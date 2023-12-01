@@ -3,6 +3,12 @@
     border-bottom: 1px solid grey;
 }
 
+.warning {
+    display: flex;
+    justify-content: center;
+    color: red;
+}
+
 .multiple-choice-label{
     display: 'block';
     margin: '5px 0' 
@@ -18,3 +24,4 @@
 .likert-label {
     margin-bottom: 5px; /* Adjust space between label and radio button */
 }
+

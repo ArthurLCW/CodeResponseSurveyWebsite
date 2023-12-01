@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
 import QuestionComponent from './QuestionComponent';
+import { useSelector, useDispatch } from 'react-redux'
+import { increment, reset } from '../redux/recorderSlice';
 
 const PageComponent = ({ pageArray, pageNumber, goToNextPage, isLastPage }) => {
   console.log(pageArray.length);
-  const [finished, setFinished] = useState(0);
+  const [finished, setFinished] = useState(false);
+  const num = useSelector((state) => state.recorder.num)
+  const dispatch = useDispatch();
 
   const handleClick = () => {
-    // if (finished === pageArray.length)
-    goToNextPage();
-    // setRecord(false);
+    console.log("num when clicking next page: ", num, " page array length: ", pageArray[pageNumber-1].length);
+    if (!finished) setFinished(true);
+    if (Number.parseInt(num)===pageArray[pageNumber-1].length) {
+      dispatch(reset());
+      goToNextPage();
+      setFinished(false);
+    }
   }
 
   return (
     <div>
       <h1>Page {pageNumber}</h1>
       <div>
-        {pageArray[pageNumber-1].map(questionContent => <QuestionComponent questionContent={questionContent} setFinished={setFinished}/>)}
+        {pageArray[pageNumber-1].map((questionContent, index) => <QuestionComponent key={pageNumber+"-"+index} questionContent={questionContent} finished={finished}/>)}
       </div>
       
       {!isLastPage && (

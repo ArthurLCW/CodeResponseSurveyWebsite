@@ -3,17 +3,27 @@ import MdDisplayerComponent from './MdDisplayerComponent';
 import MonacoEditorComponent from './MonacoEditorComponent';
 // import LikertScaleGridComponent from './LikertScaleGridComponent';
 import "./QuestionComponent.css";
-// import * as monaco from 'monaco-editor';
+import { useSelector, useDispatch } from 'react-redux'
+import { increment, reset } from '../redux/recorderSlice';
 
+const WarningMsg = () => (
+  <div className='warning'>
+    <b>
+      Please finish this question!
+    </b>
+  </div>
+  
+);
 
-const QuestionComponent = ({ questionContent, setFinished }) => {
+const QuestionComponent = ({ questionContent, finished }) => {
+  const num = useSelector((state) => state.recorder.num)
   const [selectedOption, setSelectedOption] = useState(null);
-  const [code, setCode] = useState("// write your code here");
-
+  const dispatch = useDispatch();
+  
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
-    console.log(event.target.value, ": ", selectedOption);
-    // setFinished(finished+1);
+    if (selectedOption===null) dispatch(increment());
+    console.log(event.target.value, ": ", selectedOption, " : ", num);
   };
 
   let options;
@@ -64,17 +74,20 @@ const QuestionComponent = ({ questionContent, setFinished }) => {
       <MonacoEditorComponent/>
     );
   }
-  // else if (questionContent.questionType === "likert-grid") {
-  //   options = (
-  //     <LikertScaleGridComponent questionContent={questionContent}/>
-  //   )
-  // }
+
+  const style = {
+    backgroundColor: (selectedOption===null && finished===true) ? '#e6f1ff' : 'white', // 当isBlue为true时背景为浅蓝色，否则为白色
+  };
 
   return (
-    <div className='question'>
-      <MdDisplayerComponent fileName={questionContent.questionTextSrc}/>
-      {options}
+    <div className='question' >
+      {(selectedOption===null && finished===true) && <WarningMsg/>}
+      <div style={style}>
+        <MdDisplayerComponent fileName={questionContent.questionTextSrc}/>
+        {options}
+      </div>
     </div>
+    
   );
 }
 
