@@ -1,0 +1,64 @@
+.likert-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-header, .question-row {
+  display: flex;
+  align-items: center;
+}
+
+.header-spacer {
+  width: 20%; /* Adjust based on your layout */
+}
+
+.option-title, .question-text {
+  flex: 1;
+  text-align: center;
+}
+
+.question-text {
+  text-align: left;
+}
+
+.options {
+  display: flex;
+  flex: 1;
+}
+
+.option-label {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.custom-radio {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  position: relative;
+}
+
+.custom-radio::after {
+  content: '';
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: blue;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"]:checked + .custom-radio::after {
+  opacity: 1;
+}

@@ -1,0 +1,1 @@
+To what extent do you agree with the statement: "AI will destroy humankind"?

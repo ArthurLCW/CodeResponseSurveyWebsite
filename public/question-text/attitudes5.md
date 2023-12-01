@@ -1,0 +1,1 @@
+To what extent do you agree with the statement: "AI code generation system will cause many job losses"?
