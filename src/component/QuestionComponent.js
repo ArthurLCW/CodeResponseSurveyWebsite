@@ -15,15 +15,18 @@ const WarningMsg = () => (
   
 );
 
-const QuestionComponent = ({ questionContent, finished }) => {
+const QuestionComponent = ({ myKey, questionContent, finished }) => {
   const num = useSelector((state) => state.recorder.num)
   const [selectedOption, setSelectedOption] = useState(null);
   const dispatch = useDispatch();
   
   const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
     if (selectedOption===null) dispatch(increment());
-    console.log(event.target.value, ": ", selectedOption, " : ", num);
+    setSelectedOption(event.target.value);
+    localStorage.setItem(myKey, event.target.value);
+
+    console.log("id: ", myKey, ": ", event.target.value, ": ", selectedOption, " : ", num);
+    console.log("id: ", myKey, ", localstorage: ", localStorage.getItem(myKey));
   };
 
   let options;
@@ -71,12 +74,12 @@ const QuestionComponent = ({ questionContent, finished }) => {
   } 
   else if (questionContent.questionType === "coding") {
     options = (
-      <MonacoEditorComponent/>
+      <MonacoEditorComponent dispatch={dispatch} setSelectedOption={setSelectedOption} myKey={myKey}/>
     );
   }
 
   const style = {
-    backgroundColor: (selectedOption===null && finished===true) ? '#e6f1ff' : 'white', // 当isBlue为true时背景为浅蓝色，否则为白色
+    backgroundColor: (selectedOption===null && finished===true) ? '#e6f1ff' : 'white', 
   };
 
   return (

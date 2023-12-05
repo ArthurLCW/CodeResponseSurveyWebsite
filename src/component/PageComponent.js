@@ -23,7 +23,8 @@ const PageComponent = ({ pageArray, pageNumber, goToNextPage, isLastPage }) => {
     <div>
       <h1>Page {pageNumber}</h1>
       <div>
-        {pageArray[pageNumber-1].map((questionContent, index) => <QuestionComponent key={pageNumber+"-"+index} questionContent={questionContent} finished={finished}/>)}
+        {pageArray[pageNumber-1].map((questionContent, index) => 
+          <QuestionComponent key={pageNumber+"-"+index} myKey={pageNumber+"-"+index} questionContent={questionContent} finished={finished}/>)}
       </div>
       
       {!isLastPage && (
