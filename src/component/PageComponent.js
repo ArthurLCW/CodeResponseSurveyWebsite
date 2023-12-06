@@ -3,6 +3,7 @@ import QuestionComponent from './QuestionComponent';
 import { useSelector, useDispatch } from 'react-redux'
 import { increment, reset } from '../redux/recorderSlice';
 import {Page} from './util';
+import TimerComponent from './TimerComponent';
 
 const PageComponent = ({ pageArray, pageNumber, goToNextPage, isLastPage }) => {
   console.log(pageArray.length);
@@ -23,6 +24,9 @@ const PageComponent = ({ pageArray, pageNumber, goToNextPage, isLastPage }) => {
   return (
     <div>
       <h1>Page {pageNumber}</h1>
+
+      {(pageArray[pageNumber-1].timing>0) && <TimerComponent totalTime={pageArray[pageNumber-1].timing} goToNextPage={goToNextPage}/>}
+
       <div>
         {pageArray[pageNumber-1].questions.map((questionContent, index) => 
           <QuestionComponent key={pageNumber+"-"+index} myKey={pageNumber+"-"+index} questionContent={questionContent} finished={finished}/>)}

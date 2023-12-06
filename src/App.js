@@ -92,7 +92,7 @@ const App = () => {
           [],
         )
       ],
-      500
+      300
     ),
     
 
@@ -105,7 +105,7 @@ const App = () => {
           [],
         )
       ],
-      500
+      300
     ),
 
     // post-hoc (domain knowledge familarity & perceived difficulty)
