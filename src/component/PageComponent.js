@@ -5,7 +5,7 @@ import { increment, reset } from '../redux/recorderSlice';
 import {Page} from './util';
 import TimerComponent from './TimerComponent';
 
-const PageComponent = ({ pageArray, pageNumber, goToNextPage, goToLastPage, isLastPage }) => {
+const PageComponent = ({ pageArray, pageNumber, goToNextPage, goToLastPage, isLastPage, finishCode }) => {
   console.log(pageArray.length, pageNumber);
   const [finished, setFinished] = useState(false);
   const [screenMsg, setScreenMsg] = useState("");
@@ -42,6 +42,13 @@ const PageComponent = ({ pageArray, pageNumber, goToNextPage, goToLastPage, isLa
   return (
     <div>
       <h1>Page {pageNumber}</h1>
+
+      {(finishCode && (pageNumber===pageArray.length) && !screenFlag) && (
+        <div>
+          <p><b><i>Please paste the following finish code in your Prolific Link: </i></b></p>
+          <h3 style={{color:"red"}}>{finishCode}</h3>
+        </div>
+      )}
 
       {(pageArray[pageNumber-1].timing>0) && <TimerComponent key={pageNumber} totalTime={pageArray[pageNumber-1].timing} goToNextPage={goToNextPage}/>}
 
