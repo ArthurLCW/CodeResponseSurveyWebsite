@@ -79,12 +79,12 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
   }
 
   const style = {
-    backgroundColor: (selectedOption===null && finished===true) ? '#e6f1ff' : 'white', 
+    backgroundColor: ((selectedOption===null && finished) || (questionContent.questionType==="coding" && finished && !selectedOption.includes("\n"))) ? '#e6f1ff' : 'white', 
   };
 
   return (
     <div className='question' >
-      {(selectedOption===null && finished===true) && <WarningMsg/>}
+      {(selectedOption===null && finished) || (questionContent.questionType==="coding" && finished && !selectedOption.includes("\n")) && <WarningMsg/>}
       <div style={style}>
         <MdDisplayerComponent fileName={questionContent.questionTextSrc}/>
         {options}
