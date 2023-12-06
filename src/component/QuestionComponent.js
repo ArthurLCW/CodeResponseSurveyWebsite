@@ -84,7 +84,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
 
   return (
     <div className='question' >
-      {(selectedOption===null && finished) || (questionContent.questionType==="coding" && finished && !selectedOption.includes("\n")) && <WarningMsg/>}
+      {((selectedOption===null && finished) || (questionContent.questionType==="coding" && finished && !selectedOption.includes("\n"))) && <WarningMsg/>}
       <div style={style}>
         <MdDisplayerComponent fileName={questionContent.questionTextSrc}/>
         {options}
