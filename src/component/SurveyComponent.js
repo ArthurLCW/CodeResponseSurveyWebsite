@@ -16,6 +16,11 @@ const SurveyComponent = ({pageArray, rememberState=false}) => {
       setCurrentPage(parseInt(currentPage, 10)+1);
     }
   };
+
+  const goToLastPage = () => {
+    localStorage.setItem("lcwPageNum", parseInt(pageArray.length));
+    setCurrentPage(parseInt(pageArray.length));
+  }
   
   return (
     <div>
@@ -23,6 +28,7 @@ const SurveyComponent = ({pageArray, rememberState=false}) => {
         pageArray={pageArray}
         pageNumber={currentPage}
         goToNextPage={goToNextPage}
+        goToLastPage={goToLastPage}
         isLastPage={currentPage === totalPages}
       />
     </div>

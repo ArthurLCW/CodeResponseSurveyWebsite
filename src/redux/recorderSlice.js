@@ -4,6 +4,7 @@ export const recorderSlice = createSlice({
   name: 'recorder',
   initialState: {
     num: 0,
+    screenFlag: false,
   },
   reducers: {
     increment: (state) => {
@@ -23,10 +24,16 @@ export const recorderSlice = createSlice({
     incrementByAmount: (state, action) => {
       state.num += action.payload
     },
+    toggleScreenTrue: (state)=>{
+      state.screenFlag = true
+    },
+    toggleScreenFalse: (state)=>{
+      state.screenFlag = false
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, reset, decrement, incrementByAmount } = recorderSlice.actions
+export const { increment, reset, decrement, incrementByAmount, toggleScreenTrue, toggleScreenFalse } = recorderSlice.actions
 
 export default recorderSlice.reducer

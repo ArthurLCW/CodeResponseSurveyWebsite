@@ -11,7 +11,9 @@ const App = () => {
         new Question(
           "multiple-choice",
           "consent.md",
-          ["Yes, I agree to participate in this study.", "No, I disagree to participate in this study."]
+          ["Yes, I agree to participate in this study.", "No, I disagree to participate in this study."],
+          "No, I disagree to participate in this study.",
+          "Thanks for your time. We respect your decision of not participating in this study. Now you may leave this website."
         ),
       ]
     ),
@@ -92,7 +94,8 @@ const App = () => {
           [],
         )
       ],
-      300
+      // 300
+      10
     ),
     
 
@@ -105,7 +108,8 @@ const App = () => {
           [],
         )
       ],
-      300
+      // 300
+      10
     ),
 
     // post-hoc (domain knowledge familarity & perceived difficulty)
@@ -135,11 +139,13 @@ const App = () => {
     ),
 
     new Page(
-      new Question(
-        "null",
-        "gratitude.md",
-        [],
-      )
+      [
+        new Question(
+          "null",
+          "gratitude.md",
+          [],
+        )
+      ]
     )
   ]
 

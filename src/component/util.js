@@ -1,9 +1,10 @@
 export class Question {
-  constructor(questionType, questionTextSrc, questionOptions, gridQuestions=null) {
+  constructor(questionType, questionTextSrc, questionOptions, screenOption=null, screenMsg=null) {
     this.questionType = questionType;
     this.questionTextSrc = questionTextSrc;
     this.questionOptions = questionOptions;
-    this.gridQuestions = gridQuestions;
+    this.screenOption = screenOption;
+    this.screenMsg = screenMsg;
   }
 }
 

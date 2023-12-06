@@ -4,7 +4,7 @@ import MonacoEditorComponent from './MonacoEditorComponent';
 // import LikertScaleGridComponent from './LikertScaleGridComponent';
 import "./QuestionComponent.css";
 import { useSelector, useDispatch } from 'react-redux'
-import { increment, reset } from '../redux/recorderSlice';
+import { increment, toggleScreenTrue, toggleScreenFalse } from '../redux/recorderSlice';
 
 const WarningMsg = () => (
   <div className='warning'>
@@ -16,7 +16,8 @@ const WarningMsg = () => (
 );
 
 const QuestionComponent = ({ myKey, questionContent, finished }) => {
-  const num = useSelector((state) => state.recorder.num)
+  const num = useSelector((state) => state.recorder.num);
+  const screenFlag = useSelector((state) => state.recorder.screenFlag);
   const [selectedOption, setSelectedOption] = useState(null);
   const dispatch = useDispatch();
   
@@ -24,6 +25,15 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
     if (selectedOption===null) dispatch(increment());
     setSelectedOption(event.target.value);
     localStorage.setItem(myKey, event.target.value);
+
+    if (questionContent.screenOption && event.target.value===questionContent.screenOption){
+      console.log("screen flag0: ", screenFlag);
+      dispatch(toggleScreenTrue());
+    }
+    else if (questionContent.screenOption){
+      console.log("screen flag1: ", screenFlag);
+      dispatch(toggleScreenFalse());
+    }
 
     console.log("id: ", myKey, ": ", event.target.value, ": ", selectedOption, " : ", num);
     console.log("id: ", myKey, ", localstorage: ", localStorage.getItem(myKey));
