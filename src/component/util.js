@@ -1,10 +1,11 @@
 export class Question {
-  constructor(questionType, questionTextSrc, questionOptions, screenOption=null, screenMsg=null) {
+  constructor(questionType, questionTextSrc, questionOptions, screenOption=null, screenMsg=null, recordLogic=null) {
     this.questionType = questionType;
     this.questionTextSrc = questionTextSrc;
     this.questionOptions = questionOptions;
     this.screenOption = screenOption;
     this.screenMsg = screenMsg;
+    this.recordLogic = recordLogic; // "record" or "display"
   }
 }
 

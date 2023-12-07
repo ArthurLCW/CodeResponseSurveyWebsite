@@ -3,70 +3,70 @@ You may use the entire code or integrate part of it into your own code.
 **Please notice that your reimbursement depends on the quality of your submitted codes.**
 
 ```cpp
-    #include <unordered_map>
-    #include <list>
-    using namespace std;
+#include <unordered_map>
+#include <list>
+using namespace std;
 
-    class LRUCache {
-    private:
-        // The maximum capacity of the LRU cache.
-        int maxCapacity;
+class LRUCache {
+private:
+    // The maximum capacity of the LRU cache.
+    int maxCapacity;
 
-        // A list to maintain the order of keys based on their usage.
-        // The front of the list contains the least recently used key.
-        list<int> keysOrderList;
+    // A list to maintain the order of keys based on their usage.
+    // The front of the list contains the least recently used key.
+    list<int> keysOrderList;
 
-        // A hash map to store the key of a LRURecord, and its value and address in the LRU cache. 
-        // This allows O(1) time complexity for operations.
-        unordered_map<int, pair<int, list<int>::iterator>> cacheMapKeyToAddress;
+    // A hash map to store the key of a LRURecord, and its value and address in the LRU cache. 
+    // This allows O(1) time complexity for operations.
+    unordered_map<int, pair<int, list<int>::iterator>> cacheMapKeyToAddress;
 
-    public:
-        // Constructor to initialize the LRU cache with a given capacity.
-        LRUCache(int capacity) : maxCapacity(capacity) {}
+public:
+    // Constructor to initialize the LRU cache with a given capacity.
+    LRUCache(int capacity) : maxCapacity(capacity) {}
 
-        // Method to get the value of a key from the cache.
-        int get(int key) {
-            // Return -1 to denote that the key does not exist in cache. 
-            if (cacheMapKeyToAddress.find(key) == cacheMapKeyToAddress.end()) {
-                return -1;
-            }
+    // Method to get the value of a key from the cache.
+    int get(int key) {
+        // Return -1 to denote that the key does not exist in cache. 
+        if (cacheMapKeyToAddress.find(key) == cacheMapKeyToAddress.end()) {
+            return -1;
+        }
 
-            // Move the accessed key to the back of the list to mark it as recently used.
+        // Move the accessed key to the back of the list to mark it as recently used.
+        keysOrderList.erase(cacheMapKeyToAddress[key].second);
+        keysOrderList.push_back(key);
+
+        // Update the address of the key in the LRU cache to the map. 
+        cacheMapKeyToAddress[key].second = prev(keysOrderList.end());
+
+        // Return the value associated with the key.
+        return cacheMapKeyToAddress[key].first;
+    }
+
+    // Method to insert or update a key-value pair in the cache.
+    void put(int key, int value) {
+        // If the key is already present in the cache.
+        if (cacheMapKeyToAddress.find(key) != cacheMapKeyToAddress.end()) {
+            // Update the value in the hash map to record the corresponding value of a key.
+            cacheMapKeyToAddress[key].first = value;
+
+            // Move the key to the back of the list to mark it as recently used.
             keysOrderList.erase(cacheMapKeyToAddress[key].second);
             keysOrderList.push_back(key);
 
-            // Update the address of the key in the LRU cache to the map. 
+            // Update the address of the key in the LRU Cache.
             cacheMapKeyToAddress[key].second = prev(keysOrderList.end());
-
-            // Return the value associated with the key.
-            return cacheMapKeyToAddress[key].first;
-        }
-
-        // Method to insert or update a key-value pair in the cache.
-        void put(int key, int value) {
-            // If the key is already present in the cache.
-            if (cacheMapKeyToAddress.find(key) != cacheMapKeyToAddress.end()) {
-                // Update the value in the hash map to record the corresponding value of a key.
-                cacheMapKeyToAddress[key].first = value;
-
-                // Move the key to the back of the list to mark it as recently used.
-                keysOrderList.erase(cacheMapKeyToAddress[key].second);
-                keysOrderList.push_back(key);
-
-                // Update the address of the key in the LRU Cache.
-                cacheMapKeyToAddress[key].second = prev(keysOrderList.end());
-            } else {
-                // If the cache is full, remove the least recently used key-value pair.
-                if (keysOrderList.size() == maxCapacity) {
-                    int lruKey = keysOrderList.front();
-                    keysOrderList.pop_front();
-                    cacheMapKeyToAddress.erase(lruKey);
-                }
-
-                // Insert the new key-value pair into the cache.
-                keysOrderList.push_back(key);
-                cacheMapKeyToAddress[key] = {value, prev(keysOrderList.end())};
+        } else {
+            // If the cache is full, remove the least recently used key-value pair.
+            if (keysOrderList.size() == maxCapacity) {
+                int lruKey = keysOrderList.front();
+                keysOrderList.pop_front();
+                cacheMapKeyToAddress.erase(lruKey);
             }
+
+            // Insert the new key-value pair into the cache.
+            keysOrderList.push_back(key);
+            cacheMapKeyToAddress[key] = {value, prev(keysOrderList.end())};
         }
-    };
+    }
+};
 ```

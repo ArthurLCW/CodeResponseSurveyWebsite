@@ -53,7 +53,7 @@ const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey}) => {
 
   return (
     <MonacoEditor
-      height="400"
+      height="100%"
       language="javascript"
       theme="vs-dark"
       value={code}

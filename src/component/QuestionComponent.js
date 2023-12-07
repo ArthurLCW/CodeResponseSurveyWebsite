@@ -88,16 +88,26 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
     );
   }
 
-  const style = {
+  const unfinishedStyle = {
     backgroundColor: ((selectedOption===null && finished) || (questionContent.questionType==="coding" && finished && !selectedOption.includes("\n"))) ? '#e6f1ff' : 'white', 
   };
+
+  const codingParentStyle = (questionContent.questionType==="coding")? {display: "flex"} : {};
+  // const codingChildStyle = (questionContent.questionType==="coding")? {flex:"1"} : {};
+  const codingChildStyle = (questionContent.questionType==="coding")? {width: "37.5vw"} : {};
 
   return (
     <div className='question' >
       {((selectedOption===null && finished) || (questionContent.questionType==="coding" && finished && !selectedOption.includes("\n"))) && <WarningMsg/>}
-      <div style={style}>
-        <MdDisplayerComponent fileName={questionContent.questionTextSrc}/>
-        {options}
+      <div style={unfinishedStyle}>
+        <div style={codingParentStyle}>
+          <div style={codingChildStyle}>
+            <MdDisplayerComponent fileName={questionContent.questionTextSrc}/>
+          </div>
+          <div style={codingChildStyle}>
+            {options}
+          </div>
+        </div>
       </div>
     </div>
     

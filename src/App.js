@@ -94,8 +94,8 @@ const App = () => {
           [],
         )
       ],
-      // 300
-      10
+      10, // timer
+      "record"
     ),
     
 
@@ -108,8 +108,8 @@ const App = () => {
           [],
         )
       ],
-      // 300
-      10
+      1000, // timer
+      "display"
     ),
 
     // post-hoc (domain knowledge familarity & perceived difficulty)
