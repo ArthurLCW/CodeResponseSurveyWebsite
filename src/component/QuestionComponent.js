@@ -100,13 +100,41 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
     if (questionContent.questionType="coding") recordDisplay = "```javascript\n"+localStorage.getItem("lcwRecordInfo")+"\n```";
   }
 
+  let fileName = questionContent.questionTextSrc[0];
+  if (questionContent.questionTextSrc.length>1){
+    fileName = questionContent.questionTextSrc[Math.floor(Math.random() * questionContent.questionTextSrc.length)];
+    // list does not exist, initialize it
+    if (!localStorage.getItem("lcwSurveyRandomIndexList")){ 
+      localStorage.setItem("lcwSurveyRandomIndexList", myKey);
+      localStorage.setItem("lcwSurveyRandomMd", fileName);
+    }
+    // list exists, and the key does not exist in the key -> add the key directly
+    else if (!localStorage.getItem("lcwSurveyRandomIndexList").split(",").includes(myKey)){
+      localStorage.setItem("lcwSurveyRandomIndexList", localStorage.getItem("lcwSurveyRandomIndexList")+","+myKey);
+      localStorage.setItem("lcwSurveyRandomMd", localStorage.getItem("lcwSurveyRandomMd")+","+fileName);
+    }
+    // list exists, and the key exists too -> modify the list instead of directly adding the key
+    else{
+      const indexList = localStorage.getItem("lcwSurveyRandomIndexList").split(",");
+      for (let i=0; i<indexList.length; i++){
+        if (indexList[i]===myKey){
+          const newMdList = localStorage.getItem("lcwSurveyRandomMd").split(",");
+          newMdList[i] = fileName;
+          localStorage.setItem("lcwSurveyRandomMd", newMdList.join(","));
+          break;
+        }
+      }
+    }
+    console.log("filename:", fileName, localStorage.getItem("lcwSurveyRandomIndexList"), localStorage.getItem("lcwSurveyRandomMd"));
+  }
+
   return (
     <div className='question' >
       {((selectedOption===null && finished) || (questionContent.questionType==="coding" && finished && !selectedOption.includes("\n"))) && <WarningMsg/>}
       <div style={unfinishedStyle}>
         <div style={codingParentStyle}>
           <div style={codingChildStyle}>
-            <MdDisplayerComponent fileName={questionContent.questionTextSrc}/>
+            <MdDisplayerComponent fileName={fileName}/>
             {/* {(questionContent.recordLogic==="display") && <Markdown content={"```javascript\n"+localStorage.getItem("lcwRecordInfo")+"```"}/>} */}
             <Markdown content={recordDisplay}/>
           </div>

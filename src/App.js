@@ -10,7 +10,7 @@ const App = () => {
       [
         new Question(
           "multiple-choice",
-          "consent.md",
+          ["consent.md"],
           ["Yes, I agree to participate in this study.", "No, I disagree to participate in this study."],
           "No, I disagree to participate in this study.",
           "Thanks for your time. We respect your decision of not participating in this study. Now you may leave this website."
@@ -23,27 +23,27 @@ const App = () => {
       [
         new Question(
           "multiple-choice",
-          "screener1.md",
+          ["screener1.md"],
           ["Yes","No", "I don't know"]
         ),
         new Question(
           "likert-scale",
-          "screener2.md",
+          ["screener2.md"],
           ["Not experienced at all", "Slightly experienced", "Moderately experienced", "Very experienced", "Extremely experienced"]
         ),
         new Question(
           "likert-scale",
-          "screener3.md",
+          ["screener3.md"],
           ["Not involved at all", "Slightly involved", "Moderately involved", "Very involved", "Extremely involved"]
         ),
         new Question(
           "multiple-choice",
-          "screener4.md",
+          ["screener4.md"],
           ["Student specializing in IT-related fields.","Developers.", "Other IT-related positions (such as testing engineer, operations engineer, etc).", "Others."]
         ),
         new Question(
           "multiple-choice",
-          "screener5.md",
+          ["screener5.md"],
           ["0","1","2","3","4","5","6","7","8","9","10","10+",]
         ),
       ]
@@ -54,32 +54,32 @@ const App = () => {
       [
         new Question(
           "likert-scale",
-          "attitudes1.md",
+          ["attitudes1.md"],
           ["0 (Strongly disagree)","1","2","3","4","5","6","7","8","9","10 (Strongly agree)"],
         ),
         new Question(
           "likert-scale",
-          "attitudes2.md",
+          ["attitudes2.md"],
           ["0 (Strongly disagree)","1","2","3","4","5","6","7","8","9","10 (Strongly agree)"],
         ),
         new Question(
           "likert-scale",
-          "attitudes3.md",
+          ["attitudes3.md"],
           ["0 (Strongly disagree)","1","2","3","4","5","6","7","8","9","10 (Strongly agree)"],
         ),
         new Question(
           "likert-scale",
-          "attitudes4.md",
+          ["attitudes4.md"],
           ["0 (Strongly disagree)","1","2","3","4","5","6","7","8","9","10 (Strongly agree)"],
         ),
         new Question(
           "likert-scale",
-          "attitudes5.md",
+          ["attitudes5.md"],
           ["0 (Strongly disagree)","1","2","3","4","5","6","7","8","9","10 (Strongly agree)"],
         ),
         new Question(
           "likert-scale",
-          "language-proficiency.md",
+          ["language-proficiency.md"],
           ["Not familiar at all", "Slightly familiar", "Moderately familiar", "Very familiar", "Extremely familiar"],
         ),
       ]  
@@ -90,7 +90,7 @@ const App = () => {
       [
         new Question(
           "coding",
-          "coding1.md",
+          ["coding1.md"],
           [],
           null,
           null,
@@ -106,7 +106,7 @@ const App = () => {
       [
         new Question(
           "coding",
-          "coding2.md",
+          ["coding2-v11.md","coding2-v12.md","coding2-v13.md"],
           [],
           null,
           null,
@@ -121,22 +121,22 @@ const App = () => {
       [
         new Question(
           "likert-scale",
-          "domain-knowledge1.md",
+          ["domain-knowledge1.md"],
           ["Not familiar at all", "Slightly familiar", "Moderately familiar", "Very familiar", "Extremely familiar"],
         ),
         new Question(
           "likert-scale",
-          "domain-knowledge2.md",
+          ["domain-knowledge2.md"],
           ["Not familiar at all", "Slightly familiar", "Moderately familiar", "Very familiar", "Extremely familiar"],
         ),
         new Question(
           "likert-scale",
-          "domain-knowledge3.md",
+          ["domain-knowledge3.md"],
           ["Not familiar at all", "Slightly familiar", "Moderately familiar", "Very familiar", "Extremely familiar"],
         ),
         new Question(
           "likert-scale",
-          "perceived-difficulty.md",
+          ["perceived-difficulty.md"],
           ["Extremely easy", "Somewhat Easy", "Neither easy nor difficult", "Somewhat difficult", "Extremely difficult"],
         )
       ],
@@ -146,7 +146,7 @@ const App = () => {
       [
         new Question(
           "null",
-          "gratitude.md",
+          ["gratitude.md"],
           [],
         )
       ]
