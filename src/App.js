@@ -97,7 +97,7 @@ const App = () => {
           "record"
         )
       ],
-      1000, // timer
+      10, // timer
     ),
     
 
@@ -113,7 +113,7 @@ const App = () => {
           "display"
         )
       ],
-      1000, // timer
+      10, // timer
     ),
 
     // post-hoc (domain knowledge familarity & perceived difficulty)

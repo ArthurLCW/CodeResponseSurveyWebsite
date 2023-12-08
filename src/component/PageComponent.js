@@ -13,7 +13,10 @@ const PageComponent = ({ pageArray, pageNumber, goToNextPage, goToLastPage, isLa
   const dispatch = useDispatch();
   const screenFlag = useSelector((state) => state.recorder.screenFlag);
 
-  // console.log("screen flag in page component: ", screenFlag, " ", screenMsg);
+  // Modify this block to send data to backend
+  if (pageNumber === pageArray.length){
+    localStorage.clear();
+  }
 
   const handleClick = () => {
     console.log("num when clicking next page: ", num, " page array length: ", pageArray[pageNumber-1].questions.length);
