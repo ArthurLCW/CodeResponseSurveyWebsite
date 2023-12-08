@@ -9,7 +9,7 @@ const imageMap = {
   
 };
 
-const Markdown = ({ content }) => {
+export const Markdown = ({ content }) => {
   return (
     <ReactMarkdown
       components={{
@@ -35,7 +35,7 @@ const Markdown = ({ content }) => {
   );
 }
 
-const MdDisplayerComponent = ({ fileName }) => {
+export const MdDisplayerComponent = ({ fileName }) => {
   const [content, setContent] = useState('');
 
   useEffect(() => {
@@ -47,5 +47,3 @@ const MdDisplayerComponent = ({ fileName }) => {
 
   return <Markdown content={content} />;
 };
-
-export default MdDisplayerComponent;

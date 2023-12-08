@@ -92,10 +92,12 @@ const App = () => {
           "coding",
           "coding1.md",
           [],
+          null,
+          null,
+          "record"
         )
       ],
-      10, // timer
-      "record"
+      1000, // timer
     ),
     
 
@@ -106,10 +108,12 @@ const App = () => {
           "coding",
           "coding2.md",
           [],
+          null,
+          null,
+          "display"
         )
       ],
       1000, // timer
-      "display"
     ),
 
     // post-hoc (domain knowledge familarity & perceived difficulty)

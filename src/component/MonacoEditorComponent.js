@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import MonacoEditor from 'react-monaco-editor';
 import { useSelector } from 'react-redux'
-import { increment, decrement } from '../redux/recorderSlice';
+import { increment, decrement, updateRecordInfo } from '../redux/recorderSlice';
 
 
 
-const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey}) => {
+const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey, recordLogic}) => {
   const [code, setCode] = useState('// type your code...');
   const [lineCount, setLineCount] = useState(1);
   const [counted, setCounted] = useState(false);
@@ -20,6 +20,10 @@ const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey}) => {
   const onChange = (newValue, e) => {
     localStorage.setItem(myKey, newValue);
     console.log("id: ", myKey, ", localstorage: ", localStorage.getItem(myKey));
+    if (recordLogic==="record"){
+      localStorage.setItem("lcwRecordInfo", newValue);
+      console.log("id: ", myKey, ", record localstorage: ", localStorage.getItem("lcwRecordInfo"));
+    }
 
     if (editorInstance) {
       const newLineCount = editorInstance.getModel().getLineCount();
@@ -29,7 +33,7 @@ const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey}) => {
     setCode(newValue);
     setSelectedOption(newValue);
 
-    console.log("in onchange1: lineCount: ", lineCount, ", counted: ", counted, ", code: ", code);
+    // console.log("in onchange1: lineCount: ", lineCount, ", counted: ", counted, ", code: ", code);
   };
 
   useEffect(() => {
@@ -56,7 +60,7 @@ const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey}) => {
       height="100%"
       language="javascript"
       theme="vs-dark"
-      value={code}
+      value= {(recordLogic==="display")? localStorage.getItem("lcwRecordInfo"):'// type your code...'}
       // value = '// type your code...'
       options={options}
       onChange={onChange}

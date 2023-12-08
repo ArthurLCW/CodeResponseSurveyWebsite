@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import MdDisplayerComponent from './MdDisplayerComponent';
+import {MdDisplayerComponent, Markdown} from './MdDisplayerComponent';
 import MonacoEditorComponent from './MonacoEditorComponent';
 // import LikertScaleGridComponent from './LikertScaleGridComponent';
 import "./QuestionComponent.css";
@@ -84,7 +84,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
   } 
   else if (questionContent.questionType === "coding") {
     options = (
-      <MonacoEditorComponent dispatch={dispatch} setSelectedOption={setSelectedOption} myKey={myKey}/>
+      <MonacoEditorComponent dispatch={dispatch} setSelectedOption={setSelectedOption} myKey={myKey} recordLogic={questionContent.recordLogic}/>
     );
   }
 
@@ -93,8 +93,12 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
   };
 
   const codingParentStyle = (questionContent.questionType==="coding")? {display: "flex"} : {};
-  // const codingChildStyle = (questionContent.questionType==="coding")? {flex:"1"} : {};
-  const codingChildStyle = (questionContent.questionType==="coding")? {width: "37.5vw"} : {};
+  const codingChildStyle = (questionContent.questionType==="coding")? {width: "35vw", paddingLeft: "30px"} : {};
+
+  let recordDisplay = "";
+  if (questionContent.recordLogic==="display"){
+    if (questionContent.questionType="coding") recordDisplay = "```javascript\n"+localStorage.getItem("lcwRecordInfo")+"\n```";
+  }
 
   return (
     <div className='question' >
@@ -103,6 +107,8 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
         <div style={codingParentStyle}>
           <div style={codingChildStyle}>
             <MdDisplayerComponent fileName={questionContent.questionTextSrc}/>
+            {/* {(questionContent.recordLogic==="display") && <Markdown content={"```javascript\n"+localStorage.getItem("lcwRecordInfo")+"```"}/>} */}
+            <Markdown content={recordDisplay}/>
           </div>
           <div style={codingChildStyle}>
             {options}
@@ -110,7 +116,6 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
         </div>
       </div>
     </div>
-    
   );
 }
 

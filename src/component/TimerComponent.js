@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './TimerComponent.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { reset } from '../redux/recorderSlice';
 
 const TimerComponent = ({totalTime, goToNextPage}) => {
   const [seconds, setSeconds] = useState(totalTime);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // Set up the interval
@@ -11,6 +14,7 @@ const TimerComponent = ({totalTime, goToNextPage}) => {
         // If seconds is 0, clear the interval and return 0
         if (seconds === 0) {
           clearInterval(interval);
+          dispatch(reset());
           goToNextPage();
           return 0;
         }

@@ -29,7 +29,7 @@ export const recorderSlice = createSlice({
     },
     toggleScreenFalse: (state)=>{
       state.screenFlag = false
-    }
+    },
   },
 })
 
