@@ -93,7 +93,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
   };
 
   const codingParentStyle = (questionContent.questionType==="coding")? {display: "flex"} : {};
-  const codingChildStyle = (questionContent.questionType==="coding")? {width: "35vw", paddingLeft: "30px"} : {};
+  const codingChildStyle = (questionContent.questionType==="coding")? {width: "35vw", paddingRight: "30px"} : {};
 
   let recordDisplay = "";
   if (questionContent.recordLogic==="display"){
@@ -138,7 +138,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
             {/* {(questionContent.recordLogic==="display") && <Markdown content={"```javascript\n"+localStorage.getItem("lcwRecordInfo")+"```"}/>} */}
             <Markdown content={recordDisplay}/>
           </div>
-          <div style={codingChildStyle}>
+          <div>
             {options}
           </div>
         </div>

@@ -1,9 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./App.css";
 import SurveyComponent from './component/SurveyComponent';
-import {Question, Page} from './component/util'
+import {Question, Page} from './util/utilClass'
 
 const App = () => {
+  // deal with error message
+  useEffect(() => {
+    const errorHandler = (message, source, lineno, colno, error) => {
+      if (error && error.message === 'ResizeObserver loop limit exceeded') {
+        console.warn('ResizeObserver loop limit exceeded error.');
+        return true;
+      }
+    };
+
+    window.onerror = errorHandler;
+
+    return () => {
+      window.onerror = null;
+    };
+  }, []);
+
   const pageArray = [
     // consent
     new Page(
@@ -97,7 +113,7 @@ const App = () => {
           "record"
         )
       ],
-      10, // timer
+      1000, // timer
     ),
     
 
@@ -113,7 +129,7 @@ const App = () => {
           "display"
         )
       ],
-      10, // timer
+      1000, // timer
     ),
 
     // post-hoc (domain knowledge familarity & perceived difficulty)

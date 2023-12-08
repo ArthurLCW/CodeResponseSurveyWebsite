@@ -11,7 +11,7 @@ const imageMap = {
 
 export const Markdown = ({ content }) => {
   return (
-    <ReactMarkdown
+    <ReactMarkdown 
       components={{
         code({node, inline, className, children, ...props}) {
           const match = /language-(\w+)/.exec(className || '')

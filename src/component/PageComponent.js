@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import QuestionComponent from './QuestionComponent';
 import { useSelector, useDispatch } from 'react-redux'
 import { increment, reset } from '../redux/recorderSlice';
-import {Page} from './util';
+import {Page} from '../util/utilClass';
+import {writeParticipantData} from "../util/firebase";
 import TimerComponent from './TimerComponent';
 
 const PageComponent = ({ pageArray, pageNumber, goToNextPage, goToLastPage, isLastPage, finishCode }) => {
@@ -15,8 +16,20 @@ const PageComponent = ({ pageArray, pageNumber, goToNextPage, goToLastPage, isLa
 
   // Modify this block to send data to backend
   if (pageNumber === pageArray.length){
+    let localStorageObject = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      localStorageObject[key] = localStorage.getItem(key);
+    }
+    console.log(localStorageObject);
+    writeParticipantData(localStorage.getItem("prolificId"),localStorageObject)
     localStorage.clear();
   }
+
+  // if (pageNumber == 1){
+  //   console.log("test");
+  //   writeParticipantData();
+  // }
 
   const handleClick = () => {
     console.log("num when clicking next page: ", num, " page array length: ", pageArray[pageNumber-1].questions.length);

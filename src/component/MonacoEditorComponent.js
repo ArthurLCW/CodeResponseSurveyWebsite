@@ -58,6 +58,7 @@ const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey, recordLogic}
   return (
     <MonacoEditor
       height="100%"
+      width="35vw"
       language="javascript"
       theme="vs-dark"
       value= {(recordLogic==="display")? localStorage.getItem("lcwRecordInfo"):'// type your code...'}
