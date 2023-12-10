@@ -7,6 +7,20 @@ import { Question, Page } from './util/utilClass';
 Modal.setAppElement('#root'); 
 
 function App() {
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      e.preventDefault();
+      e.returnValue = ''; // 在大多数浏览器中，设置 returnValue 是必要的
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [enableModal, setEnableModal] = useState(false); 
   const [leaveFullScreenTimes, setLeaveFullScreenTimes] = useState(
