@@ -19,8 +19,9 @@ const PageComponent = ({ pageArray, pageNumber, goToNextPage, goToLastPage, isLa
     let localStorageObject = {};
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      localStorageObject[key] = localStorage.getItem(key);
+      if (!key.includes(".")) localStorageObject[key] = localStorage.getItem(key);
     }
+    console.log(localStorage);
     console.log(localStorageObject);
     writeParticipantData(localStorage.getItem("prolificId"),localStorageObject)
     localStorage.clear();

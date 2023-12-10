@@ -54,7 +54,7 @@ const SurveyComponent = ({pageArray, rememberState=false}) => {
         goToNextPage={goToNextPage}
         goToLastPage={goToLastPage}
         isLastPage={currentPage === totalPages}
-        finishCode={"ilovegsq"}
+        finishCode={"asdfgh"}
       />
     </div>
   );
