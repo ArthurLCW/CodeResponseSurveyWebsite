@@ -6,15 +6,15 @@ You may use the entire code or integrate part of it into your own code.
 /**
  * @param {number} capacity
  */
-var LRUCache = function(maxCapacity) {
+var LRUCache = function(capacity) {
   // An integer attribute. 
-  this.maxCapacity = maxCapacity;
+  this.capacity = capacity;
 
   // A hash map to store key-value pairs.
-  this.mapCacheKeyToValue = new Map(); 
+  this.cache = new Map(); 
 
   // A list of integers.
-  this.keysOrderQueue = []; 
+  this.queue = []; 
 };
 
 /** 
@@ -23,16 +23,16 @@ var LRUCache = function(maxCapacity) {
  */
 LRUCache.prototype.get = function(key) {
   // If the key is not present in the cache, return -1.
-  if (!this.mapCacheKeyToValue.has(key)) {
+  if (!this.cache.has(key)) {
     return -1;
   }
 
   // Remove the key from its current position and push it to the end of the queue.
-  const indexInQueue = this.keysOrderQueue.indexOf(key);
-  this.keysOrderQueue.splice(indexInQueue, 1);
-  this.keysOrderQueue.push(key);
+  const index = this.queue.indexOf(key);
+  this.queue.splice(index, 1);
+  this.queue.push(key);
 
-  return this.mapCacheKeyToValue.get(key);
+  return this.cache.get(key);
 };
 
 /** 
@@ -42,23 +42,23 @@ LRUCache.prototype.get = function(key) {
  */
 LRUCache.prototype.put = function(key, value) {
   // If the key is found in map.
-  if (this.mapCacheKeyToValue.has(key)) {
+  if (this.cache.has(key)) {
     // Update the value in the hash map.
-    this.mapCacheKeyToValue.set(key, value);
+    this.cache.set(key, value);
 
     // Move the key to the back of the list.
-    const indexInQueue = this.keysOrderQueue.indexOf(key);
-    this.keysOrderQueue.splice(indexInQueue, 1);
-    this.keysOrderQueue.push(key);
+    const index = this.queue.indexOf(key);
+    this.queue.splice(index, 1);
+    this.queue.push(key);
   } else {
     // Insert a new value to the map and queue.
-    this.mapCacheKeyToValue.set(key, value);
-    this.keysOrderQueue.push(key);
+    this.cache.set(key, value);
+    this.queue.push(key);
 
     // If the queue size reaches to a number, remove a key. 
-    if (this.keysOrderQueue.length > this.maxCapacity) {
-      const oldestKey = this.keysOrderQueue.shift(); 
-      this.mapCacheKeyToValue.delete(oldestKey);
+    if (this.queue.length > this.capacity) {
+      const old = this.queue.shift(); 
+      this.cache.delete(old);
     }
   }
 };

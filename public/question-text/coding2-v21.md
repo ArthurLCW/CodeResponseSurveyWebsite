@@ -5,19 +5,19 @@ You may use the entire code or integrate part of it into your own code.
 ```javascript
 /**
  * Initializes the Least Recently Used (LRU) Cache with a given capacity.
- * @param {number} maxCapacity The maximum number of items the cache can hold.
+ * @param {number} capacity The maximum number of items the cache can hold.
  */
-var LRUCache = function(maxCapacity) {
+var LRUCache = function(capacity) {
   // The maximum capacity of the LRU cache.
-  this.maxCapacity = maxCapacity;
+  this.capacity = capacity;
 
   // A hash map to store the key of a LRURecord, and its value. 
   // This allows O(1) time complexity for operations.
-  this.mapCacheKeyToValue = new Map(); 
+  this.cache = new Map(); 
 
   // A list to maintain the order of keys based on the order of their usage.
   // The front of the list contains the least recently used key.
-  this.keysOrderQueue = []; 
+  this.queue = []; 
 };
 
 /** 
@@ -27,16 +27,16 @@ var LRUCache = function(maxCapacity) {
  */
 LRUCache.prototype.get = function(key) {
   // Return -1 to denote that the key does not exist in cache.
-  if (!this.mapCacheKeyToValue.has(key)) {
+  if (!this.cache.has(key)) {
     return -1;
   }
 
   // Move the accessed key to the back of the list to mark it as recently used.
-  const indexInQueue = this.keysOrderQueue.indexOf(key);
-  this.keysOrderQueue.splice(indexInQueue, 1);
-  this.keysOrderQueue.push(key);
+  const index = this.queue.indexOf(key);
+  this.queue.splice(index, 1);
+  this.queue.push(key);
 
-  return this.mapCacheKeyToValue.get(key);
+  return this.cache.get(key);
 };
 
 /** 
@@ -46,24 +46,24 @@ LRUCache.prototype.get = function(key) {
  */
 LRUCache.prototype.put = function(key, value) {
   // If the key is already present in the cache.
-  if (this.mapCacheKeyToValue.has(key)) {
+  if (this.cache.has(key)) {
     // Update the value in the hash map to record the corresponding value of a key.
-    this.mapCacheKeyToValue.set(key, value);
+    this.cache.set(key, value);
 
     // Move the key to the back of the list to mark it as recently used.
-    const indexInQueue = this.keysOrderQueue.indexOf(key);
-    this.keysOrderQueue.splice(indexInQueue, 1);
-    this.keysOrderQueue.push(key);
+    const index = this.queue.indexOf(key);
+    this.queue.splice(index, 1);
+    this.queue.push(key);
   } else {
     // The key does not exist in the cache. 
     // Insert the new key-value pair into the cache.
-    this.mapCacheKeyToValue.set(key, value);
-    this.keysOrderQueue.push(key);
+    this.cache.set(key, value);
+    this.queue.push(key);
 
     // If the cache is full, remove the least recently used key-value pair.
-    if (this.keysOrderQueue.length > this.maxCapacity) {
-      const oldestKey = this.keysOrderQueue.shift(); 
-      this.mapCacheKeyToValue.delete(oldestKey);
+    if (this.queue.length > this.capacity) {
+      const old = this.queue.shift(); 
+      this.cache.delete(old);
     }
   }
 };

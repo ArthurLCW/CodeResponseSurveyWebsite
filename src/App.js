@@ -155,7 +155,7 @@ function App() {
           "record"
         )
       ],
-      1000, // timer
+      420, // timer
     ),
     
 
@@ -164,14 +164,14 @@ function App() {
       [
         new Question(
           "coding",
-          ["coding2-v11.md","coding2-v12.md","coding2-v13.md"],
+          ["coding2-v11.md","coding2-v12.md","coding2-v13.md","coding2-v21.md","coding2-v22.md","coding2-v23.md"],
           [],
           null,
           null,
           "display"
         )
       ],
-      1000, // timer
+      420, // timer
     ),
 
     // post-hoc (domain knowledge familarity & perceived difficulty)

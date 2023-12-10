@@ -19,6 +19,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
   const num = useSelector((state) => state.recorder.num);
   const screenFlag = useSelector((state) => state.recorder.screenFlag);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [chosenSrcFlag, setChosenSrcFlag] = useState(false);
   const dispatch = useDispatch();
   
   const handleOptionChange = (event) => {
@@ -101,8 +102,9 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
   }
 
   let fileName = questionContent.questionTextSrc[0];
-  if (questionContent.questionTextSrc.length>1){
+  if (questionContent.questionTextSrc.length>1 && !chosenSrcFlag){
     fileName = questionContent.questionTextSrc[Math.floor(Math.random() * questionContent.questionTextSrc.length)];
+    setChosenSrcFlag(true);
     // list does not exist, initialize it
     if (!localStorage.getItem("lcwSurveyRandomIndexList")){ 
       localStorage.setItem("lcwSurveyRandomIndexList", myKey);
