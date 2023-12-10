@@ -10,7 +10,7 @@ const generateRandomString = (length = 10) => {
   return result;
 };
 
-const SurveyComponent = ({pageArray, rememberState=false}) => {
+const SurveyComponent = ({pageArray, rememberState, setEnableModal}) => {
   const [prolificId, setProlificId] = useState('');
   const [studyId, setStudyId] = useState('');
   const [sessionId, setSessionId] = useState('');
@@ -45,6 +45,22 @@ const SurveyComponent = ({pageArray, rememberState=false}) => {
     localStorage.setItem("lcwPageNum", parseInt(pageArray.length));
     setCurrentPage(parseInt(pageArray.length));
   }
+
+  useEffect(() => {
+    if (currentPage === 2 && currentPage!==pageArray.length) {
+      setEnableModal(true);
+    }
+    else if (currentPage===pageArray.length){
+      setEnableModal(false);
+      if (document.fullscreenElement) {
+        document.exitFullscreen()
+          .then(() => console.log("已退出全屏模式。"))
+          .catch((err) => console.error(`退出全屏模式时发生错误: ${err}`));
+      } else {
+        console.log("当前不在全屏模式。");
+      }
+    }
+  }, [currentPage, setEnableModal]);
   
   return (
     <div>

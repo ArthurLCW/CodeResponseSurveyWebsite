@@ -10,13 +10,37 @@ const PageComponent = ({ pageArray, pageNumber, goToNextPage, goToLastPage, isLa
   console.log(pageArray.length, pageNumber);
   const [finished, setFinished] = useState(false);
   const [screenMsg, setScreenMsg] = useState("");
+  const [sendingState, setSendingState] = useState(true);
   const num = useSelector((state) => state.recorder.num)
   const dispatch = useDispatch();
   const screenFlag = useSelector((state) => state.recorder.screenFlag);
 
+
+  function getCurrentTimeInAEDT() {
+    // 创建一个新的日期对象，它将包含当前的UTC时间
+    const now = new Date();
+
+    // 使用Intl.DateTimeFormat来格式化日期
+    const options = {
+      timeZone: 'Australia/Sydney', // 使用悉尼时区，因为它遵循AEDT
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false // 使用24小时制
+    };
+
+    const formatter = new Intl.DateTimeFormat('en-AU', options);
+    return formatter.format(now);
+  }
+
   // Modify this block to send data to backend
-  if (pageNumber === pageArray.length){
+  if (pageNumber === pageArray.length && sendingState){
+    setSendingState(false);
     let localStorageObject = {};
+    localStorageObject["sending-time"]=getCurrentTimeInAEDT();
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       if (!key.includes(".")) localStorageObject[key] = localStorage.getItem(key);
