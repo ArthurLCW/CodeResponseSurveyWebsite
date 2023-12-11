@@ -82,7 +82,7 @@ const PageComponent = ({ pageArray, pageNumber, goToNextPage, goToLastPage, isLa
 
   return (
     <div>
-      <h1>Page {pageNumber}</h1>
+      {/* <h1>Page {pageNumber}</h1> */}
 
       {(finishCode && (pageNumber===pageArray.length) && !screenFlag) && (
         <div>
@@ -100,7 +100,8 @@ const PageComponent = ({ pageArray, pageNumber, goToNextPage, goToLastPage, isLa
       </div>
       
       {!isLastPage && (
-        <button onClick={handleClick}>Go to Page {parseInt(pageNumber,10) + 1}</button>
+        // <button onClick={handleClick}>Go to Page {parseInt(pageNumber,10) + 1}</button>
+        <button onClick={handleClick}>Go to next page</button>
       )}
     </div>
   );
