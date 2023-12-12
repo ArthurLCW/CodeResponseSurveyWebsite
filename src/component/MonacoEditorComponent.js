@@ -5,9 +5,10 @@ import { increment, decrement, updateRecordInfo } from '../redux/recorderSlice';
 
 
 
-const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey, recordLogic}) => {
+const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey, recordLogic, setCodingNonEnptyLines}) => {
   const [code, setCode] = useState('// type your code...');
   const [lineCount, setLineCount] = useState(1);
+  const [nonEmptyLineCount, setNonEmptyLineCount] = useState(1);
   const [counted, setCounted] = useState(false);
 
   let editorInstance = null;
@@ -32,18 +33,35 @@ const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey, recordLogic}
 
     setCode(newValue);
     setSelectedOption(newValue);
-
+    
+    if (editorInstance) {
+      const model = editorInstance.getModel();
+      const lineCount = model.getLineCount();
+      let nonEmptyLineCountLocal = 0;
+  
+      for (let i = 1; i <= lineCount; i++) {
+        const lineContent = model.getLineContent(i);
+        if (lineContent.trim().length > 0) {
+          nonEmptyLineCountLocal++;
+        }
+      }
+      setNonEmptyLineCount(nonEmptyLineCountLocal);
+      setCodingNonEnptyLines(nonEmptyLineCount);
+      console.log("number of nonEmpty lines: ", nonEmptyLineCount);
+    }
     // console.log("in onchange1: lineCount: ", lineCount, ", counted: ", counted, ", code: ", code);
   };
 
   useEffect(() => {
-    console.log("in use effect -- lineCount: ", lineCount, ", counted: ", counted, ", code: ", code);
-    if (lineCount > 1 && !counted) {
+    console.log("in use effect -- lineCount: ", lineCount, "non-empty line: ",nonEmptyLineCount,", counted: ", counted, ", code: ", code);
+    if (nonEmptyLineCount >= 10 && !counted) {
       setCounted(true);
       dispatch(increment());
-    } else if (lineCount === 1 && counted) {
+      console.log("MONACO editor increment: ", nonEmptyLineCount);
+    } else if (nonEmptyLineCount < 10 && counted) {
       setCounted(false);
       dispatch(decrement());
+      console.log("MONACO editor decrement: ", nonEmptyLineCount);
     }
   }, [lineCount, counted, code, dispatch]);
 

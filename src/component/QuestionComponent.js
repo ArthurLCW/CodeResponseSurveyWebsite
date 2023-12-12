@@ -9,16 +9,24 @@ import { increment, toggleScreenTrue, toggleScreenFalse } from '../redux/recorde
 const WarningMsg = () => (
   <div className='warning'>
     <b>
-      Please finish this question!
+      Please finish this question! 
     </b>
   </div>
-  
 );
+
+const WarningMsgCoding = () => (
+  <div className='warning'>
+    <b>
+      Please finish this coding question! You need to write at least 10 lines of non-empty codes. 
+    </b>
+  </div>
+)
 
 const QuestionComponent = ({ myKey, questionContent, finished }) => {
   const num = useSelector((state) => state.recorder.num);
   const screenFlag = useSelector((state) => state.recorder.screenFlag);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [codingNonEnptyLines, setCodingNonEnptyLines] = useState(0);
   const [chosenSrcFlag, setChosenSrcFlag] = useState(false);
   const dispatch = useDispatch();
   
@@ -85,12 +93,18 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
   } 
   else if (questionContent.questionType === "coding") {
     options = (
-      <MonacoEditorComponent dispatch={dispatch} setSelectedOption={setSelectedOption} myKey={myKey} recordLogic={questionContent.recordLogic}/>
+      <MonacoEditorComponent 
+        dispatch={dispatch} 
+        setSelectedOption={setSelectedOption} 
+        myKey={myKey} 
+        recordLogic={questionContent.recordLogic} 
+        setCodingNonEnptyLines={setCodingNonEnptyLines}
+      />
     );
   }
 
   const unfinishedStyle = {
-    backgroundColor: ((selectedOption===null && finished) || (questionContent.questionType==="coding" && finished && !selectedOption.includes("\n"))) ? '#e6f1ff' : 'white', 
+    backgroundColor: ((selectedOption===null && finished) || (questionContent.questionType==="coding" && finished && (codingNonEnptyLines<10))) ? '#e6f1ff' : 'white', 
   };
 
   const codingParentStyle = (questionContent.questionType==="coding")? {display: "flex"} : {};
@@ -132,7 +146,8 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
 
   return (
     <div className='question' >
-      {((selectedOption===null && finished) || (questionContent.questionType==="coding" && finished && !selectedOption.includes("\n"))) && <WarningMsg/>}
+      {(questionContent.questionType==="coding" && finished && (codingNonEnptyLines<10)) && <WarningMsgCoding/>}
+      {(questionContent.questionType!=="coding" && selectedOption===null && finished) && <WarningMsg/>}
       <div style={unfinishedStyle}>
         <div style={codingParentStyle}>
           <div style={codingChildStyle}>
