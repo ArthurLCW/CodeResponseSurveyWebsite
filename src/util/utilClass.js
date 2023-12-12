@@ -10,9 +10,10 @@ export class Question {
 }
 
 export class Page {
-  constructor(questions, timing = 0){
+  constructor(questions, timeMax=0, timeMin=0){
     this.questions = questions; // Array of Questions
-    this.timing = timing; // number, seconds
+    this.timeMax = timeMax; // upper limit of timing, number, seconds
+    this.timeMin = timeMin; // lower limit of timing, number, seconds
   }
 }
 

@@ -11,6 +11,7 @@ const PageComponent = ({ pageArray, pageNumber, goToNextPage, goToLastPage, isLa
   const [finished, setFinished] = useState(false);
   const [screenMsg, setScreenMsg] = useState("");
   const [sendingState, setSendingState] = useState(true);
+  const [timingFullfilledFlag, setTimingFullfilledFlag] = useState(false);
   const num = useSelector((state) => state.recorder.num)
   const dispatch = useDispatch();
   const screenFlag = useSelector((state) => state.recorder.screenFlag);
@@ -57,12 +58,18 @@ const PageComponent = ({ pageArray, pageNumber, goToNextPage, goToLastPage, isLa
   // }
 
   const handleClick = () => {
-    console.log("num when clicking next page: ", num, " page array length: ", pageArray[pageNumber-1].questions.length);
     if (!finished) setFinished(true);
     if (Number.parseInt(num)===pageArray[pageNumber-1].questions.length) {
-      dispatch(reset());
-      goToNextPage();
-      setFinished(false);
+      if (!timingFullfilledFlag && (parseInt(pageArray[pageNumber-1].timeMin)>0)){
+        console.log("hihihi: ");
+        alert("Please spend at least "+parseInt(pageArray[pageNumber-1].timeMin/60)+" minutes and "+parseInt(pageArray[pageNumber-1].timeMin%60)+" seconds to finish the questions in this page.");
+      }
+      else {
+        dispatch(reset());
+        goToNextPage();
+        setFinished(false);
+      }
+      
     }
     if (screenFlag) {
       console.log("screen flag true in page component click, msg: ", screenMsg);
@@ -86,16 +93,25 @@ const PageComponent = ({ pageArray, pageNumber, goToNextPage, goToLastPage, isLa
 
       {(finishCode && (pageNumber===pageArray.length) && !screenFlag) && (
         <div>
-          <p><b><i>Please paste the following finish code in your Prolific Link: </i></b></p>
+          <p><b><i>Please paste the following completion code in your Prolific Link: </i></b></p>
           <h3 style={{color:"red"}}>{finishCode}</h3>
         </div>
       )}
 
-      {(pageArray[pageNumber-1].timing>0) && <TimerComponent key={pageNumber} totalTime={pageArray[pageNumber-1].timing} goToNextPage={goToNextPage}/>}
+      {(pageArray[pageNumber-1].timeMax>0) && <TimerComponent key={pageNumber} 
+        timeMax={pageArray[pageNumber-1].timeMax} 
+        timeMin={pageArray[pageNumber-1].timeMin} 
+        goToNextPage={goToNextPage} 
+        setTimingFullfilledFlag={setTimingFullfilledFlag}
+      />}
 
       <div>
         {pageArray[pageNumber-1].questions.map((questionContent, index) => {
-          return <QuestionComponent key={"lcwSurvey-"+pageNumber+"-"+index} myKey={"lcwSurvey-"+pageNumber+"-"+index} questionContent={questionContent} finished={finished}/>;
+          return <QuestionComponent key={"lcwSurvey-"+pageNumber+"-"+index} 
+            myKey={"lcwSurvey-"+pageNumber+"-"+index} 
+            questionContent={questionContent} 
+            finished={finished}
+          />;
         })}
       </div>
       
