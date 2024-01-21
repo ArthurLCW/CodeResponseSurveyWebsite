@@ -107,7 +107,8 @@ const PageComponent = ({ pageArray, pageNumber, goToNextPage, goToLastPage, isLa
 
       <div>
         {pageArray[pageNumber-1].questions.map((questionContent, index) => {
-          return <QuestionComponent key={"lcwSurvey-"+pageNumber+"-"+index} 
+          return <QuestionComponent 
+            key={"lcwSurvey-"+pageNumber+"-"+index} 
             myKey={"lcwSurvey-"+pageNumber+"-"+index} 
             questionContent={questionContent} 
             finished={finished}

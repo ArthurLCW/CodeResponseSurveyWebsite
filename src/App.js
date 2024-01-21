@@ -143,65 +143,65 @@ function App() {
     //   ]  
     // ),
 
-    // coding question (self-coding)
-    new Page(
-      [
-        new Question(
-          "coding",
-          ["coding1.md"],
-          [],
-          null,
-          null,
-          "record"
-        )
-      ],
-      420, // timer
-      30
-    ),
+    // // coding question (self-coding)
+    // new Page(
+    //   [
+    //     new Question(
+    //       "coding",
+    //       ["coding1.md"],
+    //       [],
+    //       null,
+    //       null,
+    //       "record"
+    //     )
+    //   ],
+    //   420, // timer
+    //   30
+    // ),
     
+    // // coding question (assisted coding)
+    // new Page(
+    //   [
+    //     new Question(
+    //       "coding",
+    //       ["coding2-v11.md","coding2-v12.md","coding2-v13.md","coding2-v21.md","coding2-v22.md","coding2-v23.md"],
+    //       [],
+    //       null,
+    //       null,
+    //       "display"
+    //     )
+    //   ],
+    //   420, // timer
+    //   30
+    // ),
 
-    // coding question (assisted coding)
-    new Page(
-      [
-        new Question(
-          "coding",
-          ["coding2-v11.md","coding2-v12.md","coding2-v13.md","coding2-v21.md","coding2-v22.md","coding2-v23.md"],
-          [],
-          null,
-          null,
-          "display"
-        )
-      ],
-      420, // timer
-      30
-    ),
+    // // post-hoc (domain knowledge familarity & perceived difficulty)
+    // new Page(
+    //   [
+    //     new Question(
+    //       "likert-scale",
+    //       ["domain-knowledge1.md"],
+    //       ["Not familiar at all", "Slightly familiar", "Moderately familiar", "Very familiar", "Extremely familiar"],
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["domain-knowledge2.md"],
+    //       ["Not familiar at all", "Slightly familiar", "Moderately familiar", "Very familiar", "Extremely familiar"],
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["domain-knowledge3.md"],
+    //       ["Not familiar at all", "Slightly familiar", "Moderately familiar", "Very familiar", "Extremely familiar"],
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["perceived-difficulty.md"],
+    //       ["Extremely easy", "Somewhat Easy", "Neither easy nor difficult", "Somewhat difficult", "Extremely difficult"],
+    //     )
+    //   ],
+    // ),
 
-    // post-hoc (domain knowledge familarity & perceived difficulty)
-    new Page(
-      [
-        new Question(
-          "likert-scale",
-          ["domain-knowledge1.md"],
-          ["Not familiar at all", "Slightly familiar", "Moderately familiar", "Very familiar", "Extremely familiar"],
-        ),
-        new Question(
-          "likert-scale",
-          ["domain-knowledge2.md"],
-          ["Not familiar at all", "Slightly familiar", "Moderately familiar", "Very familiar", "Extremely familiar"],
-        ),
-        new Question(
-          "likert-scale",
-          ["domain-knowledge3.md"],
-          ["Not familiar at all", "Slightly familiar", "Moderately familiar", "Very familiar", "Extremely familiar"],
-        ),
-        new Question(
-          "likert-scale",
-          ["perceived-difficulty.md"],
-          ["Extremely easy", "Somewhat Easy", "Neither easy nor difficult", "Somewhat difficult", "Extremely difficult"],
-        )
-      ],
-    ),
-
+    // gratitude
     new Page(
       [
         new Question(
