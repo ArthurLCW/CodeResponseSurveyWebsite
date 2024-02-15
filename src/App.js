@@ -51,7 +51,7 @@ function App() {
 
   const enterFullScreen = () => {
     document.documentElement.requestFullscreen().catch((e) => {
-      console.error(`无法进入全屏模式: ${e.message}`);
+      console.error(`Cannot enter full screen mode: ${e.message}`);
     });
     setModalIsOpen(false);
   };
@@ -159,21 +159,22 @@ function App() {
     //   30
     // ),
     
-    // // coding question (assisted coding)
-    // new Page(
-    //   [
-    //     new Question(
-    //       "coding",
-    //       ["coding2-v11.md","coding2-v12.md","coding2-v13.md","coding2-v21.md","coding2-v22.md","coding2-v23.md"],
-    //       [],
-    //       null,
-    //       null,
-    //       "display"
-    //     )
-    //   ],
-    //   420, // timer
-    //   30
-    // ),
+    // coding question (assisted coding)
+    new Page(
+      [
+        new Question(
+          "coding",
+          ["coding2-v11.md","coding2-v12.md","coding2-v13.md","coding2-v21.md","coding2-v22.md","coding2-v23.md"],
+          [],
+          null,
+          null,
+          "display"
+        )
+      ],
+      420, // timer
+      // 30
+      3
+    ),
 
     // // post-hoc (domain knowledge familarity & perceived difficulty)
     // new Page(

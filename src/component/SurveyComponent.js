@@ -10,10 +10,12 @@ const generateRandomString = (length = 10) => {
   return result;
 };
 
+// https://www.hci-survey.com/?PROLIFIC_PID=12345&STUDY_ID=67890&SESSION_ID=abcde
 const SurveyComponent = ({pageArray, rememberState, setEnableModal}) => {
   const [prolificId, setProlificId] = useState('');
   const [studyId, setStudyId] = useState('');
   const [sessionId, setSessionId] = useState('');
+  // const [questionSet, ]
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -54,10 +56,10 @@ const SurveyComponent = ({pageArray, rememberState, setEnableModal}) => {
       setEnableModal(false);
       if (document.fullscreenElement) {
         document.exitFullscreen()
-          .then(() => console.log("已退出全屏模式。"))
-          .catch((err) => console.error(`退出全屏模式时发生错误: ${err}`));
+          .then(() => console.log("Exit full-screen mode. "))
+          .catch((err) => console.error(`Errors occured when exiting full-screen mode: ${err}`));
       } else {
-        console.log("当前不在全屏模式。");
+        console.log("Currently not in full-screen mode. ");
       }
     }
   }, [currentPage, setEnableModal]);

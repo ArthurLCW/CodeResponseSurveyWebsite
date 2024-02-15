@@ -18,19 +18,16 @@ const PageComponent = ({ pageArray, pageNumber, goToNextPage, goToLastPage, isLa
 
 
   function getCurrentTimeInAEDT() {
-    // 创建一个新的日期对象，它将包含当前的UTC时间
     const now = new Date();
-
-    // 使用Intl.DateTimeFormat来格式化日期
     const options = {
-      timeZone: 'Australia/Sydney', // 使用悉尼时区，因为它遵循AEDT
+      timeZone: 'Australia/Sydney',
       year: 'numeric',
       month: 'long',
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
-      hour12: false // 使用24小时制
+      hour12: false
     };
 
     const formatter = new Intl.DateTimeFormat('en-AU', options);
