@@ -1,27 +1,26 @@
 .question {
-    padding: 5px;
-    border-bottom: 1px solid grey;
+  padding: 5px;
+  border-bottom: 1px solid grey;
 }
 
 .warning {
-    display: flex;
-    justify-content: center;
-    color: red;
+  display: flex;
+  justify-content: center;
+  color: red;
 }
 
-.multiple-choice-label{
-    display: 'block';
-    margin: '5px 0' 
+.multiple-choice-label {
+  display: "block";
+  margin: "5px 0";
 }
 
 .likert-scale-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 20px; /* Adjust the space between each set of button and label */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px; /* Adjust the space between each set of button and label */
 }
 
 .likert-label {
-    margin-bottom: 5px; /* Adjust space between label and radio button */
+  margin-bottom: 5px; /* Adjust space between label and radio button */
 }
-

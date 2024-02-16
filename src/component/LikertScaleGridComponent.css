@@ -3,7 +3,8 @@
   flex-direction: column;
 }
 
-.grid-header, .question-row {
+.grid-header,
+.question-row {
   display: flex;
   align-items: center;
 }
@@ -12,7 +13,8 @@
   width: 20%; /* Adjust based on your layout */
 }
 
-.option-title, .question-text {
+.option-title,
+.question-text {
   flex: 1;
   text-align: center;
 }
@@ -42,7 +44,7 @@
 }
 
 .custom-radio::after {
-  content: '';
+  content: "";
   display: block;
   width: 12px;
   height: 12px;

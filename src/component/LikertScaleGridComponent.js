@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "./LikertScaleGridComponent.css";
 
 const LikertScaleGridComponent = ({ questionContent }) => {
@@ -6,15 +6,15 @@ const LikertScaleGridComponent = ({ questionContent }) => {
   const options = questionContent.questionOptions;
 
   // Initialize state to track responses for each question
-  const [responses, setResponses] = useState(
-    questions.map(() => '')
-  );
+  const [responses, setResponses] = useState(questions.map(() => ""));
 
   // Handle option selection
   const handleSelect = (questionIndex, option) => {
-    setResponses(responses.map((response, index) => 
-      index === questionIndex ? option : response
-    ));
+    setResponses(
+      responses.map((response, index) =>
+        index === questionIndex ? option : response
+      )
+    );
   };
 
   return (

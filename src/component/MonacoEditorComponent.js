@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import MonacoEditor from 'react-monaco-editor';
-import { useSelector } from 'react-redux'
-import { increment, decrement, updateRecordInfo } from '../redux/recorderSlice';
+import React, { useState, useEffect } from "react";
+import MonacoEditor from "react-monaco-editor";
+import { useSelector } from "react-redux";
+import { increment, decrement, updateRecordInfo } from "../redux/recorderSlice";
 
-
-
-const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey, recordLogic, setCodingNonEnptyLines}) => {
-  const [code, setCode] = useState('// type your code...');
+const MonacoEditorComponent = ({
+  dispatch,
+  setSelectedOption,
+  myKey,
+  recordLogic,
+  setCodingNonEnptyLines,
+}) => {
+  const [code, setCode] = useState("// type your code...");
   const [lineCount, setLineCount] = useState(1);
   const [nonEmptyLineCount, setNonEmptyLineCount] = useState(1);
   const [counted, setCounted] = useState(false);
@@ -21,9 +25,14 @@ const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey, recordLogic,
   const onChange = (newValue, e) => {
     localStorage.setItem(myKey, newValue);
     console.log("id: ", myKey, ", localstorage: ", localStorage.getItem(myKey));
-    if (recordLogic==="record"){
+    if (recordLogic === "record") {
       localStorage.setItem("lcwRecordInfo", newValue);
-      console.log("id: ", myKey, ", record localstorage: ", localStorage.getItem("lcwRecordInfo"));
+      console.log(
+        "id: ",
+        myKey,
+        ", record localstorage: ",
+        localStorage.getItem("lcwRecordInfo")
+      );
     }
 
     if (editorInstance) {
@@ -33,12 +42,12 @@ const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey, recordLogic,
 
     setCode(newValue);
     setSelectedOption(newValue);
-    
+
     if (editorInstance) {
       const model = editorInstance.getModel();
       const lineCount = model.getLineCount();
       let nonEmptyLineCountLocal = 0;
-  
+
       for (let i = 1; i <= lineCount; i++) {
         const lineContent = model.getLineContent(i);
         if (lineContent.trim().length > 0) {
@@ -53,7 +62,16 @@ const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey, recordLogic,
   };
 
   useEffect(() => {
-    console.log("in use effect -- lineCount: ", lineCount, "non-empty line: ",nonEmptyLineCount,", counted: ", counted, ", code: ", code);
+    console.log(
+      "in use effect -- lineCount: ",
+      lineCount,
+      "non-empty line: ",
+      nonEmptyLineCount,
+      ", counted: ",
+      counted,
+      ", code: ",
+      code
+    );
     if (nonEmptyLineCount >= 10 && !counted) {
       setCounted(true);
       dispatch(increment());
@@ -69,7 +87,7 @@ const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey, recordLogic,
     selectOnLineNumbers: true,
     roundedSelection: false,
     readOnly: false,
-    cursorStyle: 'line',
+    cursorStyle: "line",
     automaticLayout: true,
   };
 
@@ -79,7 +97,11 @@ const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey, recordLogic,
       width="35vw"
       language="javascript"
       theme="vs-dark"
-      value= {(recordLogic==="display")? localStorage.getItem("lcwRecordInfo"):'// type your code...'}
+      value={
+        recordLogic === "display"
+          ? localStorage.getItem("lcwRecordInfo")
+          : "// type your code..."
+      }
       // value = '// type your code...'
       options={options}
       onChange={onChange}
@@ -87,7 +109,5 @@ const MonacoEditorComponent = ({dispatch, setSelectedOption, myKey, recordLogic,
     />
   );
 };
-
-
 
 export default MonacoEditorComponent;

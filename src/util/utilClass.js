@@ -1,5 +1,12 @@
 export class Question {
-  constructor(questionType, questionTextSrc, questionOptions, screenOption=null, screenMsg=null, recordLogic=null) {
+  constructor(
+    questionType,
+    questionTextSrc,
+    questionOptions,
+    screenOption = null,
+    screenMsg = null,
+    recordLogic = null
+  ) {
     this.questionType = questionType;
     this.questionTextSrc = questionTextSrc; // array
     this.questionOptions = questionOptions;
@@ -10,10 +17,9 @@ export class Question {
 }
 
 export class Page {
-  constructor(questions, timeMax=0, timeMin=0){
+  constructor(questions, timeMax = 0, timeMin = 0) {
     this.questions = questions; // Array of Questions
     this.timeMax = timeMax; // upper limit of timing, number, seconds
     this.timeMin = timeMin; // lower limit of timing, number, seconds
   }
 }
-

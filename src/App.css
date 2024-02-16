@@ -1,16 +1,16 @@
-.app{
+.app {
   display: flex;
   justify-content: center;
   background-color: #094183;
   min-height: 100vh;
 }
 
-.survey{
+.survey {
   background-color: white;
   /* min-width: 50%; */
   /* min-width: 50vh; */
   /* min-width: 1000px; */
-  width:75vw;
+  width: 75vw;
   margin: 5vh 0px;
   border-radius: 5px;
   padding: 25px;
