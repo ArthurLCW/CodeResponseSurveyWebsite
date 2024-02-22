@@ -22,8 +22,10 @@ function App() {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [enableModal, setEnableModal] = useState(false);
+  const [firstTimeEnter, setFirstTimeEnter] = useState(true);
+
   const [leaveFullScreenTimes, setLeaveFullScreenTimes] = useState(
-    parseInt(localStorage.getItem("leaveFullScreenTimes")) || 0
+    parseInt(sessionStorage.getItem("leaveFullScreenTimes")) || 0
   );
 
   useEffect(() => {
@@ -32,7 +34,7 @@ function App() {
         setModalIsOpen(true);
         setLeaveFullScreenTimes((prevTimes) => {
           const newTimes = prevTimes + 1;
-          localStorage.setItem("leaveFullScreenTimes", newTimes);
+          sessionStorage.setItem("leaveFullScreenTimes", newTimes);
           return newTimes;
         });
       }
@@ -53,12 +55,13 @@ function App() {
       console.error(`Cannot enter full screen mode: ${e.message}`);
     });
     setModalIsOpen(false);
+    if (firstTimeEnter) setFirstTimeEnter(false);
   };
 
   const closeModal = () => {
     setModalIsOpen(false);
     console.log("reject full screen mode.");
-    localStorage.setItem("rejectFullScreen", true);
+    sessionStorage.setItem("rejectFullScreen", true);
   };
 
   const pageArray = [
@@ -448,9 +451,18 @@ function App() {
     codingMedium: [
       // coding question (self-coding)
       new Page(
-        [new Question("coding", ["coding1.md"], [], null, null, "record")],
+        [
+          new Question(
+            "coding",
+            ["coding1-medium.md"],
+            [],
+            null,
+            null,
+            "record"
+          ),
+        ],
         420, // timer
-        30
+        10
       ),
 
       // coding question (assisted coding)
@@ -459,12 +471,12 @@ function App() {
           new Question(
             "coding",
             [
-              "coding2-v11.md",
-              "coding2-v12.md",
-              "coding2-v13.md",
-              "coding2-v21.md",
-              "coding2-v22.md",
-              "coding2-v23.md",
+              "coding2-medium-v11.md",
+              "coding2-medium-v12.md",
+              "coding2-medium-v13.md",
+              "coding2-medium-v21.md",
+              "coding2-medium-v22.md",
+              "coding2-medium-v23.md",
             ],
             [],
             null,
@@ -481,7 +493,7 @@ function App() {
       new Page([
         new Question(
           "likert-scale",
-          ["domain-knowledge1.md"],
+          ["domain-knowledge-LRU.md"],
           [
             "Not familiar at all",
             "Slightly familiar",
@@ -492,7 +504,7 @@ function App() {
         ),
         new Question(
           "likert-scale",
-          ["domain-knowledge2.md"],
+          ["domain-knowledge-HashMap.md"],
           [
             "Not familiar at all",
             "Slightly familiar",
@@ -503,7 +515,7 @@ function App() {
         ),
         new Question(
           "likert-scale",
-          ["domain-knowledge3.md"],
+          ["domain-knowledge-LinkedList.md"],
           [
             "Not familiar at all",
             "Slightly familiar",
@@ -528,13 +540,15 @@ function App() {
     gratitude: [new Page([new Question("null", ["gratitude.md"], [])])],
   };
 
-  const pageSection = [
-    "consent",
-    "screener",
-    "demographics",
-    "codingMedium",
-    "gratitude",
-  ];
+  const pageSection = {
+    medium: [
+      "consent",
+      // "screener",
+      // "demographics",
+      "codingMedium",
+      "gratitude",
+    ],
+  };
 
   return (
     <div>
@@ -568,17 +582,36 @@ function App() {
         }}
       >
         <div style={{ display: "flex" }}>
-          <h2 style={{ margin: "auto" }}>Full-Screen Mode</h2>
+          <h1 style={{ margin: "auto" }}>Full-Screen Mode</h1>
         </div>
-        <h4>Are you willing to enter full-screen mode?</h4>
+        {firstTimeEnter ? (
+          <h3>Are you willing to enter full-screen mode?</h3>
+        ) : (
+          <h3>Are you sure you want to exit full-screen mode?</h3>
+        )}
         <p>
           Please notice that we will record your action of leaving full-screen
-          mode or reject entering full-screen mode.{" "}
+          mode or reject entering full-screen mode.
         </p>
-        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-          <button onClick={enterFullScreen}>Yes</button>
-          <button onClick={closeModal}>No</button>
-        </div>
+        {firstTimeEnter ? (
+          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+            <button onClick={enterFullScreen} className="attractive-btn">
+              Yes
+            </button>
+            <button onClick={closeModal} className="less-attractive-btn">
+              No
+            </button>
+          </div>
+        ) : (
+          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+            <button onClick={closeModal} className="less-attractive-btn">
+              Yes
+            </button>
+            <button onClick={enterFullScreen} className="attractive-btn">
+              No
+            </button>
+          </div>
+        )}
       </Modal>
     </div>
   );

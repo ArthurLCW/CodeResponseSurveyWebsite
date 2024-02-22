@@ -15,7 +15,7 @@ const TimerComponent = ({
   const [localTimingFlag, setLocalTimingFlag] = useState(false);
   const dispatch = useDispatch();
 
-  console.log("Timer: ", seconds, timeMax, timeMin);
+  // console.log("Timer: ", seconds, timeMax, timeMin);
   useEffect(() => {
     // Set up the interval
     const interval = setInterval(() => {
@@ -29,7 +29,7 @@ const TimerComponent = ({
         } else if (timeMax - seconds >= timeMin && !localTimingFlag) {
           setTimingFullfilledFlag(true);
           setLocalTimingFlag(true);
-          console.log("Timer able to proceed: ", seconds, timeMax, timeMin);
+          // console.log("Timer able to proceed: ", seconds, timeMax, timeMin);
         }
 
         // Otherwise, decrement seconds

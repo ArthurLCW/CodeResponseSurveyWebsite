@@ -11,38 +11,12 @@ const MonacoEditorComponent = ({
   setCodingNonEnptyLines,
 }) => {
   const [code, setCode] = useState("// type your code...");
-  const [lineCount, setLineCount] = useState(1);
   const [nonEmptyLineCount, setNonEmptyLineCount] = useState(1);
-  const [counted, setCounted] = useState(false);
+  const num = useSelector((state) => state.recorder.num);
 
   let editorInstance = null;
 
-  const editorDidMount = (editor, monaco) => {
-    editor.focus();
-    editorInstance = editor;
-  };
-
-  const onChange = (newValue, e) => {
-    localStorage.setItem(myKey, newValue);
-    console.log("id: ", myKey, ", localstorage: ", localStorage.getItem(myKey));
-    if (recordLogic === "record") {
-      localStorage.setItem("lcwRecordInfo", newValue);
-      console.log(
-        "id: ",
-        myKey,
-        ", record localstorage: ",
-        localStorage.getItem("lcwRecordInfo")
-      );
-    }
-
-    if (editorInstance) {
-      const newLineCount = editorInstance.getModel().getLineCount();
-      setLineCount(newLineCount);
-    }
-
-    setCode(newValue);
-    setSelectedOption(newValue);
-
+  const getNonEmptyLines = (editorInstance) => {
     if (editorInstance) {
       const model = editorInstance.getModel();
       const lineCount = model.getLineCount();
@@ -55,33 +29,56 @@ const MonacoEditorComponent = ({
         }
       }
       setNonEmptyLineCount(nonEmptyLineCountLocal);
-      setCodingNonEnptyLines(nonEmptyLineCount);
-      console.log("number of nonEmpty lines: ", nonEmptyLineCount);
+      setCodingNonEnptyLines(nonEmptyLineCountLocal);
+      console.log(
+        "number of nonEmpty lines: ",
+        nonEmptyLineCount,
+        nonEmptyLineCountLocal
+      );
     }
+  };
+
+  const editorDidMount = (editor, monaco) => {
+    editor.focus();
+    editorInstance = editor;
+    getNonEmptyLines(editorInstance);
+    sessionStorage.setItem(myKey, editorInstance.getValue());
+  };
+
+  const onChange = (newValue, e) => {
+    sessionStorage.setItem(myKey, newValue);
+    // console.log(
+    //   "id: ",
+    //   myKey,
+    //   ", sessionStorage: ",
+    //   sessionStorage.getItem(myKey)
+    // );
+    if (recordLogic === "record") {
+      sessionStorage.setItem("lcwRecordInfo", newValue);
+      // console.log(
+      //   "id: ",
+      //   myKey,
+      //   ", record sessionStorage: ",
+      //   sessionStorage.getItem("lcwRecordInfo")
+      // );
+    }
+
+    setCode(newValue);
+    setSelectedOption(newValue);
+
+    getNonEmptyLines(editorInstance);
     // console.log("in onchange1: lineCount: ", lineCount, ", counted: ", counted, ", code: ", code);
   };
 
   useEffect(() => {
-    console.log(
-      "in use effect -- lineCount: ",
-      lineCount,
-      "non-empty line: ",
-      nonEmptyLineCount,
-      ", counted: ",
-      counted,
-      ", code: ",
-      code
-    );
-    if (nonEmptyLineCount >= 10 && !counted) {
-      setCounted(true);
+    if (nonEmptyLineCount >= 10 && num === 0) {
       dispatch(increment());
-      console.log("MONACO editor increment: ", nonEmptyLineCount);
-    } else if (nonEmptyLineCount < 10 && counted) {
-      setCounted(false);
+      console.log("MONACO editor increment: ", nonEmptyLineCount, num);
+    } else if (nonEmptyLineCount < 10 && num === 1) {
       dispatch(decrement());
-      console.log("MONACO editor decrement: ", nonEmptyLineCount);
+      console.log("MONACO editor decrement: ", nonEmptyLineCount, num);
     }
-  }, [lineCount, counted, code, dispatch]);
+  }, [dispatch, nonEmptyLineCount, num]);
 
   const options = {
     selectOnLineNumbers: true,
@@ -99,7 +96,7 @@ const MonacoEditorComponent = ({
       theme="vs-dark"
       value={
         recordLogic === "display"
-          ? localStorage.getItem("lcwRecordInfo")
+          ? sessionStorage.getItem("lcwRecordInfo")
           : "// type your code..."
       }
       // value = '// type your code...'

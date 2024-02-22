@@ -14,7 +14,7 @@ const PageComponent = ({
   isLastPage,
   finishCode,
 }) => {
-  console.log(pageArray.length, pageNumber);
+  // console.log(pageArray.length, pageNumber);
   const [finished, setFinished] = useState(false);
   const [screenMsg, setScreenMsg] = useState("");
   const [sendingState, setSendingState] = useState(true);
@@ -43,26 +43,21 @@ const PageComponent = ({
   // Modify this block to send data to backend
   if (pageNumber === pageArray.length && sendingState) {
     setSendingState(false);
-    let localStorageObject = {};
-    localStorageObject["sending-time"] = getCurrentTimeInAEDT();
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
+    let sessionStorageObject = {};
+    sessionStorageObject["sending-time"] = getCurrentTimeInAEDT();
+    for (let i = 0; i < sessionStorage.length; i++) {
+      const key = sessionStorage.key(i);
       if (!key.includes("."))
-        localStorageObject[key] = localStorage.getItem(key);
+        sessionStorageObject[key] = sessionStorage.getItem(key);
     }
-    console.log(localStorage);
-    console.log(localStorageObject);
+    console.log(sessionStorage);
+    console.log(sessionStorageObject, sessionStorageObject["prolificId"]);
     writeParticipantData(
-      localStorage.getItem("prolificId"),
-      localStorageObject
+      sessionStorageObject["prolificId"],
+      sessionStorageObject
     );
-    localStorage.clear();
+    sessionStorage.clear();
   }
-
-  // if (pageNumber == 1){
-  //   console.log("test");
-  //   writeParticipantData();
-  // }
 
   const handleClick = () => {
     if (!finished) setFinished(true);
@@ -98,7 +93,7 @@ const PageComponent = ({
         setScreenMsg(pageArray[pageNumber - 1].questions[i].screenMsg);
       }
     }
-  }, [pageNumber]);
+  }, [pageArray, pageNumber]);
 
   return (
     <div>

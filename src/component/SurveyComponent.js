@@ -19,37 +19,32 @@ const SurveyComponent = ({
   rememberState,
   setEnableModal,
 }) => {
-  const [prolificId, setProlificId] = useState("");
-  const [studyId, setStudyId] = useState("");
-  const [sessionId, setSessionId] = useState("");
-  const [questionSet, setQestionSet] = useState("");
-
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
-    setProlificId(
+    sessionStorage.setItem(
+      "prolificId",
       queryParams.get("PROLIFIC_PID") ||
         "PROLIFIC_PID_" + generateRandomString()
     );
-    setStudyId(
+    sessionStorage.setItem(
+      "studyId",
       queryParams.get("STUDY_ID") || "STUDY_ID_" + generateRandomString()
     );
-    setSessionId(
+    sessionStorage.setItem(
+      "sessionId",
       queryParams.get("SESSION_ID") || "SESSION_ID_" + generateRandomString()
     );
-    setQestionSet(queryParams.get("QUESTION_SET") || "medium");
+    sessionStorage.setItem(
+      "questionSet",
+      queryParams.get("QUESTION_SET") || "medium"
+    );
   }, []);
 
-  // console.log("prolificId:",prolificId, "studyId:",studyId, "sessionId:",sessionId);
-  localStorage.setItem("prolificId", prolificId);
-  localStorage.setItem("studyId", studyId);
-  localStorage.setItem("sessionId", sessionId);
-  localStorage.setItem("questionSet", questionSet);
-
-  if (!rememberState) localStorage.setItem("lcwPageNum", 1);
+  if (!rememberState) sessionStorage.setItem("initPageNum", 1);
 
   const pageArray = [];
   for (const [key, value] of Object.entries(pageObj)) {
-    if (pageSection.includes(key)) {
+    if ((pageSection["medium"] || []).includes(key)) {
       for (const page of value) {
         pageArray.push(page);
       }
@@ -59,18 +54,20 @@ const SurveyComponent = ({
   const totalPages = pageArray.length;
 
   const [currentPage, setCurrentPage] = useState(
-    localStorage.getItem("lcwPageNum") ? localStorage.getItem("lcwPageNum") : 1
+    sessionStorage.getItem("initPageNum")
+      ? sessionStorage.getItem("initPageNum")
+      : 1
   );
 
   const goToNextPage = () => {
     if (currentPage < totalPages) {
-      localStorage.setItem("lcwPageNum", parseInt(currentPage, 10) + 1);
+      // sessionStorage.setItem("initPageNum", parseInt(currentPage, 10) + 1);
       setCurrentPage(parseInt(currentPage, 10) + 1);
     }
   };
 
   const goToLastPage = () => {
-    localStorage.setItem("lcwPageNum", parseInt(pageArray.length));
+    // sessionStorage.setItem("initPageNum", parseInt(pageArray.length));
     setCurrentPage(parseInt(pageArray.length));
   };
 
@@ -97,6 +94,7 @@ const SurveyComponent = ({
   return (
     <div>
       <PageComponent
+        pageArray={pageArray}
         pageNumber={currentPage}
         goToNextPage={goToNextPage}
         goToLastPage={goToLastPage}

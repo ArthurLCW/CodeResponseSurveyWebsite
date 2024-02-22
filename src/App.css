@@ -15,3 +15,36 @@
   border-radius: 5px;
   padding: 25px;
 }
+
+/* Attractive Button Styles */
+.attractive-btn {
+  background-color: #1e90ff; /* Light blue background */
+  color: white; /* White text */
+  padding: 14px 20px; /* Some padding */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Larger font size */
+  transition: all 0.3s; /* Smooth transition for hover effects */
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.attractive-btn:hover {
+  background-color: #1c86ee; /* A slightly darker shade of light blue on hover */
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.25); /* Larger shadow on hover */
+  transform: scale(1.05); /* Slightly larger on hover */
+}
+
+/* Less Attractive Button Styles */
+.less-attractive-btn {
+  background-color: #f4f4f4; /* Light grey background */
+  color: #757575; /* Dark grey text */
+  padding: 14px 20px; /* Some padding */
+  border: 1px solid #ddd; /* Light border */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Same font size */
+  transition: all 0.3s; /* Smooth transition for hover effects */
+}
+
+.less-attractive-btn:hover {
+  background-color: #e7e7e7; /* Slightly darker grey on hover */
+}
