@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { solarizedlight } from "react-syntax-highlighter/dist/esm/styles/prism";
+import {
+  solarizedlight,
+  vs,
+  prism,
+} from "react-syntax-highlighter/dist/esm/styles/prism";
+import "./MdDisplayerComponent.css";
 
 // Map images
 const imageMap = {};
@@ -15,7 +21,8 @@ export const Markdown = ({ content }) => {
           const match = /language-(\w+)/.exec(className || "");
           return !inline && match ? (
             <SyntaxHighlighter
-              style={solarizedlight}
+              className={"syntax-highlighter"}
+              style={prism}
               language={match[1]}
               PreTag="div"
               children={String(children).replace(/\n$/, "")}
@@ -33,6 +40,7 @@ export const Markdown = ({ content }) => {
         },
       }}
       remarkPlugins={[remarkGfm]}
+      rehypePlugins={[rehypeRaw]}
     >
       {content}
     </ReactMarkdown>

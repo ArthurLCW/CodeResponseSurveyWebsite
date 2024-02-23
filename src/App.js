@@ -537,17 +537,77 @@ function App() {
         ),
       ]),
     ],
+    // coding (the medium one)
+    codingEasy: [
+      // coding question (self-coding)
+      new Page(
+        [new Question("coding", ["coding1-easy.md"], [], null, null, "record")],
+        420, // timer
+        10
+      ),
+
+      // coding question (assisted coding)
+      new Page(
+        [
+          new Question(
+            "coding",
+            [
+              "coding2-easy-v11.md",
+              "coding2-easy-v12.md",
+              "coding2-easy-v13.md",
+              "coding2-easy-v21.md",
+              "coding2-easy-v22.md",
+              "coding2-easy-v23.md",
+            ],
+            [],
+            null,
+            null,
+            "display"
+          ),
+        ],
+        420, // timer
+        // 30
+        3
+      ),
+
+      // post-hoc (domain knowledge familarity & perceived difficulty)
+      new Page([
+        new Question(
+          "likert-scale",
+          ["domain-knowledge-HashMap.md"],
+          [
+            "Not familiar at all",
+            "Slightly familiar",
+            "Moderately familiar",
+            "Very familiar",
+            "Extremely familiar",
+          ]
+        ),
+        new Question(
+          "likert-scale",
+          ["perceived-difficulty.md"],
+          [
+            "Extremely easy",
+            "Somewhat Easy",
+            "Neither easy nor difficult",
+            "Somewhat difficult",
+            "Extremely difficult",
+          ]
+        ),
+      ]),
+    ],
     gratitude: [new Page([new Question("null", ["gratitude.md"], [])])],
   };
 
   const pageSection = {
     medium: [
       "consent",
-      // "screener",
-      // "demographics",
+      "screener",
+      "demographics",
       "codingMedium",
       "gratitude",
     ],
+    easy: ["consent", "screener", "demographics", "codingEasy", "gratitude"],
   };
 
   return (

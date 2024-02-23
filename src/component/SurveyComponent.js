@@ -19,32 +19,31 @@ const SurveyComponent = ({
   rememberState,
   setEnableModal,
 }) => {
-  useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    sessionStorage.setItem(
-      "prolificId",
-      queryParams.get("PROLIFIC_PID") ||
-        "PROLIFIC_PID_" + generateRandomString()
-    );
-    sessionStorage.setItem(
-      "studyId",
-      queryParams.get("STUDY_ID") || "STUDY_ID_" + generateRandomString()
-    );
-    sessionStorage.setItem(
-      "sessionId",
-      queryParams.get("SESSION_ID") || "SESSION_ID_" + generateRandomString()
-    );
-    sessionStorage.setItem(
-      "questionSet",
-      queryParams.get("QUESTION_SET") || "medium"
-    );
-  }, []);
+  const queryParams = new URLSearchParams(window.location.search);
+  sessionStorage.setItem(
+    "prolificId",
+    queryParams.get("PROLIFIC_PID") || "PROLIFIC_PID_" + generateRandomString()
+  );
+  sessionStorage.setItem(
+    "studyId",
+    queryParams.get("STUDY_ID") || "STUDY_ID_" + generateRandomString()
+  );
+  sessionStorage.setItem(
+    "sessionId",
+    queryParams.get("SESSION_ID") || "SESSION_ID_" + generateRandomString()
+  );
+  sessionStorage.setItem(
+    "questionSet",
+    queryParams.get("QUESTION_SET") || "medium"
+  );
 
   if (!rememberState) sessionStorage.setItem("initPageNum", 1);
 
   const pageArray = [];
   for (const [key, value] of Object.entries(pageObj)) {
-    if ((pageSection["medium"] || []).includes(key)) {
+    if (
+      (pageSection[sessionStorage.getItem("questionSet")] || []).includes(key)
+    ) {
       for (const page of value) {
         pageArray.push(page);
       }
