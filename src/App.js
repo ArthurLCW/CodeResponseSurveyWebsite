@@ -462,7 +462,7 @@ function App() {
           ),
         ],
         420, // timer
-        10
+        60
       ),
 
       // coding question (assisted coding)
@@ -485,8 +485,7 @@ function App() {
           ),
         ],
         420, // timer
-        // 30
-        3
+        60
       ),
 
       // post-hoc (domain knowledge familarity & perceived difficulty)
@@ -543,7 +542,7 @@ function App() {
       new Page(
         [new Question("coding", ["coding1-easy.md"], [], null, null, "record")],
         420, // timer
-        10
+        60
       ),
 
       // coding question (assisted coding)
@@ -566,8 +565,7 @@ function App() {
           ),
         ],
         420, // timer
-        // 30
-        3
+        60
       ),
 
       // post-hoc (domain knowledge familarity & perceived difficulty)
