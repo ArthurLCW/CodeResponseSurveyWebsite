@@ -79,153 +79,153 @@ function App() {
         ),
       ]),
     ],
-    // screener (programming experience)
-    screener: [
-      new Page([
-        new Question(
-          "multiple-choice",
-          ["screener1.md"],
-          ["Yes", "No", "I don't know"]
-        ),
-        new Question(
-          "likert-scale",
-          ["screener2.md"],
-          [
-            "Not experienced at all",
-            "Slightly experienced",
-            "Moderately experienced",
-            "Very experienced",
-            "Extremely experienced",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["screener3.md"],
-          [
-            "Not involved at all",
-            "Slightly involved",
-            "Moderately involved",
-            "Very involved",
-            "Extremely involved",
-          ]
-        ),
-        new Question(
-          "multiple-choice",
-          ["screener4.md"],
-          [
-            "Student specializing in IT-related fields.",
-            "Professional specializing in IT (such as developer, testing engineer, operations engineer, etc).",
-            "Others.",
-          ]
-        ),
-        new Question(
-          "multiple-choice",
-          ["screener5.md"],
-          ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
-        ),
-      ]),
-    ],
-    // demographics (attitudes towards ai, language proficiency)
-    demographics: [
-      new Page([
-        new Question(
-          "likert-scale",
-          ["attitudes1.md"],
-          [
-            "0 (Strongly disagree)",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10 (Strongly agree)",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["attitudes2.md"],
-          [
-            "0 (Strongly disagree)",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10 (Strongly agree)",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["attitudes3.md"],
-          [
-            "0 (Strongly disagree)",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10 (Strongly agree)",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["attitudes4.md"],
-          [
-            "0 (Strongly disagree)",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10 (Strongly agree)",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["attitudes5.md"],
-          [
-            "0 (Strongly disagree)",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10 (Strongly agree)",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["language-proficiency.md"],
-          [
-            "Not familiar at all",
-            "Slightly familiar",
-            "Moderately familiar",
-            "Very familiar",
-            "Extremely familiar",
-          ]
-        ),
-      ]),
-    ],
+    // // screener (programming experience)
+    // screener: [
+    //   new Page([
+    //     new Question(
+    //       "multiple-choice",
+    //       ["screener1.md"],
+    //       ["Yes", "No", "I don't know"]
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["screener2.md"],
+    //       [
+    //         "Not experienced at all",
+    //         "Slightly experienced",
+    //         "Moderately experienced",
+    //         "Very experienced",
+    //         "Extremely experienced",
+    //       ]
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["screener3.md"],
+    //       [
+    //         "Not involved at all",
+    //         "Slightly involved",
+    //         "Moderately involved",
+    //         "Very involved",
+    //         "Extremely involved",
+    //       ]
+    //     ),
+    //     new Question(
+    //       "multiple-choice",
+    //       ["screener4.md"],
+    //       [
+    //         "Student specializing in IT-related fields.",
+    //         "Professional specializing in IT (such as developer, testing engineer, operations engineer, etc).",
+    //         "Others.",
+    //       ]
+    //     ),
+    //     new Question(
+    //       "multiple-choice",
+    //       ["screener5.md"],
+    //       ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
+    //     ),
+    //   ]),
+    // ],
+    // // demographics (attitudes towards ai, language proficiency)
+    // demographics: [
+    //   new Page([
+    //     new Question(
+    //       "likert-scale",
+    //       ["attitudes1.md"],
+    //       [
+    //         "0 (Strongly disagree)",
+    //         "1",
+    //         "2",
+    //         "3",
+    //         "4",
+    //         "5",
+    //         "6",
+    //         "7",
+    //         "8",
+    //         "9",
+    //         "10 (Strongly agree)",
+    //       ]
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["attitudes2.md"],
+    //       [
+    //         "0 (Strongly disagree)",
+    //         "1",
+    //         "2",
+    //         "3",
+    //         "4",
+    //         "5",
+    //         "6",
+    //         "7",
+    //         "8",
+    //         "9",
+    //         "10 (Strongly agree)",
+    //       ]
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["attitudes3.md"],
+    //       [
+    //         "0 (Strongly disagree)",
+    //         "1",
+    //         "2",
+    //         "3",
+    //         "4",
+    //         "5",
+    //         "6",
+    //         "7",
+    //         "8",
+    //         "9",
+    //         "10 (Strongly agree)",
+    //       ]
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["attitudes4.md"],
+    //       [
+    //         "0 (Strongly disagree)",
+    //         "1",
+    //         "2",
+    //         "3",
+    //         "4",
+    //         "5",
+    //         "6",
+    //         "7",
+    //         "8",
+    //         "9",
+    //         "10 (Strongly agree)",
+    //       ]
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["attitudes5.md"],
+    //       [
+    //         "0 (Strongly disagree)",
+    //         "1",
+    //         "2",
+    //         "3",
+    //         "4",
+    //         "5",
+    //         "6",
+    //         "7",
+    //         "8",
+    //         "9",
+    //         "10 (Strongly agree)",
+    //       ]
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["language-proficiency.md"],
+    //       [
+    //         "Not familiar at all",
+    //         "Slightly familiar",
+    //         "Moderately familiar",
+    //         "Very familiar",
+    //         "Extremely familiar",
+    //       ]
+    //     ),
+    //   ]),
+    // ],
     // coding (the medium one)
     codingMedium: [
       // coding question (self-coding)
@@ -243,27 +243,27 @@ function App() {
  * @param {number} capacity
  */
 var LRUCache = function(capacity) {
-    
+
 };
 
-/** 
+/**
  * @param {number} key
  * @return {number}
  */
 LRUCache.prototype.get = function(key) {
-    
+
 };
 
-/** 
- * @param {number} key 
+/**
+ * @param {number} key
  * @param {number} value
  * @return {void}
  */
 LRUCache.prototype.put = function(key, value) {
-    
+
 };
 
-/** 
+/**
  * Your LRUCache object will be instantiated and called as such:
  * var obj = new LRUCache(capacity)
  * var param_1 = obj.get(key)
@@ -351,10 +351,15 @@ LRUCache.prototype.put = function(key, value) {
     codingEasy: [
       // coding question (self-coding)
       new Page(
-        [new Question("coding", ["coding1-easy.md"], [], null, null, "record")],
-        420, // timer
-        1,
-        `
+        [
+          new Question(
+            "coding",
+            ["coding1-easy.md"],
+            [],
+            null,
+            null,
+            "record",
+            `
 /**
  * @param {string} ransomNote
  * @param {string} magazine
@@ -364,6 +369,10 @@ var canConstruct = function(ransomNote, magazine) {
 
 };
         `
+          ),
+        ],
+        420, // timer
+        1
       ),
 
       // coding question (assisted coding)
@@ -497,3 +506,43 @@ var canConstruct = function(ransomNote, magazine) {
 }
 
 export default App;
+
+// import React, { useState } from "react";
+// import { render } from "react-dom";
+// import MonacoEditor from "react-monaco-editor";
+
+// const App = () => {
+//   // 初始化代码状态
+//   const [code, setCode] = useState(
+//     '// 你可以在这里写一些 C++ 代码\n#include<iostream>\nint main() {\n  std::cout << "Hello, World!" << std::endl;\n  return 0;\n}'
+//   );
+
+//   // 处理编辑器内容变化
+//   const handleEditorChange = (newValue, e) => {
+//     setCode(newValue);
+//   };
+
+//   // 配置编辑器选项
+//   const options = {
+//     selectOnLineNumbers: true,
+//     roundedSelection: false,
+//     readOnly: false,
+//     cursorStyle: "line",
+//     automaticLayout: true,
+//   };
+
+//   return (
+//     <MonacoEditor
+//       width="800"
+//       height="600"
+//       language="cpp"
+//       theme="vs-dark"
+//       value={code}
+//       options={options}
+//       onChange={handleEditorChange}
+//     />
+//   );
+// };
+
+// // render(<App />, document.getElementById('root'));
+// export default App;
