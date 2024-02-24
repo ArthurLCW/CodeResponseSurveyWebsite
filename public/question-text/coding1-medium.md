@@ -1,4 +1,4 @@
-Please write a code snippet to solve the following programming problem. You will have **10 minutes** to solve it.
+Please write a code snippet to solve the following programming problem. You will have **7 minutes** to solve it.
 
 Please notice that you need to solve this programming problem **on your own**. 
 
@@ -6,18 +6,17 @@ Please notice that you need to solve this programming problem **on your own**.
 
 Programming question:
 
-Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
+Design a data structure that follows the constraints of a <span style="color: red;">Least Recently Used (LRU)</span> cache. The example below demonstrates how  <span style="color: red;">Least Recently Used (LRU)</span> works. 
 
-Implement the LRUCache class:
+Implement the `LRUCache` class:
 
-- `LRUCache(int capacity)` Initialize the LRU cache with positive size capacity.
-- `int get(int key)` Return the value of the key if the key exists, otherwise return -1.
-- `void put(int key, int value)` Update the value of the key if the key exists.
-- Otherwise, add the key-value pair to the cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key.
+- `LRUCache(int capacity)` Initialize the LRU cache with **positive** size `capacity`.
+- `int get(int key)` Return the value of the `key` if the key exists, otherwise return `-1`.
+- `void put(int key, int value)` Update the value of the `key` if the `key` exists. Otherwise, add the `key-value` pair to the cache. If the number of keys exceeds the `capacity` from this operation, **evict** the least recently used key.
 
-The functions `get` and `put` must each run in O(1) average time complexity.
+The functions `get` and `put` must each run in `O(1)` average time complexity.
 
-## Example 1:
+#### Example 1:
 
 ```javascript
 Input
@@ -41,10 +40,3 @@ lRUCache.get(1);    // return -1 (not found)
 lRUCache.get(3);    // return 3
 lRUCache.get(4);    // return 4
 ```
-
-## Constraints:
-
-- 1 <= capacity <= 3000
-- 0 <= key <= 104
-- 0 <= value <= 105
-- At most 2 * 105 calls will be made to get and put.

@@ -9,6 +9,7 @@ const MonacoEditorComponent = ({
   myKey,
   recordLogic,
   setCodingNonEnptyLines,
+  defaultCode,
 }) => {
   const [code, setCode] = useState("// type your code...");
   const [nonEmptyLineCount, setNonEmptyLineCount] = useState(1);
@@ -88,6 +89,7 @@ const MonacoEditorComponent = ({
     automaticLayout: true,
   };
 
+  console.log(defaultCode);
   return (
     <MonacoEditor
       height="100%"
@@ -97,7 +99,7 @@ const MonacoEditorComponent = ({
       value={
         recordLogic === "display"
           ? sessionStorage.getItem("lcwRecordInfo")
-          : "// type your code..."
+          : defaultCode
       }
       // value = '// type your code...'
       options={options}

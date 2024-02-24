@@ -125,6 +125,7 @@ const PageComponent = ({
 
       <div>
         {pageArray[pageNumber - 1].questions.map((questionContent, index) => {
+          console.log(questionContent);
           return (
             <QuestionComponent
               key={"lcwSurvey-" + pageNumber + "-" + index}

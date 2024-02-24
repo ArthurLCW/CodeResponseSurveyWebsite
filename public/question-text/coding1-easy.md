@@ -1,4 +1,4 @@
-Please write a code snippet to solve the following programming problem. You will have **10 minutes** to solve it.
+Please write a code snippet to solve the following programming problem. You will have **7 minutes** to solve it.
 
 Please notice that you need to solve this programming problem **on your own**. 
 
@@ -32,10 +32,3 @@ Output: false
 Input: ransomNote = "aa", magazine = "aab"
 Output: true
 ```
-
- 
-
-**Constraints:**
-
-- `1 <= ransomNote.length, magazine.length <= 105`
-- `ransomNote` and `magazine` consist of lowercase English letters. 

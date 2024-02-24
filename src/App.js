@@ -64,227 +64,6 @@ function App() {
     sessionStorage.setItem("rejectFullScreen", true);
   };
 
-  const pageArray = [
-    // consent
-    new Page([
-      new Question(
-        "multiple-choice",
-        ["consent.md"],
-        [
-          "Yes, I agree to participate in this study.",
-          "No, I disagree to participate in this study.",
-        ],
-        "No, I disagree to participate in this study.",
-        "Thanks for your time. We respect your decision of not participating in this study. Now you may leave this website."
-      ),
-    ]),
-
-    // // screener (programming experience)
-    // new Page([
-    //   new Question(
-    //     "multiple-choice",
-    //     ["screener1.md"],
-    //     ["Yes", "No", "I don't know"]
-    //   ),
-    //   new Question(
-    //     "likert-scale",
-    //     ["screener2.md"],
-    //     [
-    //       "Not experienced at all",
-    //       "Slightly experienced",
-    //       "Moderately experienced",
-    //       "Very experienced",
-    //       "Extremely experienced",
-    //     ]
-    //   ),
-    //   new Question(
-    //     "likert-scale",
-    //     ["screener3.md"],
-    //     [
-    //       "Not involved at all",
-    //       "Slightly involved",
-    //       "Moderately involved",
-    //       "Very involved",
-    //       "Extremely involved",
-    //     ]
-    //   ),
-    //   new Question(
-    //     "multiple-choice",
-    //     ["screener4.md"],
-    //     [
-    //       "Student specializing in IT-related fields.",
-    //       "Professional specializing in IT (such as developer, testing engineer, operations engineer, etc).",
-    //       "Others.",
-    //     ]
-    //   ),
-    //   new Question(
-    //     "multiple-choice",
-    //     ["screener5.md"],
-    //     ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
-    //   ),
-    // ]),
-
-    // // demographics (attitudes towards ai, language proficiency)
-    // new Page([
-    //   new Question(
-    //     "likert-scale",
-    //     ["attitudes1.md"],
-    //     [
-    //       "0 (Strongly disagree)",
-    //       "1",
-    //       "2",
-    //       "3",
-    //       "4",
-    //       "5",
-    //       "6",
-    //       "7",
-    //       "8",
-    //       "9",
-    //       "10 (Strongly agree)",
-    //     ]
-    //   ),
-    //   new Question(
-    //     "likert-scale",
-    //     ["attitudes2.md"],
-    //     [
-    //       "0 (Strongly disagree)",
-    //       "1",
-    //       "2",
-    //       "3",
-    //       "4",
-    //       "5",
-    //       "6",
-    //       "7",
-    //       "8",
-    //       "9",
-    //       "10 (Strongly agree)",
-    //     ]
-    //   ),
-    //   new Question(
-    //     "likert-scale",
-    //     ["attitudes3.md"],
-    //     [
-    //       "0 (Strongly disagree)",
-    //       "1",
-    //       "2",
-    //       "3",
-    //       "4",
-    //       "5",
-    //       "6",
-    //       "7",
-    //       "8",
-    //       "9",
-    //       "10 (Strongly agree)",
-    //     ]
-    //   ),
-    //   new Question(
-    //     "likert-scale",
-    //     ["attitudes4.md"],
-    //     [
-    //       "0 (Strongly disagree)",
-    //       "1",
-    //       "2",
-    //       "3",
-    //       "4",
-    //       "5",
-    //       "6",
-    //       "7",
-    //       "8",
-    //       "9",
-    //       "10 (Strongly agree)",
-    //     ]
-    //   ),
-    //   new Question(
-    //     "likert-scale",
-    //     ["attitudes5.md"],
-    //     [
-    //       "0 (Strongly disagree)",
-    //       "1",
-    //       "2",
-    //       "3",
-    //       "4",
-    //       "5",
-    //       "6",
-    //       "7",
-    //       "8",
-    //       "9",
-    //       "10 (Strongly agree)",
-    //     ]
-    //   ),
-    //   new Question(
-    //     "likert-scale",
-    //     ["language-proficiency.md"],
-    //     [
-    //       "Not familiar at all",
-    //       "Slightly familiar",
-    //       "Moderately familiar",
-    //       "Very familiar",
-    //       "Extremely familiar",
-    //     ]
-    //   ),
-    // ]),
-
-    // // coding question (self-coding)
-    // new Page(
-    //   [new Question("coding", ["coding1.md"], [], null, null, "record")],
-    //   420, // timer
-    //   30
-    // ),
-
-    // // coding question (assisted coding)
-    // new Page(
-    //   [
-    //     new Question(
-    //       "coding",
-    //       [
-    //         "coding2-v11.md",
-    //         "coding2-v12.md",
-    //         "coding2-v13.md",
-    //         "coding2-v21.md",
-    //         "coding2-v22.md",
-    //         "coding2-v23.md",
-    //       ],
-    //       [],
-    //       null,
-    //       null,
-    //       "display"
-    //     ),
-    //   ],
-    //   420, // timer
-    //   // 30
-    //   3
-    // ),
-
-    // // post-hoc (domain knowledge familarity & perceived difficulty)
-    // new Page(
-    //   [
-    //     new Question(
-    //       "likert-scale",
-    //       ["domain-knowledge1.md"],
-    //       ["Not familiar at all", "Slightly familiar", "Moderately familiar", "Very familiar", "Extremely familiar"],
-    //     ),
-    //     new Question(
-    //       "likert-scale",
-    //       ["domain-knowledge2.md"],
-    //       ["Not familiar at all", "Slightly familiar", "Moderately familiar", "Very familiar", "Extremely familiar"],
-    //     ),
-    //     new Question(
-    //       "likert-scale",
-    //       ["domain-knowledge3.md"],
-    //       ["Not familiar at all", "Slightly familiar", "Moderately familiar", "Very familiar", "Extremely familiar"],
-    //     ),
-    //     new Question(
-    //       "likert-scale",
-    //       ["perceived-difficulty.md"],
-    //       ["Extremely easy", "Somewhat Easy", "Neither easy nor difficult", "Somewhat difficult", "Extremely difficult"],
-    //     )
-    //   ],
-    // ),
-
-    // gratitude
-    new Page([new Question("null", ["gratitude.md"], [])]),
-  ];
-
   const pageObj = {
     consent: [
       new Page([
@@ -300,153 +79,153 @@ function App() {
         ),
       ]),
     ],
-    // screener (programming experience)
-    screener: [
-      new Page([
-        new Question(
-          "multiple-choice",
-          ["screener1.md"],
-          ["Yes", "No", "I don't know"]
-        ),
-        new Question(
-          "likert-scale",
-          ["screener2.md"],
-          [
-            "Not experienced at all",
-            "Slightly experienced",
-            "Moderately experienced",
-            "Very experienced",
-            "Extremely experienced",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["screener3.md"],
-          [
-            "Not involved at all",
-            "Slightly involved",
-            "Moderately involved",
-            "Very involved",
-            "Extremely involved",
-          ]
-        ),
-        new Question(
-          "multiple-choice",
-          ["screener4.md"],
-          [
-            "Student specializing in IT-related fields.",
-            "Professional specializing in IT (such as developer, testing engineer, operations engineer, etc).",
-            "Others.",
-          ]
-        ),
-        new Question(
-          "multiple-choice",
-          ["screener5.md"],
-          ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
-        ),
-      ]),
-    ],
-    // demographics (attitudes towards ai, language proficiency)
-    demographics: [
-      new Page([
-        new Question(
-          "likert-scale",
-          ["attitudes1.md"],
-          [
-            "0 (Strongly disagree)",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10 (Strongly agree)",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["attitudes2.md"],
-          [
-            "0 (Strongly disagree)",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10 (Strongly agree)",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["attitudes3.md"],
-          [
-            "0 (Strongly disagree)",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10 (Strongly agree)",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["attitudes4.md"],
-          [
-            "0 (Strongly disagree)",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10 (Strongly agree)",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["attitudes5.md"],
-          [
-            "0 (Strongly disagree)",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10 (Strongly agree)",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["language-proficiency.md"],
-          [
-            "Not familiar at all",
-            "Slightly familiar",
-            "Moderately familiar",
-            "Very familiar",
-            "Extremely familiar",
-          ]
-        ),
-      ]),
-    ],
+    // // screener (programming experience)
+    // screener: [
+    //   new Page([
+    //     new Question(
+    //       "multiple-choice",
+    //       ["screener1.md"],
+    //       ["Yes", "No", "I don't know"]
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["screener2.md"],
+    //       [
+    //         "Not experienced at all",
+    //         "Slightly experienced",
+    //         "Moderately experienced",
+    //         "Very experienced",
+    //         "Extremely experienced",
+    //       ]
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["screener3.md"],
+    //       [
+    //         "Not involved at all",
+    //         "Slightly involved",
+    //         "Moderately involved",
+    //         "Very involved",
+    //         "Extremely involved",
+    //       ]
+    //     ),
+    //     new Question(
+    //       "multiple-choice",
+    //       ["screener4.md"],
+    //       [
+    //         "Student specializing in IT-related fields.",
+    //         "Professional specializing in IT (such as developer, testing engineer, operations engineer, etc).",
+    //         "Others.",
+    //       ]
+    //     ),
+    //     new Question(
+    //       "multiple-choice",
+    //       ["screener5.md"],
+    //       ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
+    //     ),
+    //   ]),
+    // ],
+    // // demographics (attitudes towards ai, language proficiency)
+    // demographics: [
+    //   new Page([
+    //     new Question(
+    //       "likert-scale",
+    //       ["attitudes1.md"],
+    //       [
+    //         "0 (Strongly disagree)",
+    //         "1",
+    //         "2",
+    //         "3",
+    //         "4",
+    //         "5",
+    //         "6",
+    //         "7",
+    //         "8",
+    //         "9",
+    //         "10 (Strongly agree)",
+    //       ]
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["attitudes2.md"],
+    //       [
+    //         "0 (Strongly disagree)",
+    //         "1",
+    //         "2",
+    //         "3",
+    //         "4",
+    //         "5",
+    //         "6",
+    //         "7",
+    //         "8",
+    //         "9",
+    //         "10 (Strongly agree)",
+    //       ]
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["attitudes3.md"],
+    //       [
+    //         "0 (Strongly disagree)",
+    //         "1",
+    //         "2",
+    //         "3",
+    //         "4",
+    //         "5",
+    //         "6",
+    //         "7",
+    //         "8",
+    //         "9",
+    //         "10 (Strongly agree)",
+    //       ]
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["attitudes4.md"],
+    //       [
+    //         "0 (Strongly disagree)",
+    //         "1",
+    //         "2",
+    //         "3",
+    //         "4",
+    //         "5",
+    //         "6",
+    //         "7",
+    //         "8",
+    //         "9",
+    //         "10 (Strongly agree)",
+    //       ]
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["attitudes5.md"],
+    //       [
+    //         "0 (Strongly disagree)",
+    //         "1",
+    //         "2",
+    //         "3",
+    //         "4",
+    //         "5",
+    //         "6",
+    //         "7",
+    //         "8",
+    //         "9",
+    //         "10 (Strongly agree)",
+    //       ]
+    //     ),
+    //     new Question(
+    //       "likert-scale",
+    //       ["language-proficiency.md"],
+    //       [
+    //         "Not familiar at all",
+    //         "Slightly familiar",
+    //         "Moderately familiar",
+    //         "Very familiar",
+    //         "Extremely familiar",
+    //       ]
+    //     ),
+    //   ]),
+    // ],
     // coding (the medium one)
     codingMedium: [
       // coding question (self-coding)
@@ -458,11 +237,43 @@ function App() {
             [],
             null,
             null,
-            "record"
+            "record",
+            `
+/**
+ * @param {number} capacity
+ */
+var LRUCache = function(capacity) {
+    
+};
+
+/** 
+ * @param {number} key
+ * @return {number}
+ */
+LRUCache.prototype.get = function(key) {
+    
+};
+
+/** 
+ * @param {number} key 
+ * @param {number} value
+ * @return {void}
+ */
+LRUCache.prototype.put = function(key, value) {
+    
+};
+
+/** 
+ * Your LRUCache object will be instantiated and called as such:
+ * var obj = new LRUCache(capacity)
+ * var param_1 = obj.get(key)
+ * obj.put(key,value)
+ */
+            `
           ),
         ],
         420, // timer
-        60
+        1
       ),
 
       // coding question (assisted coding)
@@ -485,7 +296,7 @@ function App() {
           ),
         ],
         420, // timer
-        60
+        1
       ),
 
       // post-hoc (domain knowledge familarity & perceived difficulty)
@@ -542,7 +353,17 @@ function App() {
       new Page(
         [new Question("coding", ["coding1-easy.md"], [], null, null, "record")],
         420, // timer
-        60
+        1,
+        `
+/**
+ * @param {string} ransomNote
+ * @param {string} magazine
+ * @return {boolean}
+ */
+var canConstruct = function(ransomNote, magazine) {
+
+};
+        `
       ),
 
       // coding question (assisted coding)
@@ -565,7 +386,7 @@ function App() {
           ),
         ],
         420, // timer
-        60
+        1
       ),
 
       // post-hoc (domain knowledge familarity & perceived difficulty)

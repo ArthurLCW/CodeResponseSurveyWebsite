@@ -5,7 +5,8 @@ export class Question {
     questionOptions,
     screenOption = null,
     screenMsg = null,
-    recordLogic = null
+    recordLogic = null,
+    defaultCode = null
   ) {
     this.questionType = questionType;
     this.questionTextSrc = questionTextSrc; // array
@@ -13,6 +14,8 @@ export class Question {
     this.screenOption = screenOption;
     this.screenMsg = screenMsg;
     this.recordLogic = recordLogic; // "record" or "display"
+    this.defaultCode = defaultCode;
+    console.log(defaultCode);
   }
 }
 

@@ -108,6 +108,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
       </div>
     );
   } else if (questionContent.questionType === "coding") {
+    console.log(questionContent);
     options = (
       <MonacoEditorComponent
         dispatch={dispatch}
@@ -115,6 +116,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
         myKey={myKey}
         recordLogic={questionContent.recordLogic}
         setCodingNonEnptyLines={setCodingNonEnptyLines}
+        defaultCode={questionContent.defaultCode}
       />
     );
   }
