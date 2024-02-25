@@ -1,4 +1,4 @@
-Please write a code snippet to solve the following programming problem. You will have **13 minutes** to solve it. Please notice that you need to solve this programming problem **on your own**.  Please **do NOT** use the internet or AI code generators to find the answer.
+Please write a **<span style="color: red;">Javascript</span>** code snippet to solve the following programming problem. You will have **13 minutes** to solve it. Please notice that you need to solve this programming problem **on your own**.  Please **do NOT** use the internet or AI code generators to find the answer.
 
 ---
 

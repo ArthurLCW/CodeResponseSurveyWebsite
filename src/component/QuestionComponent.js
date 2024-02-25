@@ -30,7 +30,6 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
   const screenFlag = useSelector((state) => state.recorder.screenFlag);
   const [selectedOption, setSelectedOption] = useState(null);
   const [codingNonEnptyLines, setCodingNonEnptyLines] = useState(0);
-  const [chosenSrcFlag, setChosenSrcFlag] = useState(false);
   const dispatch = useDispatch();
 
   const handleOptionChange = (event) => {
@@ -146,17 +145,17 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
         "```javascript\n" + sessionStorage.getItem("lcwRecordInfo") + "\n```";
   }
 
-  let fileName = questionContent.questionTextSrc[0];
-  if (questionContent.questionTextSrc.length > 1 && !chosenSrcFlag) {
-    fileName =
-      questionContent.questionTextSrc[
-        Math.floor(Math.random() * questionContent.questionTextSrc.length)
-      ];
-    setChosenSrcFlag(true);
+  const fileName = useRef(questionContent.questionTextSrc[0]);
+  if (questionContent.questionTextSrc.length > 1) {
+    const randomNumber = Math.floor(
+      Math.random() * questionContent.questionTextSrc.length
+    );
+    fileName.current = questionContent.questionTextSrc[randomNumber];
+    console.log("randomNumber", randomNumber, fileName.current);
     // list does not exist, initialize it
     if (!sessionStorage.getItem("lcwSurveyRandomIndexList")) {
       sessionStorage.setItem("lcwSurveyRandomIndexList", myKey);
-      sessionStorage.setItem("lcwSurveyRandomMd", fileName);
+      sessionStorage.setItem("lcwSurveyRandomMd", fileName.current);
     }
     // list exists, and the key does not exist in the key -> add the key directly
     else if (
@@ -171,7 +170,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
       );
       sessionStorage.setItem(
         "lcwSurveyRandomMd",
-        sessionStorage.getItem("lcwSurveyRandomMd") + "," + fileName
+        sessionStorage.getItem("lcwSurveyRandomMd") + "," + fileName.current
       );
     }
     // list exists, and the key exists too -> modify the list instead of directly adding the key
@@ -184,7 +183,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
           const newMdList = sessionStorage
             .getItem("lcwSurveyRandomMd")
             .split(",");
-          newMdList[i] = fileName;
+          newMdList[i] = fileName.current;
           sessionStorage.setItem("lcwSurveyRandomMd", newMdList.join(","));
           break;
         }
@@ -192,7 +191,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
     }
     console.log(
       "filename:",
-      fileName,
+      fileName.current,
       sessionStorage.getItem("lcwSurveyRandomIndexList"),
       sessionStorage.getItem("lcwSurveyRandomMd")
     );
@@ -209,7 +208,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
       <div style={unfinishedStyle}>
         <div style={codingParentStyle}>
           <div style={codingChildStyle}>
-            <MdDisplayerComponent fileName={fileName} />
+            <MdDisplayerComponent fileName={fileName.current} />
             {/* {(questionContent.recordLogic==="display") && <Markdown content={"```javascript\n"+sessionStorage.getItem("lcwRecordInfo")+"```"}/>} */}
             <Markdown content={recordDisplay} />
           </div>

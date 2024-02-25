@@ -56,7 +56,14 @@ export const Markdown = ({ content }) => {
         },
         img({ node, ...props }) {
           const newSrc = imageMap[props.src] || props.src;
-          return <img {...props} src={newSrc} style={{ maxWidth: "100%" }} />;
+          return (
+            <img
+              {...props}
+              src={newSrc}
+              style={{ maxWidth: "100%" }}
+              alt={newSrc}
+            />
+          );
         },
       }}
       remarkPlugins={[remarkGfm]}
@@ -69,7 +76,6 @@ export const Markdown = ({ content }) => {
 
 export const MdDisplayerComponent = ({ fileName }) => {
   const [content, setContent] = useState("");
-
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/question-text/${fileName}`)
       .then((response) => response.text())

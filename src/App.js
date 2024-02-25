@@ -238,8 +238,7 @@ function App() {
             null,
             null,
             "record",
-            `
-/**
+            `/**
  * @param {number} capacity
  */
 var LRUCache = function(capacity) {
@@ -268,8 +267,7 @@ LRUCache.prototype.put = function(key, value) {
  * var obj = new LRUCache(capacity)
  * var param_1 = obj.get(key)
  * obj.put(key,value)
- */
-            `
+ */`
           ),
         ],
         780, // timer
@@ -359,16 +357,14 @@ LRUCache.prototype.put = function(key, value) {
             null,
             null,
             "record",
-            `
-/**
+            `/**
  * @param {string} ransomNote
  * @param {string} magazine
  * @return {boolean}
  */
 var canConstruct = function(ransomNote, magazine) {
 
-};
-        `
+};`
           ),
         ],
         780, // timer
