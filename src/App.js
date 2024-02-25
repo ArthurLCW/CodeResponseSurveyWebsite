@@ -426,8 +426,8 @@ var canConstruct = function(ransomNote, magazine) {
   const pageSection = {
     medium: [
       "consent",
-      // "screener",
-      // "demographics",
+      "screener",
+      "demographics",
       "codingMedium",
       "gratitude",
     ],
