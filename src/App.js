@@ -79,153 +79,153 @@ function App() {
         ),
       ]),
     ],
-    // // screener (programming experience)
-    // screener: [
-    //   new Page([
-    //     new Question(
-    //       "multiple-choice",
-    //       ["screener1.md"],
-    //       ["Yes", "No", "I don't know"]
-    //     ),
-    //     new Question(
-    //       "likert-scale",
-    //       ["screener2.md"],
-    //       [
-    //         "Not experienced at all",
-    //         "Slightly experienced",
-    //         "Moderately experienced",
-    //         "Very experienced",
-    //         "Extremely experienced",
-    //       ]
-    //     ),
-    //     new Question(
-    //       "likert-scale",
-    //       ["screener3.md"],
-    //       [
-    //         "Not involved at all",
-    //         "Slightly involved",
-    //         "Moderately involved",
-    //         "Very involved",
-    //         "Extremely involved",
-    //       ]
-    //     ),
-    //     new Question(
-    //       "multiple-choice",
-    //       ["screener4.md"],
-    //       [
-    //         "Student specializing in IT-related fields.",
-    //         "Professional specializing in IT (such as developer, testing engineer, operations engineer, etc).",
-    //         "Others.",
-    //       ]
-    //     ),
-    //     new Question(
-    //       "multiple-choice",
-    //       ["screener5.md"],
-    //       ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
-    //     ),
-    //   ]),
-    // ],
-    // // demographics (attitudes towards ai, language proficiency)
-    // demographics: [
-    //   new Page([
-    //     new Question(
-    //       "likert-scale",
-    //       ["attitudes1.md"],
-    //       [
-    //         "0 (Strongly disagree)",
-    //         "1",
-    //         "2",
-    //         "3",
-    //         "4",
-    //         "5",
-    //         "6",
-    //         "7",
-    //         "8",
-    //         "9",
-    //         "10 (Strongly agree)",
-    //       ]
-    //     ),
-    //     new Question(
-    //       "likert-scale",
-    //       ["attitudes2.md"],
-    //       [
-    //         "0 (Strongly disagree)",
-    //         "1",
-    //         "2",
-    //         "3",
-    //         "4",
-    //         "5",
-    //         "6",
-    //         "7",
-    //         "8",
-    //         "9",
-    //         "10 (Strongly agree)",
-    //       ]
-    //     ),
-    //     new Question(
-    //       "likert-scale",
-    //       ["attitudes3.md"],
-    //       [
-    //         "0 (Strongly disagree)",
-    //         "1",
-    //         "2",
-    //         "3",
-    //         "4",
-    //         "5",
-    //         "6",
-    //         "7",
-    //         "8",
-    //         "9",
-    //         "10 (Strongly agree)",
-    //       ]
-    //     ),
-    //     new Question(
-    //       "likert-scale",
-    //       ["attitudes4.md"],
-    //       [
-    //         "0 (Strongly disagree)",
-    //         "1",
-    //         "2",
-    //         "3",
-    //         "4",
-    //         "5",
-    //         "6",
-    //         "7",
-    //         "8",
-    //         "9",
-    //         "10 (Strongly agree)",
-    //       ]
-    //     ),
-    //     new Question(
-    //       "likert-scale",
-    //       ["attitudes5.md"],
-    //       [
-    //         "0 (Strongly disagree)",
-    //         "1",
-    //         "2",
-    //         "3",
-    //         "4",
-    //         "5",
-    //         "6",
-    //         "7",
-    //         "8",
-    //         "9",
-    //         "10 (Strongly agree)",
-    //       ]
-    //     ),
-    //     new Question(
-    //       "likert-scale",
-    //       ["language-proficiency.md"],
-    //       [
-    //         "Not familiar at all",
-    //         "Slightly familiar",
-    //         "Moderately familiar",
-    //         "Very familiar",
-    //         "Extremely familiar",
-    //       ]
-    //     ),
-    //   ]),
-    // ],
+    // screener (programming experience)
+    screener: [
+      new Page([
+        new Question(
+          "multiple-choice",
+          ["screener1.md"],
+          ["Yes", "No", "I don't know"]
+        ),
+        new Question(
+          "likert-scale",
+          ["screener2.md"],
+          [
+            "Not experienced at all",
+            "Slightly experienced",
+            "Moderately experienced",
+            "Very experienced",
+            "Extremely experienced",
+          ]
+        ),
+        new Question(
+          "likert-scale",
+          ["screener3.md"],
+          [
+            "Not involved at all",
+            "Slightly involved",
+            "Moderately involved",
+            "Very involved",
+            "Extremely involved",
+          ]
+        ),
+        new Question(
+          "multiple-choice",
+          ["screener4.md"],
+          [
+            "Student specializing in IT-related fields.",
+            "Professional specializing in IT (such as developer, testing engineer, operations engineer, etc).",
+            "Others.",
+          ]
+        ),
+        new Question(
+          "multiple-choice",
+          ["screener5.md"],
+          ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
+        ),
+      ]),
+    ],
+    // demographics (attitudes towards ai, language proficiency)
+    demographics: [
+      new Page([
+        new Question(
+          "likert-scale",
+          ["attitudes1.md"],
+          [
+            "0 (Strongly disagree)",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10 (Strongly agree)",
+          ]
+        ),
+        new Question(
+          "likert-scale",
+          ["attitudes2.md"],
+          [
+            "0 (Strongly disagree)",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10 (Strongly agree)",
+          ]
+        ),
+        new Question(
+          "likert-scale",
+          ["attitudes3.md"],
+          [
+            "0 (Strongly disagree)",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10 (Strongly agree)",
+          ]
+        ),
+        new Question(
+          "likert-scale",
+          ["attitudes4.md"],
+          [
+            "0 (Strongly disagree)",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10 (Strongly agree)",
+          ]
+        ),
+        new Question(
+          "likert-scale",
+          ["attitudes5.md"],
+          [
+            "0 (Strongly disagree)",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10 (Strongly agree)",
+          ]
+        ),
+        new Question(
+          "likert-scale",
+          ["language-proficiency.md"],
+          [
+            "Not familiar at all",
+            "Slightly familiar",
+            "Moderately familiar",
+            "Very familiar",
+            "Extremely familiar",
+          ]
+        ),
+      ]),
+    ],
     // coding (the medium one)
     codingMedium: [
       // coding question (self-coding)
@@ -272,7 +272,7 @@ LRUCache.prototype.put = function(key, value) {
             `
           ),
         ],
-        10, // timer
+        780, // timer
         1
       ),
 
@@ -371,7 +371,7 @@ var canConstruct = function(ransomNote, magazine) {
         `
           ),
         ],
-        420, // timer
+        780, // timer
         1
       ),
 
@@ -430,8 +430,8 @@ var canConstruct = function(ransomNote, magazine) {
   const pageSection = {
     medium: [
       "consent",
-      "screener",
-      "demographics",
+      // "screener",
+      // "demographics",
       "codingMedium",
       "gratitude",
     ],

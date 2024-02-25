@@ -19,20 +19,40 @@ export const Markdown = ({ content }) => {
       components={{
         code({ node, inline, className, children, ...props }) {
           const match = /language-(\w+)/.exec(className || "");
-          return !inline && match ? (
-            <SyntaxHighlighter
-              className={"syntax-highlighter"}
-              style={prism}
-              language={match[1]}
-              PreTag="div"
-              children={String(children).replace(/\n$/, "")}
-              {...props}
-            />
-          ) : (
-            <code className={className} {...props}>
-              {children}
-            </code>
-          );
+          // return !inline && match ? (
+          //   <SyntaxHighlighter
+          //     className={"syntax-highlighter"}
+          //     style={prism}
+          //     language={match[1]}
+          //     PreTag="div"
+          //     children={String(children).replace(/\n$/, "")}
+          //     {...props}
+          //   />
+          // ) : (
+          //   <code className={className} {...props}>
+          //     {children}
+          //   </code>
+          // );
+          if (!inline && match) {
+            // 块级代码
+            return (
+              <SyntaxHighlighter
+                className={"syntax-highlighter"}
+                style={prism}
+                language={match[1]}
+                PreTag="div"
+                children={String(children).replace(/\n$/, "")}
+                {...props}
+              />
+            );
+          } else {
+            // 行内代码
+            return (
+              <code className={`inline-code ${className}`} {...props}>
+                {children}
+              </code>
+            );
+          }
         },
         img({ node, ...props }) {
           const newSrc = imageMap[props.src] || props.src;

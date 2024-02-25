@@ -91,6 +91,7 @@ const MonacoEditorComponent = ({
     readOnly: false,
     cursorStyle: "line",
     automaticLayout: true,
+    tabSize: 2,
   };
 
   return (

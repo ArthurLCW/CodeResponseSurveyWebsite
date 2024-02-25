@@ -1,12 +1,16 @@
-Please write a code snippet to solve the following programming problem. You will have **7 minutes** to solve it.
+Please write a code snippet to solve the following programming problem. You will have **13 minutes** to solve it. Please notice that you need to solve this programming problem **on your own**.  Please **do NOT** use the internet or AI code generators to find the answer.
 
-Please notice that you need to solve this programming problem **on your own**. 
+---
 
- 
+#### Programming question:
 
-Programming question:
+Design a data structure that follows the constraints of a <span style="color: red;">Least Recently Used (LRU)</span> cache. 
 
-Design a data structure that follows the constraints of a <span style="color: red;">Least Recently Used (LRU)</span> cache. The example below demonstrates how  <span style="color: red;">Least Recently Used (LRU)</span> works. 
+The <span style="color: red;">Least Recently Used (LRU)</span> cache mechanism is a data storage strategy that removes the least recently accessed items when the cache reaches its capacity limit, ensuring only the most recent data is kept for quick access.  
+
+The example below demonstrates how  <span style="color: red;">Least Recently Used (LRU)</span> works. 
+
+
 
 Implement the `LRUCache` class:
 
