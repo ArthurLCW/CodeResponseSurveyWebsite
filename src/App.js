@@ -272,7 +272,7 @@ LRUCache.prototype.put = function(key, value) {
             `
           ),
         ],
-        420, // timer
+        10, // timer
         1
       ),
 
@@ -506,43 +506,3 @@ var canConstruct = function(ransomNote, magazine) {
 }
 
 export default App;
-
-// import React, { useState } from "react";
-// import { render } from "react-dom";
-// import MonacoEditor from "react-monaco-editor";
-
-// const App = () => {
-//   // 初始化代码状态
-//   const [code, setCode] = useState(
-//     '// 你可以在这里写一些 C++ 代码\n#include<iostream>\nint main() {\n  std::cout << "Hello, World!" << std::endl;\n  return 0;\n}'
-//   );
-
-//   // 处理编辑器内容变化
-//   const handleEditorChange = (newValue, e) => {
-//     setCode(newValue);
-//   };
-
-//   // 配置编辑器选项
-//   const options = {
-//     selectOnLineNumbers: true,
-//     roundedSelection: false,
-//     readOnly: false,
-//     cursorStyle: "line",
-//     automaticLayout: true,
-//   };
-
-//   return (
-//     <MonacoEditor
-//       width="800"
-//       height="600"
-//       language="cpp"
-//       theme="vs-dark"
-//       value={code}
-//       options={options}
-//       onChange={handleEditorChange}
-//     />
-//   );
-// };
-
-// // render(<App />, document.getElementById('root'));
-// export default App;

@@ -1,45 +1,75 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./TimerComponent.css";
 import { useSelector, useDispatch } from "react-redux";
 import { reset } from "../redux/recorderSlice";
 
 const TimerComponent = ({
+  pageNumber,
   timeMax,
   timeMin,
   goToNextPage,
   setTimingFullfilledFlag,
 }) => {
   const [seconds, setSeconds] = useState(timeMax);
+  const secondsRef = useRef(seconds);
 
   // for performance enhancement, avoid updating state in Page component every second
   const [localTimingFlag, setLocalTimingFlag] = useState(false);
   const dispatch = useDispatch();
 
-  // console.log("Timer: ", seconds, timeMax, timeMin);
+  // console.log("current time", seconds, pageNumber);
   useEffect(() => {
     // Set up the interval
     const interval = setInterval(() => {
-      setSeconds((seconds) => {
-        // If seconds is 0, clear the interval and return 0
-        if (seconds === 0) {
+      setSeconds((prevSeconds) => {
+        const newSeconds = prevSeconds - 1;
+        secondsRef.current = newSeconds;
+
+        if (newSeconds === 0) {
           clearInterval(interval);
           dispatch(reset());
           goToNextPage();
+          sessionStorage.setItem(
+            `Page ${pageNumber} finishing time`,
+            timeMax - newSeconds
+          );
           return 0;
-        } else if (timeMax - seconds >= timeMin && !localTimingFlag) {
+        } else if (timeMax - newSeconds >= timeMin && !localTimingFlag) {
           setTimingFullfilledFlag(true);
           setLocalTimingFlag(true);
-          // console.log("Timer able to proceed: ", seconds, timeMax, timeMin);
         }
 
-        // Otherwise, decrement seconds
-        return seconds - 1;
+        return newSeconds;
       });
     }, 1000);
 
     // Clear the interval on component unmount
-    return () => clearInterval(interval);
-  }, []);
+    return () => {
+      clearInterval(interval);
+      sessionStorage.setItem(
+        `Page ${pageNumber} finishing time`,
+        timeMax - secondsRef.current
+      );
+      console.log(
+        "Cleanup - current time",
+        timeMax - secondsRef.current,
+        "Max Time:",
+        timeMax,
+        "Last Seconds:",
+        secondsRef.current,
+        "Page Number:",
+        pageNumber
+      );
+    };
+  }, [
+    pageNumber,
+    timeMax,
+    timeMin,
+    goToNextPage,
+    setTimingFullfilledFlag,
+    dispatch,
+    localTimingFlag,
+  ]);
 
   return (
     <div className="timer">

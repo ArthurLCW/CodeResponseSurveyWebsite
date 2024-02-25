@@ -1,0 +1,32 @@
+.next-page-button {
+  background-color: #094183;
+  color: #ffffff;
+  border: none;
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.next-page-button:hover {
+  background-color: #072f5f;
+}
+
+.page-number-info {
+  text-align: center;
+  color: #e8f0fe;
+  font-size: 18px;
+  font-weight: normal;
+  margin: 10px 0;
+  padding: 8px 16px;
+  background: linear-gradient(to right, #a6c0fe, #6f8ab7);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #d1d9e6;
+}

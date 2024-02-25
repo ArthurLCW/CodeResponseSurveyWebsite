@@ -15,7 +15,6 @@ export class Question {
     this.screenMsg = screenMsg;
     this.recordLogic = recordLogic; // "record" or "display"
     this.defaultCode = defaultCode;
-    console.log(defaultCode);
   }
 }
 

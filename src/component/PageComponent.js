@@ -5,6 +5,7 @@ import { increment, reset } from "../redux/recorderSlice";
 import { Page } from "../util/utilClass";
 import { writeParticipantData } from "../util/firebase";
 import TimerComponent from "./TimerComponent";
+import "./PageComponent.css";
 
 const PageComponent = ({
   pageArray,
@@ -97,35 +98,38 @@ const PageComponent = ({
 
   return (
     <div>
-      {/* <h1>Page {pageNumber}</h1> */}
-
-      {finishCode && pageNumber === pageArray.length && !screenFlag && (
-        <div>
-          <p>
-            <b>
-              <i>
-                Please paste the following completion code in your Prolific
-                Link:{" "}
-              </i>
-            </b>
-          </p>
-          <h3 style={{ color: "red" }}>{finishCode}</h3>
-        </div>
-      )}
-
-      {pageArray[pageNumber - 1].timeMax > 0 && (
-        <TimerComponent
-          key={pageNumber}
-          timeMax={pageArray[pageNumber - 1].timeMax}
-          timeMin={pageArray[pageNumber - 1].timeMin}
-          goToNextPage={goToNextPage}
-          setTimingFullfilledFlag={setTimingFullfilledFlag}
-        />
-      )}
-
       <div>
+        <div className="page-number-info">
+          Page {pageNumber} / {pageArray.length}
+        </div>
+
+        {finishCode && pageNumber === pageArray.length && !screenFlag && (
+          <div>
+            <p>
+              <b>
+                <i>
+                  Please paste the following completion code in your Prolific
+                  Link:{" "}
+                </i>
+              </b>
+            </p>
+            <h3 style={{ color: "red" }}>{finishCode}</h3>
+          </div>
+        )}
+
+        {pageArray[pageNumber - 1].timeMax > 0 && (
+          <TimerComponent
+            key={pageNumber}
+            pageNumber={pageNumber}
+            timeMax={pageArray[pageNumber - 1].timeMax}
+            timeMin={pageArray[pageNumber - 1].timeMin}
+            goToNextPage={goToNextPage}
+            setTimingFullfilledFlag={setTimingFullfilledFlag}
+          />
+        )}
+
         {pageArray[pageNumber - 1].questions.map((questionContent, index) => {
-          console.log(questionContent);
+          // console.log(questionContent);
           return (
             <QuestionComponent
               key={"lcwSurvey-" + pageNumber + "-" + index}
@@ -139,7 +143,9 @@ const PageComponent = ({
 
       {!isLastPage && (
         // <button onClick={handleClick}>Go to Page {parseInt(pageNumber,10) + 1}</button>
-        <button onClick={handleClick}>Go to next page</button>
+        <button className={"next-page-button"} onClick={handleClick}>
+          Go to next page
+        </button>
       )}
     </div>
   );

@@ -121,7 +121,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
     );
   }
 
-  console.log(finished, codingNonEnptyLines, selectedOption === null);
+  // console.log(finished, codingNonEnptyLines, selectedOption === null);
   const unfinishedStyle = {
     backgroundColor:
       (selectedOption === null && finished) ||

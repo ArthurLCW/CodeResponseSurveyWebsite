@@ -44,6 +44,10 @@ const MonacoEditorComponent = ({
     editorInstance = editor;
     getNonEmptyLines(editorInstance);
     sessionStorage.setItem(myKey, editorInstance.getValue());
+    // if the user does not input anything, then need to record placeholder at beginning
+    if (recordLogic === "record") {
+      sessionStorage.setItem("lcwRecordInfo", editorInstance.getValue());
+    }
   };
 
   const onChange = (newValue, e) => {
@@ -89,7 +93,6 @@ const MonacoEditorComponent = ({
     automaticLayout: true,
   };
 
-  console.log(defaultCode);
   return (
     <MonacoEditor
       height="100%"
