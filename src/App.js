@@ -271,7 +271,7 @@ LRUCache.prototype.put = function(key, value) {
           ),
         ],
         780, // timer
-        1
+        10
       ),
 
       // coding question (assisted coding)

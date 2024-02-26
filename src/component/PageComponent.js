@@ -6,7 +6,9 @@ import { Page } from "../util/utilClass";
 import { writeParticipantData } from "../util/firebase";
 import TimerComponent from "./TimerComponent";
 import "./PageComponent.css";
+import Modal from "react-modal";
 
+Modal.setAppElement("#root");
 const PageComponent = ({
   pageArray,
   pageNumber,
@@ -23,6 +25,8 @@ const PageComponent = ({
   const num = useSelector((state) => state.recorder.num);
   const dispatch = useDispatch();
   const screenFlag = useSelector((state) => state.recorder.screenFlag);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
 
   function getCurrentTimeInAEDT() {
     const now = new Date();
@@ -67,14 +71,21 @@ const PageComponent = ({
         !timingFullfilledFlag &&
         parseInt(pageArray[pageNumber - 1].timeMin) > 0
       ) {
-        console.log("hihihi: ");
-        alert(
-          "Please spend at least " +
-            parseInt(pageArray[pageNumber - 1].timeMin / 60) +
-            " minutes and " +
-            parseInt(pageArray[pageNumber - 1].timeMin % 60) +
-            " seconds to finish the questions in this page."
+        // alert(
+        //   "Please spend at least " +
+        //     parseInt(pageArray[pageNumber - 1].timeMin / 60) +
+        //     " minutes and " +
+        //     parseInt(pageArray[pageNumber - 1].timeMin % 60) +
+        //     " seconds to finish the questions in this page."
+        // );
+        setModalContent(
+          `Please spend at least ${parseInt(
+            pageArray[pageNumber - 1].timeMin / 60
+          )} minutes and ${parseInt(
+            pageArray[pageNumber - 1].timeMin % 60
+          )} seconds to finish the questions in this page.`
         );
+        setModalIsOpen(true);
       } else {
         dispatch(reset());
         goToNextPage();
@@ -83,7 +94,9 @@ const PageComponent = ({
     }
     if (screenFlag) {
       console.log("screen flag true in page component click, msg: ", screenMsg);
-      alert(screenMsg);
+      // alert(screenMsg);
+      setModalContent(screenMsg);
+      setModalIsOpen(true);
       goToLastPage();
     }
   };
@@ -98,6 +111,35 @@ const PageComponent = ({
 
   return (
     <div>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        shouldCloseOnOverlayClick={false}
+        shouldCloseOnEsc={false}
+        contentLabel="go-next-page-alert"
+        style={{
+          content: {
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+          },
+        }}
+      >
+        <div style={{ margin: "10px" }}>{modalContent}</div>
+
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button
+            className="attractive-btn"
+            onClick={() => setModalIsOpen(false)}
+          >
+            OK
+          </button>
+        </div>
+      </Modal>
+
       <div>
         <div className="page-number-info">
           Page {pageNumber} / {pageArray.length}
