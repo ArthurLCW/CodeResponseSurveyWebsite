@@ -62,12 +62,14 @@ const SurveyComponent = ({
     if (currentPage < totalPages) {
       // sessionStorage.setItem("initPageNum", parseInt(currentPage, 10) + 1);
       setCurrentPage(parseInt(currentPage, 10) + 1);
+      sessionStorage.setItem("currentPage", parseInt(currentPage, 10) + 1);
     }
   };
 
   const goToLastPage = () => {
     // sessionStorage.setItem("initPageNum", parseInt(pageArray.length));
     setCurrentPage(parseInt(pageArray.length));
+    sessionStorage.setItem("currentPage", parseInt(pageArray.length));
   };
 
   useEffect(() => {

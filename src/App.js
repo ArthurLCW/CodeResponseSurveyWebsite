@@ -24,19 +24,33 @@ function App() {
   const [enableModal, setEnableModal] = useState(false);
   const [firstTimeEnter, setFirstTimeEnter] = useState(true);
 
-  const [leaveFullScreenTimes, setLeaveFullScreenTimes] = useState(
-    parseInt(sessionStorage.getItem("leaveFullScreenTimes")) || 0
-  );
-
   useEffect(() => {
     function onFullScreenChange() {
       if (!document.fullscreenElement && enableModal) {
         setModalIsOpen(true);
-        setLeaveFullScreenTimes((prevTimes) => {
-          const newTimes = prevTimes + 1;
-          sessionStorage.setItem("leaveFullScreenTimes", newTimes);
-          return newTimes;
-        });
+        // get records object
+        let leaveFullScreenObj;
+        if (!sessionStorage.getItem("leaveFullScreenTimes")) {
+          leaveFullScreenObj = {};
+        } else {
+          leaveFullScreenObj = JSON.parse(
+            sessionStorage.getItem("leaveFullScreenTimes")
+          );
+        }
+
+        // get/set current page record
+        if (!leaveFullScreenObj[sessionStorage.getItem("currentPage")]) {
+          leaveFullScreenObj[sessionStorage.getItem("currentPage")] = [1, 0];
+        } else {
+          leaveFullScreenObj[sessionStorage.getItem("currentPage")][0] =
+            leaveFullScreenObj[sessionStorage.getItem("currentPage")][0] + 1;
+        }
+
+        // set records object
+        sessionStorage.setItem(
+          "leaveFullScreenTimes",
+          JSON.stringify(leaveFullScreenObj)
+        );
       }
     }
 
@@ -469,15 +483,35 @@ var canConstruct = function(ransomNote, magazine) {
           <h1 style={{ margin: "auto" }}>Full-Screen Mode</h1>
         </div>
         {firstTimeEnter ? (
-          <h3>Are you willing to enter full-screen mode?</h3>
+          <p>
+            You need to stay in full-screen mode to proceed with the survey.{" "}
+          </p>
         ) : (
-          <h3>Are you sure you want to exit full-screen mode?</h3>
+          <p>
+            Please DO NOT leave full-screen mode before finishing this survey!
+          </p>
         )}
         <p>
-          Please notice that we will record your action of leaving full-screen
-          mode or reject entering full-screen mode.
+          Please notice that we will{" "}
+          <b>record your action of leaving full-screen mode</b>.{" "}
         </p>
-        {firstTimeEnter ? (
+        <p>
+          <b style={{ color: "red" }}>
+            Leaving full-screen mode may lead to reduce in reimbursement!
+          </b>
+        </p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "10px",
+          }}
+        >
+          <button onClick={enterFullScreen} className="attractive-btn">
+            OK
+          </button>
+        </div>
+        {/* {firstTimeEnter ? (
           <div style={{ display: "flex", justifyContent: "space-evenly" }}>
             <button onClick={enterFullScreen} className="attractive-btn">
               Yes
@@ -495,7 +529,7 @@ var canConstruct = function(ransomNote, magazine) {
               No
             </button>
           </div>
-        )}
+        )} */}
       </Modal>
     </div>
   );
