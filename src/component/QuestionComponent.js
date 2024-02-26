@@ -197,7 +197,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
         sessionStorage.getItem("lcwSurveyRandomMd")
       );
     }
-  }, [myKey, questionContent.questionTextSrc]);
+  }, [myKey]);
 
   return (
     <div className="question">

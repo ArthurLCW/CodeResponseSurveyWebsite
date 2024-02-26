@@ -283,7 +283,7 @@ LRUCache.prototype.put = function(key, value) {
           ),
         ],
         780, // timer
-        10
+        60
       ),
 
       // coding question (assisted coding)
@@ -306,7 +306,7 @@ LRUCache.prototype.put = function(key, value) {
           ),
         ],
         420, // timer
-        1
+        60
       ),
 
       // post-hoc (domain knowledge familarity & perceived difficulty)
@@ -380,7 +380,7 @@ var canConstruct = function(ransomNote, magazine) {
           ),
         ],
         780, // timer
-        1
+        60
       ),
 
       // coding question (assisted coding)
@@ -403,7 +403,7 @@ var canConstruct = function(ransomNote, magazine) {
           ),
         ],
         420, // timer
-        1
+        60
       ),
 
       // post-hoc (domain knowledge familarity & perceived difficulty)
@@ -438,8 +438,8 @@ var canConstruct = function(ransomNote, magazine) {
   const pageSection = {
     medium: [
       "consent",
-      // "screener",
-      // "demographics",
+      "screener",
+      "demographics",
       "codingMedium",
       "gratitude",
     ],
