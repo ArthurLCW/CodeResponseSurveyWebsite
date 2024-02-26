@@ -8,18 +8,16 @@ Please **DO NOT** use the internet or AI code generators to find the answer. If 
 
 #### Programming question:
 
-Design a data structure that follows the constraints of a <span style="color: red;">Least Recently Used (LRU)</span> cache. 
-
 The <span style="color: red;">Least Recently Used (LRU)</span> cache mechanism is a data storage strategy that removes the least recently accessed items when the cache reaches its capacity limit, ensuring only the most recent data is kept for quick access.  
 
-The example below demonstrates how <span style="color: red;">Least Recently Used (LRU)</span> works. 
 
 
+Design a data structure that follows the constraints of a <span style="color: red;">Least Recently Used (LRU)</span> cache. 
 
 Implement the `LRUCache` class:
 
 - `LRUCache(int capacity)` Initialize the LRU cache with **positive** size `capacity`.
-- `int get(int key)` Return the value of the `key` if the key exists, otherwise return `-1`.
+- `int get(int key)` Return the value of the `key` if the `key` exists, otherwise return `-1`.
 - `void put(int key, int value)` Update the value of the `key` if the `key` exists. Otherwise, add the `key-value` pair to the cache. If the number of keys exceeds the `capacity` from this operation, **evict** the least recently used key.
 
 The functions `get` and `put` must each run in `O(1)` average time complexity.
