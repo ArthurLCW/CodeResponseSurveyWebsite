@@ -146,56 +146,58 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
   }
 
   const fileName = useRef(questionContent.questionTextSrc[0]);
-  if (questionContent.questionTextSrc.length > 1) {
-    const randomNumber = Math.floor(
-      Math.random() * questionContent.questionTextSrc.length
-    );
-    fileName.current = questionContent.questionTextSrc[randomNumber];
-    console.log("randomNumber", randomNumber, fileName.current);
-    // list does not exist, initialize it
-    if (!sessionStorage.getItem("lcwSurveyRandomIndexList")) {
-      sessionStorage.setItem("lcwSurveyRandomIndexList", myKey);
-      sessionStorage.setItem("lcwSurveyRandomMd", fileName.current);
-    }
-    // list exists, and the key does not exist in the key -> add the key directly
-    else if (
-      !sessionStorage
-        .getItem("lcwSurveyRandomIndexList")
-        .split(",")
-        .includes(myKey)
-    ) {
-      sessionStorage.setItem(
-        "lcwSurveyRandomIndexList",
-        sessionStorage.getItem("lcwSurveyRandomIndexList") + "," + myKey
+  useEffect(() => {
+    if (questionContent.questionTextSrc.length > 1) {
+      const randomNumber = Math.floor(
+        Math.random() * questionContent.questionTextSrc.length
       );
-      sessionStorage.setItem(
-        "lcwSurveyRandomMd",
-        sessionStorage.getItem("lcwSurveyRandomMd") + "," + fileName.current
-      );
-    }
-    // list exists, and the key exists too -> modify the list instead of directly adding the key
-    else {
-      const indexList = sessionStorage
-        .getItem("lcwSurveyRandomIndexList")
-        .split(",");
-      for (let i = 0; i < indexList.length; i++) {
-        if (indexList[i] === myKey) {
-          const newMdList = sessionStorage
-            .getItem("lcwSurveyRandomMd")
-            .split(",");
-          newMdList[i] = fileName.current;
-          sessionStorage.setItem("lcwSurveyRandomMd", newMdList.join(","));
-          break;
+      fileName.current = questionContent.questionTextSrc[randomNumber];
+      console.log("randomNumber", randomNumber, fileName.current);
+      // list does not exist, initialize it
+      if (!sessionStorage.getItem("lcwSurveyRandomIndexList")) {
+        sessionStorage.setItem("lcwSurveyRandomIndexList", myKey);
+        sessionStorage.setItem("lcwSurveyRandomMd", fileName.current);
+      }
+      // list exists, and the key does not exist in the key -> add the key directly
+      else if (
+        !sessionStorage
+          .getItem("lcwSurveyRandomIndexList")
+          .split(",")
+          .includes(myKey)
+      ) {
+        sessionStorage.setItem(
+          "lcwSurveyRandomIndexList",
+          sessionStorage.getItem("lcwSurveyRandomIndexList") + "," + myKey
+        );
+        sessionStorage.setItem(
+          "lcwSurveyRandomMd",
+          sessionStorage.getItem("lcwSurveyRandomMd") + "," + fileName.current
+        );
+      }
+      // list exists, and the key exists too -> modify the list instead of directly adding the key
+      else {
+        const indexList = sessionStorage
+          .getItem("lcwSurveyRandomIndexList")
+          .split(",");
+        for (let i = 0; i < indexList.length; i++) {
+          if (indexList[i] === myKey) {
+            const newMdList = sessionStorage
+              .getItem("lcwSurveyRandomMd")
+              .split(",");
+            newMdList[i] = fileName.current;
+            sessionStorage.setItem("lcwSurveyRandomMd", newMdList.join(","));
+            break;
+          }
         }
       }
+      console.log(
+        "filename:",
+        fileName.current,
+        sessionStorage.getItem("lcwSurveyRandomIndexList"),
+        sessionStorage.getItem("lcwSurveyRandomMd")
+      );
     }
-    console.log(
-      "filename:",
-      fileName.current,
-      sessionStorage.getItem("lcwSurveyRandomIndexList"),
-      sessionStorage.getItem("lcwSurveyRandomMd")
-    );
-  }
+  }, [myKey, questionContent.questionTextSrc]);
 
   return (
     <div className="question">
