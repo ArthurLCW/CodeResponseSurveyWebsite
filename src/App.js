@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Modal from "react-modal";
 import "./App.css";
 import SurveyComponent from "./component/SurveyComponent";
+import FullScreenModalComponent from "./component/FullScreenModalComponent";
 import { Question, Page } from "./util/utilClass";
-
-Modal.setAppElement("#root");
 
 function App() {
   useEffect(() => {
@@ -461,8 +459,13 @@ var canConstruct = function(ransomNote, magazine) {
           />
         </div>
       </div>
-
-      <Modal
+      <FullScreenModalComponent
+        isOpen={modalIsOpen}
+        closeModal={closeModal}
+        enterFullScreen={enterFullScreen}
+        firstTimeEnter={firstTimeEnter}
+      />
+      {/* <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         shouldCloseOnOverlayClick={false}
@@ -511,26 +514,7 @@ var canConstruct = function(ransomNote, magazine) {
             OK
           </button>
         </div>
-        {/* {firstTimeEnter ? (
-          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-            <button onClick={enterFullScreen} className="attractive-btn">
-              Yes
-            </button>
-            <button onClick={closeModal} className="less-attractive-btn">
-              No
-            </button>
-          </div>
-        ) : (
-          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-            <button onClick={closeModal} className="less-attractive-btn">
-              Yes
-            </button>
-            <button onClick={enterFullScreen} className="attractive-btn">
-              No
-            </button>
-          </div>
-        )} */}
-      </Modal>
+      </Modal> */}
     </div>
   );
 }
