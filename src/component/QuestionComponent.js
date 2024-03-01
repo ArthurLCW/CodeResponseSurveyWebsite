@@ -10,6 +10,10 @@ import {
   toggleScreenFalse,
 } from "../redux/recorderSlice";
 
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import SvgIcon from "@mui/material/SvgIcon";
+
 const WarningMsg = () => (
   <div className="warning">
     <b>Please finish this question!</b>
@@ -31,6 +35,8 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [codingNonEnptyLines, setCodingNonEnptyLines] = useState(0);
   const dispatch = useDispatch();
+  const [showTask, setShowTask] = useState(false);
+  const [showSelfCodes, setShowSelfCodes] = useState(false);
 
   const handleOptionChange = (event) => {
     if (selectedOption === null) dispatch(increment());
@@ -135,17 +141,20 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
     questionContent.questionType === "coding" ? { display: "flex" } : {};
   const codingChildStyle =
     questionContent.questionType === "coding"
-      ? { width: "35vw", paddingRight: "30px" }
+      ? { width: "calc(37.5vw - 5px)", paddingRight: "10px" }
       : {};
+
+  const fileName = useRef(questionContent.questionTextSrc[0]);
 
   let recordDisplay = "";
   if (questionContent.recordLogic === "display") {
     if ((questionContent.questionType = "coding"))
       recordDisplay =
         "```javascript\n" + sessionStorage.getItem("lcwRecordInfo") + "\n```";
+  } else if (questionContent.recordLogic === "record") {
+    sessionStorage.setItem("taskFile", fileName.current);
   }
 
-  const fileName = useRef(questionContent.questionTextSrc[0]);
   useEffect(() => {
     if (questionContent.questionTextSrc.length > 1) {
       const randomNumber = Math.floor(
@@ -210,9 +219,59 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
       <div style={unfinishedStyle}>
         <div style={codingParentStyle}>
           <div style={codingChildStyle}>
-            <MdDisplayerComponent fileName={fileName.current} />
+            {questionContent.questionType === "coding" ? (
+              <div
+                className={
+                  questionContent.questionType === "coding" &&
+                  "left-coding-panel"
+                }
+              >
+                {questionContent.recordLogic === "record" && (
+                  <MdDisplayerComponent fileName="coding1-general.md" />
+                )}
+                <MdDisplayerComponent fileName={fileName.current} />
+                {questionContent.recordLogic === "display" && (
+                  <>
+                    <div className="collapse-container">
+                      <div
+                        className="collapse-header"
+                        onClick={() => setShowSelfCodes(!showSelfCodes)}
+                      >
+                        <SvgIcon
+                          component={
+                            showSelfCodes ? ArrowDropDownIcon : ArrowRightIcon
+                          }
+                        />
+                        <h4>Codes Written by Yourself in Previous Page</h4>
+                      </div>
+                      {showSelfCodes && <Markdown content={recordDisplay} />}
+                    </div>
+                    <div className="collapse-container">
+                      <div
+                        className="collapse-header"
+                        onClick={() => setShowTask(!showTask)}
+                      >
+                        <SvgIcon
+                          component={
+                            showTask ? ArrowDropDownIcon : ArrowRightIcon
+                          }
+                        />
+                        <h4>Coding Task Description</h4>
+                      </div>
+                      {showTask && (
+                        <MdDisplayerComponent
+                          fileName={sessionStorage.getItem("taskFile")}
+                        />
+                      )}
+                    </div>
+                  </>
+                )}
+              </div>
+            ) : (
+              <MdDisplayerComponent fileName={fileName.current} />
+            )}
             {/* {(questionContent.recordLogic==="display") && <Markdown content={"```javascript\n"+sessionStorage.getItem("lcwRecordInfo")+"```"}/>} */}
-            <Markdown content={recordDisplay} />
+            {/* <Markdown content={recordDisplay} /> */}
           </div>
           <div>{options}</div>
         </div>

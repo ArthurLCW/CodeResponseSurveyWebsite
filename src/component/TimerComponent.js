@@ -73,24 +73,24 @@ const TimerComponent = ({
 
   return (
     <div className="timer">
-      <p>
+      <div>
         Please finish all the questions in this page within{" "}
         <b>
           {parseInt(timeMax / 60)} minutes and {parseInt(timeMax % 60)} seconds
         </b>
         .{" "}
-      </p>
+      </div>
       {timeMin > 0 && (
-        <p>
+        <div>
           Please spend <b>at least</b>{" "}
           <b>
             {parseInt(timeMin / 60)} minutes and {parseInt(timeMin % 60)}{" "}
             seconds
           </b>{" "}
           to finish the questions in this page.{" "}
-        </p>
+        </div>
       )}
-      <p>
+      <div>
         You still have{" "}
         <b>
           <i>
@@ -98,7 +98,7 @@ const TimerComponent = ({
             seconds remaining
           </i>
         </b>
-      </p>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 .question {
-  padding: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   border-bottom: 1px solid grey;
 }
 
@@ -23,4 +24,28 @@
 
 .likert-label {
   margin-bottom: 5px; /* Adjust space between label and radio button */
+}
+
+.left-coding-panel {
+  height: 70vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-right: 30px;
+  padding-left: 30px;
+  border-radius: 5px;
+  border: 1px solid #094183;
+}
+
+.collapse-container {
+  border-bottom: 1px solid #c7cdd1;
+  border-top: 1px solid #c7cdd1;
+}
+.collapse-header {
+  display: flex;
+  align-items: center;
+  /* border-top: 1px solid #c7cdd1;
+  border-bottom: 1px solid #c7cdd1; */
+
+  /* justify-content: center; */
+  /* padding: 5px; */
 }

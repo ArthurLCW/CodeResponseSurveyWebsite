@@ -283,7 +283,7 @@ LRUCache.prototype.put = function(key, value) {
           ),
         ],
         780, // timer
-        60
+        1
       ),
 
       // coding question (assisted coding)
@@ -306,7 +306,7 @@ LRUCache.prototype.put = function(key, value) {
           ),
         ],
         420, // timer
-        60
+        1
       ),
 
       // post-hoc (domain knowledge familarity & perceived difficulty)
@@ -380,7 +380,7 @@ var canConstruct = function(ransomNote, magazine) {
           ),
         ],
         780, // timer
-        60
+        1
       ),
 
       // coding question (assisted coding)
@@ -403,7 +403,7 @@ var canConstruct = function(ransomNote, magazine) {
           ),
         ],
         420, // timer
-        60
+        1
       ),
 
       // post-hoc (domain knowledge familarity & perceived difficulty)
@@ -438,12 +438,13 @@ var canConstruct = function(ransomNote, magazine) {
   const pageSection = {
     medium: [
       "consent",
-      "screener",
-      "demographics",
+      // "screener",
+      // "demographics",
       "codingMedium",
       "gratitude",
     ],
-    easy: ["consent", "screener", "demographics", "codingEasy", "gratitude"],
+    // easy: ["consent", "screener", "demographics", "codingEasy", "gratitude"],
+    easy: ["consent", "codingEasy", "gratitude"],
   };
 
   return (
@@ -459,12 +460,12 @@ var canConstruct = function(ransomNote, magazine) {
           />
         </div>
       </div>
-      <FullScreenModalComponent
+      {/* <FullScreenModalComponent
         isOpen={modalIsOpen}
         closeModal={closeModal}
         enterFullScreen={enterFullScreen}
         firstTimeEnter={firstTimeEnter}
-      />
+      /> */}
       {/* <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

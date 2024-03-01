@@ -34,7 +34,7 @@ const SurveyComponent = ({
   );
   sessionStorage.setItem(
     "questionSet",
-    queryParams.get("QUESTION_SET") || "medium"
+    queryParams.get("QUESTION_SET") || "easy"
   );
 
   if (!rememberState) sessionStorage.setItem("initPageNum", 1);

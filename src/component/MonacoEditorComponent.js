@@ -96,8 +96,9 @@ const MonacoEditorComponent = ({
 
   return (
     <MonacoEditor
-      height="100%"
-      width="35vw"
+      // height="100%"
+      height="70vh"
+      width="calc(37.5vw - 5px)"
       language="javascript"
       theme="vs-dark"
       value={
