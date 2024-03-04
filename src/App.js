@@ -283,7 +283,7 @@ LRUCache.prototype.put = function(key, value) {
           ),
         ],
         780, // timer
-        1
+        60
       ),
 
       // coding question (assisted coding)
@@ -306,7 +306,7 @@ LRUCache.prototype.put = function(key, value) {
           ),
         ],
         420, // timer
-        1
+        60
       ),
 
       // post-hoc (domain knowledge familarity & perceived difficulty)
@@ -380,7 +380,7 @@ var canConstruct = function(ransomNote, magazine) {
           ),
         ],
         780, // timer
-        1
+        60
       ),
 
       // coding question (assisted coding)
@@ -403,7 +403,7 @@ var canConstruct = function(ransomNote, magazine) {
           ),
         ],
         420, // timer
-        1
+        60
       ),
 
       // post-hoc (domain knowledge familarity & perceived difficulty)
@@ -438,13 +438,13 @@ var canConstruct = function(ransomNote, magazine) {
   const pageSection = {
     medium: [
       "consent",
-      // "screener",
-      // "demographics",
+      "screener",
+      "demographics",
       "codingMedium",
       "gratitude",
     ],
-    // easy: ["consent", "screener", "demographics", "codingEasy", "gratitude"],
-    easy: ["consent", "codingEasy", "gratitude"],
+    easy: ["consent", "screener", "demographics", "codingEasy", "gratitude"],
+    // easy: ["consent", "codingEasy", "gratitude"],
   };
 
   return (
@@ -460,62 +460,12 @@ var canConstruct = function(ransomNote, magazine) {
           />
         </div>
       </div>
-      {/* <FullScreenModalComponent
+      <FullScreenModalComponent
         isOpen={modalIsOpen}
         closeModal={closeModal}
         enterFullScreen={enterFullScreen}
         firstTimeEnter={firstTimeEnter}
-      /> */}
-      {/* <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        shouldCloseOnOverlayClick={false}
-        shouldCloseOnEsc={false}
-        contentLabel="full-screen-mode-confirmation"
-        style={{
-          content: {
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            marginRight: "-50%",
-            transform: "translate(-50%, -50%)",
-          },
-        }}
-      >
-        <div style={{ display: "flex" }}>
-          <h1 style={{ margin: "auto" }}>Full-Screen Mode</h1>
-        </div>
-        {firstTimeEnter ? (
-          <p>
-            You need to stay in full-screen mode to proceed with the survey.{" "}
-          </p>
-        ) : (
-          <p>
-            Please DO NOT leave full-screen mode before finishing this survey!
-          </p>
-        )}
-        <p>
-          Please notice that we will{" "}
-          <b>record your action of leaving full-screen mode</b>.{" "}
-        </p>
-        <p>
-          <b style={{ color: "red" }}>
-            Leaving full-screen mode may lead to reduce in reimbursement!
-          </b>
-        </p>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "10px",
-          }}
-        >
-          <button onClick={enterFullScreen} className="attractive-btn">
-            OK
-          </button>
-        </div>
-      </Modal> */}
+      />
     </div>
   );
 }

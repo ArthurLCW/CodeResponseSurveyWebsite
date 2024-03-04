@@ -72,7 +72,7 @@ function FullScreenModalComponent({
       </p>
       <p>
         <b style={{ color: "red" }}>
-          Leaving full-screen mode may lead to reduce in reimbursement!
+          Leaving full-screen mode may lead to reduce in payment!
         </b>
       </p>
       <div

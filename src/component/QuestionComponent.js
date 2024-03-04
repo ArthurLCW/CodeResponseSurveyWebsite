@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useMemo } from "react";
 import { MdDisplayerComponent, Markdown } from "./MdDisplayerComponent";
 import MonacoEditorComponent from "./MonacoEditorComponent";
 // import LikertScaleGridComponent from './LikertScaleGridComponent';
@@ -144,28 +144,18 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
       ? { width: "calc(37.5vw - 5px)", paddingRight: "10px" }
       : {};
 
-  const fileName = useRef(questionContent.questionTextSrc[0]);
-
-  let recordDisplay = "";
-  if (questionContent.recordLogic === "display") {
-    if ((questionContent.questionType = "coding"))
-      recordDisplay =
-        "```javascript\n" + sessionStorage.getItem("lcwRecordInfo") + "\n```";
-  } else if (questionContent.recordLogic === "record") {
-    sessionStorage.setItem("taskFile", fileName.current);
-  }
-
-  useEffect(() => {
+  const fileName = useMemo(() => {
+    let fileNameTemp = questionContent.questionTextSrc[0];
     if (questionContent.questionTextSrc.length > 1) {
       const randomNumber = Math.floor(
         Math.random() * questionContent.questionTextSrc.length
       );
-      fileName.current = questionContent.questionTextSrc[randomNumber];
-      console.log("randomNumber", randomNumber, fileName.current);
+      fileNameTemp = questionContent.questionTextSrc[randomNumber];
+      console.log("randomNumber", randomNumber, fileNameTemp);
       // list does not exist, initialize it
       if (!sessionStorage.getItem("lcwSurveyRandomIndexList")) {
         sessionStorage.setItem("lcwSurveyRandomIndexList", myKey);
-        sessionStorage.setItem("lcwSurveyRandomMd", fileName.current);
+        sessionStorage.setItem("lcwSurveyRandomMd", fileNameTemp);
       }
       // list exists, and the key does not exist in the key -> add the key directly
       else if (
@@ -180,7 +170,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
         );
         sessionStorage.setItem(
           "lcwSurveyRandomMd",
-          sessionStorage.getItem("lcwSurveyRandomMd") + "," + fileName.current
+          sessionStorage.getItem("lcwSurveyRandomMd") + "," + fileNameTemp
         );
       }
       // list exists, and the key exists too -> modify the list instead of directly adding the key
@@ -193,7 +183,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
             const newMdList = sessionStorage
               .getItem("lcwSurveyRandomMd")
               .split(",");
-            newMdList[i] = fileName.current;
+            newMdList[i] = fileNameTemp;
             sessionStorage.setItem("lcwSurveyRandomMd", newMdList.join(","));
             break;
           }
@@ -201,12 +191,22 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
       }
       console.log(
         "filename:",
-        fileName.current,
+        fileNameTemp,
         sessionStorage.getItem("lcwSurveyRandomIndexList"),
         sessionStorage.getItem("lcwSurveyRandomMd")
       );
     }
+    return fileNameTemp;
   }, [myKey]);
+
+  let recordDisplay = "";
+  if (questionContent.recordLogic === "display") {
+    if ((questionContent.questionType = "coding"))
+      recordDisplay =
+        "```javascript\n" + sessionStorage.getItem("lcwRecordInfo") + "\n```";
+  } else if (questionContent.recordLogic === "record") {
+    sessionStorage.setItem("taskFile", fileName);
+  }
 
   return (
     <div className="question">
@@ -229,7 +229,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
                 {questionContent.recordLogic === "record" && (
                   <MdDisplayerComponent fileName="coding1-general.md" />
                 )}
-                <MdDisplayerComponent fileName={fileName.current} />
+                <MdDisplayerComponent fileName={fileName} />
                 {questionContent.recordLogic === "display" && (
                   <>
                     <div className="collapse-container">
@@ -268,7 +268,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
                 )}
               </div>
             ) : (
-              <MdDisplayerComponent fileName={fileName.current} />
+              <MdDisplayerComponent fileName={fileName} />
             )}
             {/* {(questionContent.recordLogic==="display") && <Markdown content={"```javascript\n"+sessionStorage.getItem("lcwRecordInfo")+"```"}/>} */}
             {/* <Markdown content={recordDisplay} /> */}

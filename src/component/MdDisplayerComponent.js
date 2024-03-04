@@ -75,6 +75,7 @@ export const Markdown = ({ content }) => {
 };
 
 export const MdDisplayerComponent = ({ fileName }) => {
+  // console.log("mdDisplayer", fileName);
   const [content, setContent] = useState("");
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/question-text/${fileName}`)

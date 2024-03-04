@@ -90,6 +90,7 @@ const PageComponent = ({
         dispatch(reset());
         goToNextPage();
         setFinished(false);
+        setTimingFullfilledFlag(false);
       }
     }
     if (screenFlag) {
