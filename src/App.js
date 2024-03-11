@@ -566,6 +566,99 @@ var deleteDuplicates = function(head) {
         ...programFactorsQuestions,
       ]),
     ],
+    // coding (the medium one: remove-duplicates-from-sorted-list)
+    codingMediumRemoveDuplicates: [
+      // coding question (self-coding)
+      new Page(
+        [
+          new Question(
+            "coding",
+            ["coding1-medium-remove-duplicates-from-sorted-list.md"],
+            [],
+            null,
+            null,
+            "record",
+            `/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var deleteDuplicates = function(head) {
+    
+};`
+          ),
+        ],
+        780, // timer
+        60
+      ),
+
+      // coding question (assisted coding)
+      new Page(
+        [
+          new Question(
+            "coding",
+            [
+              "coding2-medium-v11-remove-duplicates.md",
+              "coding2-medium-v12-remove-duplicates.md",
+              "coding2-medium-v13-remove-duplicates.md",
+              "coding2-medium-v21-remove-duplicates.md",
+              "coding2-medium-v22-remove-duplicates.md",
+              "coding2-medium-v23-remove-duplicates.md",
+            ],
+            [],
+            null,
+            null,
+            "display"
+          ),
+        ],
+        420, // timer
+        60
+      ),
+
+      // post-hoc (domain knowledge familarity & perceived difficulty)
+      new Page([
+        new Question(
+          "likert-scale",
+          ["domain-knowledge-LinkedList.md"],
+          [
+            "Not familiar at all",
+            "Slightly familiar",
+            "Moderately familiar",
+            "Very familiar",
+            "Extremely familiar",
+          ]
+        ),
+        new Question(
+          "likert-scale",
+          ["domain-knowledge-twoPointer.md"],
+          [
+            "Not familiar at all",
+            "Slightly familiar",
+            "Moderately familiar",
+            "Very familiar",
+            "Extremely familiar",
+          ]
+        ),
+        new Question(
+          "likert-scale",
+          ["perceived-difficulty.md"],
+          [
+            "Extremely easy",
+            "Somewhat Easy",
+            "Neither easy nor difficult",
+            "Somewhat difficult",
+            "Extremely difficult",
+          ]
+        ),
+        ...programFactorsQuestions,
+      ]),
+    ],
     gratitude: [new Page([new Question("null", ["gratitude.md"], [])])],
   };
 
@@ -591,6 +684,18 @@ var deleteDuplicates = function(head) {
     //   "codingEasyRemoveDuplicates",
     //   "gratitude",
     // ],
+    // medium_remove_duplicates: [
+    //   "consent",
+    //   "screener",
+    //   "demographics",
+    //   "codingMediumRemoveDuplicates",
+    //   "gratitude",
+    // ],
+    medium_remove_duplicates: [
+      "consent",
+      "codingMediumRemoveDuplicates",
+      "gratitude",
+    ],
   };
 
   return (
