@@ -684,18 +684,18 @@ var deleteDuplicates = function(head) {
     //   "codingEasyRemoveDuplicates",
     //   "gratitude",
     // ],
-    // medium_remove_duplicates: [
-    //   "consent",
-    //   "screener",
-    //   "demographics",
-    //   "codingMediumRemoveDuplicates",
-    //   "gratitude",
-    // ],
     medium_remove_duplicates: [
       "consent",
+      "screener",
+      "demographics",
       "codingMediumRemoveDuplicates",
       "gratitude",
     ],
+    // medium_remove_duplicates: [
+    //   "consent",
+    //   "codingMediumRemoveDuplicates",
+    //   "gratitude",
+    // ],
   };
 
   return (
