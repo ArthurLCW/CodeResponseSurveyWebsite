@@ -82,6 +82,8 @@ const MonacoEditorComponent = ({
     } else if (nonEmptyLineCount < 10 && num === 1) {
       dispatch(decrement());
       console.log("MONACO editor decrement: ", nonEmptyLineCount, num);
+    } else {
+      console.log("MONACO editor nothing: ", nonEmptyLineCount, num);
     }
   }, [dispatch, nonEmptyLineCount, num]);
 

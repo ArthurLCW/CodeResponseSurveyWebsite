@@ -29,6 +29,7 @@ const TimerComponent = ({
           clearInterval(interval);
           dispatch(reset());
           goToNextPage();
+          setTimingFullfilledFlag(false);
           sessionStorage.setItem(
             `Page ${pageNumber} finishing time`,
             timeMax - newSeconds

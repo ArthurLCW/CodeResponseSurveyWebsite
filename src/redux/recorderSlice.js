@@ -19,7 +19,7 @@ export const recorderSlice = createSlice({
       state.num = 0;
     },
     decrement: (state) => {
-      state.num -= 1;
+      if (state.num > 0) state.num -= 1;
     },
     incrementByAmount: (state, action) => {
       state.num += action.payload;
