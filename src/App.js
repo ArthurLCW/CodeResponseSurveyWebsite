@@ -76,6 +76,56 @@ function App() {
     sessionStorage.setItem("rejectFullScreen", true);
   };
 
+  const programFactorsQuestions = [
+    new Question(
+      "likert-scale",
+      ["post-test-comprehend.md"],
+      [
+        "Fully understand",
+        "Somewhat understand",
+        "Do not understand",
+        "I don't remember if I can understand. ",
+      ]
+    ),
+    new Question(
+      "likert-scale",
+      ["post-test-code-quality.md"],
+      [
+        "Very good",
+        "Somewhat good",
+        "Neither good nor bad",
+        "Somewhat bad",
+        "Very bad",
+        "I don't remember the quality of the AI-generated codes",
+      ]
+    ),
+    new Question(
+      "likert-scale",
+      ["post-test-variable.md"],
+      [
+        "Very good",
+        "Somewhat good",
+        "Neither good nor bad",
+        "Somewhat bad",
+        "Very bad",
+        "I don't remember the variable naming style of the AI-generated codes",
+      ]
+    ),
+    new Question(
+      "likert-scale",
+      ["post-test-comment.md"],
+      [
+        "Very good",
+        "Somewhat good",
+        "Neither good nor bad",
+        "Somewhat bad",
+        "Very bad",
+        "I don't remember the comment quality of the AI-generated codes",
+        "There is no comment in the AI-generated codes",
+      ]
+    ),
+  ];
+
   const pageObj = {
     consent: [
       new Page([
@@ -238,7 +288,7 @@ function App() {
         ),
       ]),
     ],
-    // coding (the medium one)
+    // coding (the medium one: lru)
     codingMedium: [
       // coding question (self-coding)
       new Page(
@@ -355,9 +405,10 @@ LRUCache.prototype.put = function(key, value) {
             "Extremely difficult",
           ]
         ),
+        ...programFactorsQuestions,
       ]),
     ],
-    // coding (the medium one)
+    // coding (the easy one: ransom note)
     codingEasy: [
       // coding question (self-coding)
       new Page(
@@ -430,6 +481,89 @@ var canConstruct = function(ransomNote, magazine) {
             "Extremely difficult",
           ]
         ),
+        ...programFactorsQuestions,
+      ]),
+    ],
+    // coding (the easy one: remove-duplicates-from-sorted-list)
+    codingEasyRemoveDuplicates: [
+      // coding question (self-coding)
+      new Page(
+        [
+          new Question(
+            "coding",
+            ["coding1-easy-remove-duplicates-from-sorted-list.md"],
+            [],
+            null,
+            null,
+            "record",
+            `/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var deleteDuplicates = function(head) {
+    
+};`
+          ),
+        ],
+        780, // timer
+        60
+      ),
+
+      // coding question (assisted coding)
+      new Page(
+        [
+          new Question(
+            "coding",
+            [
+              "coding2-easy-v11-remove-duplicates.md",
+              "coding2-easy-v12-remove-duplicates.md",
+              "coding2-easy-v13-remove-duplicates.md",
+              "coding2-easy-v21-remove-duplicates.md",
+              "coding2-easy-v22-remove-duplicates.md",
+              "coding2-easy-v23-remove-duplicates.md",
+            ],
+            [],
+            null,
+            null,
+            "display"
+          ),
+        ],
+        420, // timer
+        60
+      ),
+
+      // post-hoc (domain knowledge familarity & perceived difficulty)
+      new Page([
+        new Question(
+          "likert-scale",
+          ["domain-knowledge-LinkedList.md"],
+          [
+            "Not familiar at all",
+            "Slightly familiar",
+            "Moderately familiar",
+            "Very familiar",
+            "Extremely familiar",
+          ]
+        ),
+        new Question(
+          "likert-scale",
+          ["perceived-difficulty.md"],
+          [
+            "Extremely easy",
+            "Somewhat Easy",
+            "Neither easy nor difficult",
+            "Somewhat difficult",
+            "Extremely difficult",
+          ]
+        ),
+        ...programFactorsQuestions,
       ]),
     ],
     gratitude: [new Page([new Question("null", ["gratitude.md"], [])])],
@@ -445,6 +579,18 @@ var canConstruct = function(ransomNote, magazine) {
     ],
     easy: ["consent", "screener", "demographics", "codingEasy", "gratitude"],
     // easy: ["consent", "codingEasy", "gratitude"],
+    easy_remove_duplicates: [
+      "consent",
+      "screener",
+      "demographics",
+      "codingEasyRemoveDuplicates",
+      "gratitude",
+    ],
+    // easy_remove_duplicates: [
+    //   "consent",
+    //   "codingEasyRemoveDuplicates",
+    //   "gratitude",
+    // ],
   };
 
   return (
