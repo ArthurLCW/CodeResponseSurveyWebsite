@@ -61,7 +61,7 @@ const PageComponent = ({
       sessionStorageObject["prolificId"],
       sessionStorageObject
     );
-    sessionStorage.clear();
+    // sessionStorage.clear();
   }
 
   const handleClick = () => {

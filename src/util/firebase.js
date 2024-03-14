@@ -17,9 +17,13 @@ const writeParticipantData = (
   myData = userData,
   app = firebaseApp
 ) => {
+  const batch = myData["batch"] || "unknown";
+  const project = myData["project"] || "unknown";
+
   console.log("userId:", userId, "myData:", myData);
+
   const database = getDatabase(app);
-  const dataRef = ref(database, "participants/" + userId);
+  const dataRef = ref(database, `${project}/${batch}/${userId}`);
   set(dataRef, myData)
     .then(() => {
       console.log("Data saved successfully!");

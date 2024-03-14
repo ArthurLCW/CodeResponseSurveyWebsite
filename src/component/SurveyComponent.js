@@ -36,6 +36,11 @@ const SurveyComponent = ({
     "questionSet",
     queryParams.get("QUESTION_SET") || "easy"
   );
+  sessionStorage.setItem(
+    "project",
+    queryParams.get("PROJECT") || "default_project"
+  );
+  sessionStorage.setItem("batch", queryParams.get("BATCH") || "default_batch");
 
   if (!rememberState) sessionStorage.setItem("initPageNum", 1);
 

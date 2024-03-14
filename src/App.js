@@ -671,7 +671,7 @@ var deleteDuplicates = function(head) {
       "gratitude",
     ],
     easy: ["consent", "screener", "demographics", "codingEasy", "gratitude"],
-    // easy: ["consent", "codingEasy", "gratitude"],
+    // easy: ["consent", "screener", "gratitude"],
     easy_remove_duplicates: [
       "consent",
       "screener",
