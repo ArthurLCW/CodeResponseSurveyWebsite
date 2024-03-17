@@ -34,7 +34,7 @@ const SurveyComponent = ({
   );
   sessionStorage.setItem(
     "questionSet",
-    queryParams.get("QUESTION_SET") || "easy"
+    queryParams.get("QUESTION_SET") || "easy_remove_duplicates"
   );
   sessionStorage.setItem(
     "project",

@@ -122,6 +122,8 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
         recordLogic={questionContent.recordLogic}
         setCodingNonEnptyLines={setCodingNonEnptyLines}
         defaultCode={questionContent.defaultCode}
+        examples={questionContent.examples}
+        clarification={questionContent.clarification}
       />
     );
   }
@@ -141,7 +143,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
     questionContent.questionType === "coding" ? { display: "flex" } : {};
   const codingChildStyle =
     questionContent.questionType === "coding"
-      ? { width: "calc(37.5vw - 5px)", paddingRight: "10px" }
+      ? { width: "calc(42.5vw - 5px)", paddingRight: "10px" }
       : {};
 
   const fileName = useMemo(() => {

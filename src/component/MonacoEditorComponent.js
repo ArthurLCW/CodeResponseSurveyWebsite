@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MonacoEditor from "react-monaco-editor";
+import TestLayout from "./TestLayout";
 import { useSelector } from "react-redux";
 import { increment, decrement, updateRecordInfo } from "../redux/recorderSlice";
 
@@ -10,7 +11,10 @@ const MonacoEditorComponent = ({
   recordLogic,
   setCodingNonEnptyLines,
   defaultCode,
+  examples,
+  clarification,
 }) => {
+  const [testFold, setTestFold] = useState(true);
   const [code, setCode] = useState("// type your code...");
   const [nonEmptyLineCount, setNonEmptyLineCount] = useState(1);
   const num = useSelector((state) => state.recorder.num);
@@ -44,6 +48,7 @@ const MonacoEditorComponent = ({
     editorInstance = editor;
     getNonEmptyLines(editorInstance);
     sessionStorage.setItem(myKey, editorInstance.getValue());
+    setCode(editorInstance.getValue());
     // if the user does not input anything, then need to record placeholder at beginning
     if (recordLogic === "record") {
       sessionStorage.setItem("lcwRecordInfo", editorInstance.getValue());
@@ -97,22 +102,30 @@ const MonacoEditorComponent = ({
   };
 
   return (
-    <MonacoEditor
-      // height="100%"
-      height="70vh"
-      width="calc(37.5vw - 5px)"
-      language="javascript"
-      theme="vs-dark"
-      value={
-        recordLogic === "display"
-          ? sessionStorage.getItem("lcwRecordInfo")
-          : defaultCode
-      }
-      // value = '// type your code...'
-      options={options}
-      onChange={onChange}
-      editorDidMount={editorDidMount}
-    />
+    <div style={{ position: "relative" }}>
+      <MonacoEditor
+        // height="100%"
+        height={testFold ? "65vh" : "40vh"}
+        width="calc(42.5vw - 5px)"
+        language="javascript"
+        theme="vs-dark"
+        value={
+          recordLogic === "display"
+            ? sessionStorage.getItem("lcwRecordInfo")
+            : defaultCode
+        }
+        // value = '// type your code...'
+        options={options}
+        onChange={onChange}
+        editorDidMount={editorDidMount}
+      />
+      <TestLayout
+        setTestFold={setTestFold}
+        testFold={testFold}
+        examples={examples}
+        clarification={clarification}
+      />
+    </div>
   );
 };
 

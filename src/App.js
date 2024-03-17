@@ -495,6 +495,9 @@ var canConstruct = function(ransomNote, magazine) {
             [],
             null,
             null,
+            ["[1,1,2]", "[1,1,2,3,3]"],
+            `The input contains the values of all nodes presenting as an array. For example, [1,1,2] represents node(1)=>node(1)=>node(2). 
+            Please notice that both the input and output is the head of a linked-list, NOT an Array. We use array to present input and output just for simplicity. `,
             "record",
             `/**
  * Definition for singly-linked list.
@@ -532,6 +535,10 @@ var deleteDuplicates = function(head) {
             [],
             null,
             null,
+            ["[1,1,2]", "[1,1,2,3,3]"],
+            `The input contains the values of all nodes presenting as an array. For example, [1,1,2] represents node(1)=>node(1)=>node(2). 
+            Please notice that both the input and output is the head of a linked-list, NOT an Array. We use array to present input and output just for simplicity. `,
+
             "display"
           ),
         ],
@@ -671,19 +678,19 @@ var deleteDuplicates = function(head) {
       "gratitude",
     ],
     easy: ["consent", "screener", "demographics", "codingEasy", "gratitude"],
-    // easy: ["consent", "screener", "gratitude"],
-    easy_remove_duplicates: [
-      "consent",
-      "screener",
-      "demographics",
-      "codingEasyRemoveDuplicates",
-      "gratitude",
-    ],
+    // easy: ["consent", "codingEasy", "gratitude"],
     // easy_remove_duplicates: [
     //   "consent",
+    //   "screener",
+    //   "demographics",
     //   "codingEasyRemoveDuplicates",
     //   "gratitude",
     // ],
+    easy_remove_duplicates: [
+      "consent",
+      "codingEasyRemoveDuplicates",
+      "gratitude",
+    ],
     medium_remove_duplicates: [
       "consent",
       "screener",
@@ -711,12 +718,12 @@ var deleteDuplicates = function(head) {
           />
         </div>
       </div>
-      <FullScreenModalComponent
+      {/* <FullScreenModalComponent
         isOpen={modalIsOpen}
         closeModal={closeModal}
         enterFullScreen={enterFullScreen}
         firstTimeEnter={firstTimeEnter}
-      />
+      /> */}
     </div>
   );
 }

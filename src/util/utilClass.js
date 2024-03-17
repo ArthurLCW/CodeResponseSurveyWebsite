@@ -5,6 +5,8 @@ export class Question {
     questionOptions,
     screenOption = null,
     screenMsg = null,
+    examples = [],
+    clarification = "",
     recordLogic = null,
     defaultCode = null
   ) {
@@ -13,6 +15,8 @@ export class Question {
     this.questionOptions = questionOptions;
     this.screenOption = screenOption;
     this.screenMsg = screenMsg;
+    this.examples = examples; // example test cases
+    this.clarification = clarification; // clarification of input
     this.recordLogic = recordLogic; // "record" or "display"
     this.defaultCode = defaultCode;
   }
