@@ -6,8 +6,39 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import SvgIcon from "@mui/material/SvgIcon";
 
-const TestHeader = ({ showTab, setShowTab, setTestFold, testFold }) => {
+const TestHeader = ({
+  showTab,
+  setShowTab,
+  setTestFold,
+  testFold,
+  testInput,
+  setTestResult,
+}) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  function isStringAnArray(str) {
+    const trimmedStr = str.trim();
+    if (!(trimmedStr.startsWith("[") && trimmedStr.endsWith("]"))) {
+      return false;
+    }
+
+    try {
+      const parsed = JSON.parse(trimmedStr);
+      if (!Array.isArray(parsed)) {
+        return false;
+      }
+      if (
+        trimmedStr.slice(1, -1).includes("[") ||
+        trimmedStr.slice(1, -1).includes("]")
+      ) {
+        return false;
+      }
+      return true;
+    } catch (e) {
+      // If JSON.parse() fails, the string is not a valid JSON array
+      return false;
+    }
+  }
 
   useEffect(() => {
     let timer;
@@ -19,7 +50,22 @@ const TestHeader = ({ showTab, setShowTab, setTestFold, testFold }) => {
     return () => clearTimeout(timer);
   }, [isButtonDisabled]);
 
-  const handleButtonClick = () => {
+  const handleRunButtonClick = () => {
+    console.log("isButtonClick", isButtonDisabled);
+    console.log("testInput", testInput);
+    if (isButtonDisabled) return;
+    if (!isStringAnArray(testInput)) {
+      setTestResult({
+        type: "Invalid Testcase",
+        message: `${testInput} is NOT a valid input! Please refer to the examples and introduction of the input format. `,
+        isError: true,
+      });
+    }
+    setShowTab("Test Result");
+    setIsButtonDisabled(true);
+  };
+
+  const handleSubmitButtonClick = () => {
     console.log("isButtonClick", isButtonDisabled);
     if (isButtonDisabled) return;
     setIsButtonDisabled(true);
@@ -132,7 +178,7 @@ const TestHeader = ({ showTab, setShowTab, setTestFold, testFold }) => {
           title="Run your code with specified inputs in 'Test Cases'."
           componentsProps={{ tooltip: { sx: { fontSize: "1em" } } }}
         >
-          <span style={iconLabelStyle} onClick={handleButtonClick}>
+          <span style={iconLabelStyle} onClick={handleRunButtonClick}>
             <SvgIcon component={PlayArrowIcon} style={iconStyle} />
             Run
           </span>
@@ -141,7 +187,7 @@ const TestHeader = ({ showTab, setShowTab, setTestFold, testFold }) => {
           title="Submit and run your code with all test cases. "
           componentsProps={{ tooltip: { sx: { fontSize: "1em" } } }}
         >
-          <span style={iconLabelStyle} onClick={handleButtonClick}>
+          <span style={iconLabelStyle} onClick={handleSubmitButtonClick}>
             <SvgIcon component={CloudUploadIcon} style={iconStyle} />
             Submit
           </span>
@@ -151,37 +197,73 @@ const TestHeader = ({ showTab, setShowTab, setTestFold, testFold }) => {
   );
 };
 
-const TestContent = ({ examples, clarification }) => {
-  const TestCases = ({ examples = [], clarification = "" }) => {
-    const [input, setInput] = useState(examples[0] || "");
-    const inputStyle = {
-      width: "40vw",
-      height: "10vh",
-    };
-
-    return (
-      <div style={{ padding: "10px" }}>
-        <textarea
-          style={inputStyle}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Please enter input of test cases according to the input format below."
-        />
-        {examples.map((example, index) => {
-          return (
-            <button
-              onClick={() => {
-                setInput(example);
-              }}
-            >
-              Load Example {index}
-            </button>
-          );
-        })}
-        <p>{clarification}</p>
-      </div>
-    );
+const TestCases = ({
+  examples = [],
+  clarification = "",
+  testInput,
+  setTestInput,
+}) => {
+  // const [input, setInput] = useState(examples[0] || "");
+  const inputStyle = {
+    width: "40vw",
+    height: "10vh",
   };
+
+  return (
+    <div style={{ padding: "10px" }}>
+      <textarea
+        style={inputStyle}
+        value={testInput}
+        onChange={(e) => setTestInput(e.target.value)}
+        placeholder="Please enter input of test cases according to the input format below."
+      />
+      {examples.map((example, index) => {
+        return (
+          <button
+            onClick={() => {
+              setTestInput(example);
+            }}
+          >
+            Load Example {index}
+          </button>
+        );
+      })}
+      <p>{clarification}</p>
+    </div>
+  );
+};
+
+const TestResult = ({ testResult }) => {
+  const resultTypeStyle = {
+    color: testResult.isError ? "rgb(239, 71, 67)" : "rgb(45, 181, 93)",
+    padding: "20px",
+    fontSize: "20px",
+    fontWeight: "500",
+  };
+  const resultMessageStyle = {
+    backgroundColor: testResult.isError
+      ? "rgba(246, 54, 54, 0.08)"
+      : "rgba(38, 187, 156, .08)",
+    color: testResult.isError ? "rgb(246, 54, 54)" : "rgb(45, 181, 93)",
+    padding: "20px",
+    fontSize: "14px",
+  };
+  return (
+    <div style={{ margin: "20px" }}>
+      <div style={resultTypeStyle}>{testResult.type}</div>
+      <div style={resultMessageStyle}>{testResult.message}</div>
+    </div>
+  );
+};
+
+const TestContent = ({
+  examples,
+  clarification,
+  showTab,
+  testInput,
+  setTestInput,
+  testResult,
+}) => {
   return (
     <div
       style={{
@@ -189,13 +271,32 @@ const TestContent = ({ examples, clarification }) => {
         overflowY: "scroll",
       }}
     >
-      <TestCases examples={examples} clarification={clarification} />
+      {showTab === "Test Cases" && (
+        <TestCases
+          examples={examples}
+          clarification={clarification}
+          testInput={testInput}
+          setTestInput={setTestInput}
+        />
+      )}
+      {showTab === "Test Result" && <TestResult testResult={testResult} />}
     </div>
   );
 };
 
-const TestLayout = ({ setTestFold, testFold, examples, clarification }) => {
+const TestLayout = ({
+  setTestFold,
+  testFold,
+  examples = [],
+  clarification,
+}) => {
   const [showTab, setShowTab] = useState("Test Result");
+  const [testInput, setTestInput] = useState(examples[0] || "");
+  const [testResult, setTestResult] = useState({
+    type: "",
+    message: "There will be running results once you run/submit your code.",
+    isError: false,
+  });
 
   return (
     <div
@@ -217,9 +318,18 @@ const TestLayout = ({ setTestFold, testFold, examples, clarification }) => {
         showTab={showTab}
         testFold={testFold}
         setTestFold={setTestFold}
+        testInput={testInput}
+        setTestResult={setTestResult}
       />
       {!testFold && (
-        <TestContent examples={examples} clarification={clarification} />
+        <TestContent
+          examples={examples}
+          clarification={clarification}
+          showTab={showTab}
+          testInput={testInput}
+          setTestInput={setTestInput}
+          testResult={testResult}
+        />
       )}
     </div>
   );
