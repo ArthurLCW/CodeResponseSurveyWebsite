@@ -202,26 +202,60 @@ const TestCases = ({
   clarification = "",
   testInput,
   setTestInput,
+  expectedOutput,
+  setExpectedOutput,
 }) => {
-  // const [input, setInput] = useState(examples[0] || "");
+  const labelStype = {
+    display: "inline-block",
+    width: "10vw",
+    paddingRight: "20px",
+  };
   const inputStyle = {
-    width: "40vw",
-    height: "10vh",
+    width: "25vw",
+    // height: "10vh",
   };
 
   return (
     <div style={{ padding: "10px" }}>
-      <textarea
-        style={inputStyle}
-        value={testInput}
-        onChange={(e) => setTestInput(e.target.value)}
-        placeholder="Please enter input of test cases according to the input format below."
-      />
+      <div>
+        <span style={labelStype}>Testcase Input:</span>
+        <input
+          type="text"
+          style={inputStyle}
+          value={testInput}
+          onChange={(e) => setTestInput(e.target.value)}
+          placeholder="Enter input based on the format below."
+        />
+      </div>
+
+      <div>
+        <span style={labelStype}>Expected Output:</span>
+        <input
+          type="text"
+          style={inputStyle}
+          value={expectedOutput}
+          onChange={(e) => setExpectedOutput(e.target.value)}
+          placeholder="Enter expected output based on the format below."
+        />
+      </div>
+
       {examples.map((example, index) => {
         return (
           <button
+            style={{
+              borderRadius: "5px",
+              background: "#5a92c5",
+              color: "white",
+              borderColor: "#094183",
+              borderWidth: "1px",
+              borderStyle: "solid",
+              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+              cursor: "pointer",
+              transition: "background-color 0.3s",
+            }}
             onClick={() => {
-              setTestInput(example);
+              setTestInput(example.input);
+              setExpectedOutput(example.output);
             }}
           >
             Load Example {index}
@@ -262,6 +296,8 @@ const TestContent = ({
   showTab,
   testInput,
   setTestInput,
+  expectedOutput,
+  setExpectedOutput,
   testResult,
 }) => {
   return (
@@ -277,6 +313,8 @@ const TestContent = ({
           clarification={clarification}
           testInput={testInput}
           setTestInput={setTestInput}
+          expectedOutput={expectedOutput}
+          setExpectedOutput={setExpectedOutput}
         />
       )}
       {showTab === "Test Result" && <TestResult testResult={testResult} />}
@@ -291,7 +329,10 @@ const TestLayout = ({
   clarification,
 }) => {
   const [showTab, setShowTab] = useState("Test Result");
-  const [testInput, setTestInput] = useState(examples[0] || "");
+  const [testInput, setTestInput] = useState(examples[0].input || "");
+  const [expectedOutput, setExpectedOutput] = useState(
+    examples[0].output || ""
+  );
   const [testResult, setTestResult] = useState({
     type: "",
     message: "There will be running results once you run/submit your code.",
@@ -328,6 +369,8 @@ const TestLayout = ({
           showTab={showTab}
           testInput={testInput}
           setTestInput={setTestInput}
+          expectedOutput={expectedOutput}
+          setExpectedOutput={setExpectedOutput}
           testResult={testResult}
         />
       )}
