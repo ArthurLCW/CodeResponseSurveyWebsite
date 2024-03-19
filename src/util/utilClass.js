@@ -7,6 +7,8 @@ export class Question {
     screenMsg = null,
     examples = [],
     clarification = "",
+    preCode = "",
+    postCode = "",
     recordLogic = null,
     defaultCode = null
   ) {
@@ -17,6 +19,8 @@ export class Question {
     this.screenMsg = screenMsg;
     this.examples = examples; // example test cases
     this.clarification = clarification; // clarification of input
+    this.preCode = preCode; // code submit to api for testing, usually contains class def
+    this.postCode = postCode; // code submit to api for testing, usually function callers
     this.recordLogic = recordLogic; // "record" or "display"
     this.defaultCode = defaultCode;
   }

@@ -5,6 +5,7 @@ import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import SvgIcon from "@mui/material/SvgIcon";
+import executeBatch from "../util/api";
 
 const TestHeader = ({
   showTab,
@@ -12,9 +13,14 @@ const TestHeader = ({
   setTestFold,
   testFold,
   testInput,
+  expectedOutput,
   setTestResult,
+  preCode,
+  postCode,
+  userCode,
 }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   function isStringAnArray(str) {
     const trimmedStr = str.trim();
@@ -40,6 +46,42 @@ const TestHeader = ({
     }
   }
 
+  function transApiResult(submissions, isRun) {
+    console.log("rawResults", submissions);
+    let type = "";
+    let message =
+      "There will be running results once you run/submit your code.";
+    let isError = false;
+
+    for (let i = 0; i < submissions.length; i++) {
+      if (submissions[i].status.id !== 3) {
+        type = submissions[i].status.description;
+        isError = true;
+        message = isRun
+          ? "This is the test result of the testcases SPECIFIED BY YOURSELF:\n"
+          : "This is the test result of our predefined testcases:\n";
+        if (isRun)
+          message += `Passed ${i}/${submissions.length} test cases. \n`;
+        if (submissions[i].status.id === 4) {
+          // wrong answer
+          message += `Expected output is ${submissions[i].expected_output}\n`;
+          message += `However, the actual out is ${submissions[i].stdout}\n`;
+        } else {
+          message += submissions[i].stderr;
+        }
+        break;
+      }
+    }
+    if (!isError) {
+      type = "Accepted";
+      message = isRun
+        ? "You have pass the testcase specified by yourself. \nHowever, please notice that passing self-defined testcase does NOT guarantee passing all predefined testcases. "
+        : "Congratulations! You have passed all the test cases. ";
+    }
+
+    return { type, message, isError };
+  }
+
   useEffect(() => {
     let timer;
     if (isButtonDisabled) {
@@ -51,9 +93,10 @@ const TestHeader = ({
   }, [isButtonDisabled]);
 
   const handleRunButtonClick = () => {
-    console.log("isButtonClick", isButtonDisabled);
+    setIsButtonDisabled(true);
+    console.log("isButtonClick & loading", isButtonDisabled, isLoading);
     console.log("testInput", testInput);
-    if (isButtonDisabled) return;
+    if (isButtonDisabled || isLoading) return;
     if (!isStringAnArray(testInput)) {
       setTestResult({
         type: "Invalid Testcase",
@@ -61,8 +104,24 @@ const TestHeader = ({
         isError: true,
       });
     }
-    setShowTab("Test Result");
-    setIsButtonDisabled(true);
+
+    const submissions = [
+      {
+        language_id: 63,
+        source_code: preCode + userCode + postCode,
+        stdin: testInput,
+        expected_output: expectedOutput,
+      },
+    ];
+    console.log(userCode);
+
+    setIsLoading(true);
+    executeBatch(submissions, (results) => {
+      setTestResult(transApiResult(results, true));
+      console.log("test!!!!!!!!!");
+      setShowTab("Test Result");
+      setIsLoading(false);
+    });
   };
 
   const handleSubmitButtonClick = () => {
@@ -86,13 +145,13 @@ const TestHeader = ({
     padding: "5px 10px",
     marginRight: "5px",
     borderRadius: "5px",
-    background: isButtonDisabled ? "#a0c4e5" : "#5a92c5",
+    background: isButtonDisabled || isLoading ? "#a0c4e5" : "#5a92c5",
     color: "white",
     borderColor: "#094183",
     borderWidth: "1px",
     borderStyle: "solid",
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
-    cursor: isButtonDisabled ? "not-allowed" : "pointer",
+    cursor: isButtonDisabled || isLoading ? "not-allowed" : "pointer",
     transition: "background-color 0.3s",
   };
 
@@ -285,7 +344,14 @@ const TestResult = ({ testResult }) => {
   return (
     <div style={{ margin: "20px" }}>
       <div style={resultTypeStyle}>{testResult.type}</div>
-      <div style={resultMessageStyle}>{testResult.message}</div>
+      <div style={resultMessageStyle}>
+        {testResult.message.split("\n").map((line, index, array) => (
+          <div key={index}>
+            {line}
+            {index < array.length - 1 && <br />}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -327,6 +393,9 @@ const TestLayout = ({
   testFold,
   examples = [],
   clarification,
+  preCode,
+  postCode,
+  userCode,
 }) => {
   const [showTab, setShowTab] = useState("Test Result");
   const [testInput, setTestInput] = useState(examples[0].input || "");
@@ -360,7 +429,11 @@ const TestLayout = ({
         testFold={testFold}
         setTestFold={setTestFold}
         testInput={testInput}
+        expectedOutput={expectedOutput}
         setTestResult={setTestResult}
+        preCode={preCode}
+        postCode={postCode}
+        userCode={userCode}
       />
       {!testFold && (
         <TestContent

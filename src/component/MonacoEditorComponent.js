@@ -13,6 +13,8 @@ const MonacoEditorComponent = ({
   defaultCode,
   examples,
   clarification,
+  preCode,
+  postCode,
 }) => {
   const [testFold, setTestFold] = useState(true);
   const [code, setCode] = useState("// type your code...");
@@ -124,6 +126,9 @@ const MonacoEditorComponent = ({
         testFold={testFold}
         examples={examples}
         clarification={clarification}
+        preCode={preCode}
+        postCode={postCode}
+        userCode={code}
       />
     </div>
   );

@@ -124,6 +124,8 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
         defaultCode={questionContent.defaultCode}
         examples={questionContent.examples}
         clarification={questionContent.clarification}
+        preCode={questionContent.preCode}
+        postCode={questionContent.postCode}
       />
     );
   }
