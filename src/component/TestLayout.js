@@ -7,8 +7,27 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import SvgIcon from "@mui/material/SvgIcon";
 import executeBatch from "../util/api";
 
+// count line numbers, used to deduce in error message
+function countLines(str) {
+  return str.split("\n").length;
+}
+// update line number so that they are the same as the line number at the code editor
+function updateLineNumbers(inputString, lineNum) {
+  // Regular expression to match "/box/script.js:" followed by a number
+  const regex = /\/box\/script\.js:(\d+)/g;
+
+  const updatedString = inputString.replace(regex, (match, number) => {
+    const updatedNumber = parseInt(number, 10) - lineNum + 1;
+    return `/box/script.js:${updatedNumber}`;
+  });
+
+  return updatedString;
+}
+
 const TestHeader = ({
   showTab,
+  isLoading,
+  setIsLoading,
   setShowTab,
   setTestFold,
   testFold,
@@ -20,7 +39,6 @@ const TestHeader = ({
   userCode,
 }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   function isStringAnArray(str) {
     const trimmedStr = str.trim();
@@ -52,6 +70,8 @@ const TestHeader = ({
     let message =
       "There will be running results once you run/submit your code.";
     let isError = false;
+    let time = undefined;
+    let memory = undefined;
 
     for (let i = 0; i < submissions.length; i++) {
       if (submissions[i].status.id !== 3) {
@@ -67,7 +87,10 @@ const TestHeader = ({
           message += `Expected output is ${submissions[i].expected_output}\n`;
           message += `However, the actual out is ${submissions[i].stdout}\n`;
         } else {
-          message += submissions[i].stderr;
+          message += updateLineNumbers(
+            submissions[i].stderr,
+            countLines(preCode)
+          );
         }
         break;
       }
@@ -77,9 +100,13 @@ const TestHeader = ({
       message = isRun
         ? "You have pass the testcase specified by yourself. \nHowever, please notice that passing self-defined testcase does NOT guarantee passing all predefined testcases. "
         : "Congratulations! You have passed all the test cases. ";
+      time = String(
+        parseFloat(submissions[submissions.length - 1].time) * 1000
+      );
+      memory = submissions[submissions.length - 1].memory;
     }
 
-    return { type, message, isError };
+    return { type, message, isError, time, memory };
   }
 
   useEffect(() => {
@@ -116,7 +143,7 @@ const TestHeader = ({
     console.log(userCode);
 
     setIsLoading(true);
-    executeBatch(submissions, (results) => {
+    executeBatch("run", submissions, (results) => {
       setTestResult(transApiResult(results, true));
       console.log("test!!!!!!!!!");
       setShowTab("Test Result");
@@ -220,7 +247,7 @@ const TestHeader = ({
         >
           Test Cases
         </span>
-        <span
+        {/* <span
           style={
             showTab === "Submissions" ? tabTitleChosenStyle : tabTitleStyle
           }
@@ -229,12 +256,12 @@ const TestHeader = ({
           }}
         >
           Submissions
-        </span>
+        </span> */}
       </span>
 
       <span>
         <Tooltip
-          title="Run your code with specified inputs in 'Test Cases'."
+          title="Run your code with inputs specified by yourself in 'Test Cases'."
           componentsProps={{ tooltip: { sx: { fontSize: "1em" } } }}
         >
           <span style={iconLabelStyle} onClick={handleRunButtonClick}>
@@ -243,7 +270,7 @@ const TestHeader = ({
           </span>
         </Tooltip>
         <Tooltip
-          title="Submit and run your code with all test cases. "
+          title="Submit and run your code with all pre-defined test cases. "
           componentsProps={{ tooltip: { sx: { fontSize: "1em" } } }}
         >
           <span style={iconLabelStyle} onClick={handleSubmitButtonClick}>
@@ -326,7 +353,7 @@ const TestCases = ({
   );
 };
 
-const TestResult = ({ testResult }) => {
+const TestResult = ({ testResult, isLoading }) => {
   const resultTypeStyle = {
     color: testResult.isError ? "rgb(239, 71, 67)" : "rgb(45, 181, 93)",
     padding: "20px",
@@ -341,9 +368,24 @@ const TestResult = ({ testResult }) => {
     padding: "20px",
     fontSize: "14px",
   };
-  return (
+  const loadingMessageStyle = {
+    padding: "20px",
+    fontSize: "14px",
+  };
+  return isLoading ? (
+    <div style={loadingMessageStyle}>Code in Execution...</div>
+  ) : (
     <div style={{ margin: "20px" }}>
       <div style={resultTypeStyle}>{testResult.type}</div>
+      {testResult.time && testResult.memory && (
+        <div>
+          <span style={{ marginRight: "10px" }}>
+            Runtime: {testResult.time}ms
+          </span>
+          <span>Memory:{testResult.memory}KB</span>
+        </div>
+      )}
+
       <div style={resultMessageStyle}>
         {testResult.message.split("\n").map((line, index, array) => (
           <div key={index}>
@@ -365,6 +407,7 @@ const TestContent = ({
   expectedOutput,
   setExpectedOutput,
   testResult,
+  isLoading,
 }) => {
   return (
     <div
@@ -383,7 +426,9 @@ const TestContent = ({
           setExpectedOutput={setExpectedOutput}
         />
       )}
-      {showTab === "Test Result" && <TestResult testResult={testResult} />}
+      {showTab === "Test Result" && (
+        <TestResult testResult={testResult} isLoading={isLoading} />
+      )}
     </div>
   );
 };
@@ -406,7 +451,10 @@ const TestLayout = ({
     type: "",
     message: "There will be running results once you run/submit your code.",
     isError: false,
+    time: undefined,
+    memory: undefined,
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <div
@@ -428,6 +476,8 @@ const TestLayout = ({
         showTab={showTab}
         testFold={testFold}
         setTestFold={setTestFold}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
         testInput={testInput}
         expectedOutput={expectedOutput}
         setTestResult={setTestResult}
@@ -445,6 +495,7 @@ const TestLayout = ({
           expectedOutput={expectedOutput}
           setExpectedOutput={setExpectedOutput}
           testResult={testResult}
+          isLoading={isLoading}
         />
       )}
     </div>

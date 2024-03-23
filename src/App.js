@@ -590,8 +590,57 @@ var deleteDuplicates = function(head) {
             ["[1,1,2]", "[1,1,2,3,3]"],
             `The input contains the values of all nodes presenting as an array. For example, [1,1,2] represents node(1)=>node(1)=>node(2). 
             Please notice that both the input and output is the head of a linked-list, NOT an Array. We use array to present input and output just for simplicity. `,
-
-            "display"
+            `
+            function ListNode(val, next) {
+              this.val = val === undefined ? 0 : val;
+              this.next = next === undefined ? null : next;
+            }
+            
+            function arrayToLinkedList(arr) {
+              if (arr.length === 0) return undefined; // Handle empty array case
+            
+              let head = new ListNode(arr[0]); // Create the head of the linked list
+              let current = head;
+            
+              for (let i = 1; i < arr.length; i++) {
+                current.next = new ListNode(arr[i]); // Create and link the next node
+                current = current.next; // Move to the newly created node
+              }
+            
+              return head; // Return the head of the linked list
+            }
+            
+            function linkedListToArray(head) {
+              let arr = []; // Initialize an empty array to hold the node values
+            
+              let current = head; // Start with the head of the linked list
+            
+              while (current !== null && current !== undefined) {
+                // Push the current node's value to the array, allowing for 'undefined' values
+                arr.push(current.val);
+            
+                // Move to the next node in the list
+                current = current.next;
+              }
+            
+              return arr; // Return the array containing all node values
+            }
+            `,
+            `
+            var res = function (str) {
+              let arrayOld = JSON.parse(str);
+              let linkedListOld = arrayToLinkedList(arrayOld);
+              let linkedListNew = deleteDuplicates(linkedListOld);
+              let arrayNew = linkedListToArray(linkedListNew);
+              return JSON.stringify(arrayNew);
+            };
+            
+            const fs = require("fs");
+            let input = fs.readFileSync("/dev/stdin").toString();
+            console.log(res(input));
+            `,
+            "display",
+            null
           ),
         ],
         420, // timer

@@ -1,6 +1,20 @@
 import axios from "axios";
 
-const checkResults = async (tokens, callback) => {
+function pushObjectToSessionArray(key, newObj) {
+  const existing = sessionStorage.getItem(key);
+
+  let array;
+  if (existing) {
+    array = JSON.parse(existing);
+  } else {
+    array = [];
+  }
+
+  array.push(newObj);
+  sessionStorage.setItem(key, JSON.stringify(array));
+}
+
+const checkResults = async (buttonName, tokens, callback) => {
   const resultsResponse = await axios({
     method: "GET",
     url: `https://judge0-ce.p.rapidapi.com/submissions/batch`,
@@ -22,13 +36,17 @@ const checkResults = async (tokens, callback) => {
   console.log(allDone, resultsResponse);
   if (!allDone) {
     // If any submission is still in queue or processing, wait for some time and then check again.
-    setTimeout(() => checkResults(tokens, callback), 3000); // Check again after 3 seconds
+    setTimeout(() => checkResults(buttonName, tokens, callback), 3000); // Check again after 3 seconds
   } else {
     callback(resultsResponse.data.submissions);
+    pushObjectToSessionArray(
+      buttonName + "Records",
+      resultsResponse.data.submissions
+    );
   }
 };
 
-const executeBatch = async (submissions, callback) => {
+const executeBatch = async (buttonName, submissions, callback) => {
   console.log("executeBatch submissions: ", submissions);
   const submissionData = submissions.map((submission) => ({
     language_id: submission.language_id,
@@ -56,7 +74,7 @@ const executeBatch = async (submissions, callback) => {
     console.log(submitResponse, tokens);
 
     // Initially check the results
-    checkResults(tokens, callback);
+    checkResults(buttonName, tokens, callback);
   } catch (error) {
     console.error(error);
   } finally {
