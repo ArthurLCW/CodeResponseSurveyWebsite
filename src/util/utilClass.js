@@ -10,7 +10,8 @@ export class Question {
     preCode = "",
     postCode = "",
     recordLogic = null,
-    defaultCode = null
+    defaultCode = null,
+    testCases = []
   ) {
     this.questionType = questionType;
     this.questionTextSrc = questionTextSrc; // array
@@ -23,6 +24,7 @@ export class Question {
     this.postCode = postCode; // code submit to api for testing, usually function callers
     this.recordLogic = recordLogic; // "record" or "display"
     this.defaultCode = defaultCode;
+    this.testCases = testCases;
   }
 }
 

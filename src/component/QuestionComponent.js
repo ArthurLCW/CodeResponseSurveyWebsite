@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { MdDisplayerComponent, Markdown } from "./MdDisplayerComponent";
 import MonacoEditorComponent from "./MonacoEditorComponent";
 // import LikertScaleGridComponent from './LikertScaleGridComponent';
@@ -30,8 +30,35 @@ const WarningMsgCoding = () => (
 );
 
 const QuestionComponent = ({ myKey, questionContent, finished }) => {
-  const num = useSelector((state) => state.recorder.num);
-  const screenFlag = useSelector((state) => state.recorder.screenFlag);
+  useEffect(() => {
+    console.log("rerender!!!!!!!!!!!!");
+  }, [myKey, questionContent, finished]);
+  // const MdDisplayerComponentMemo = React.memo(
+  //   MdDisplayerComponent,
+  //   (prevProps, nextProps) => {
+  //     console.log(
+  //       "rerender in memo",
+  //       prevProps.fileName === nextProps.fileName
+  //     );
+  //     return prevProps.fileName === nextProps.fileName;
+  //   }
+  // );
+  // const MdDisplayerComponentMemo = React.memo(
+  //   ({ fileName }) => {
+  //     console.log("rerender in self test");
+  //     return <h1>{fileName}</h1>;
+  //   },
+  //   (prevProps, nextProps) => {
+  //     console.log(
+  //       "rerender in memo",
+  //       prevProps.fileName === nextProps.fileName
+  //     );
+  //     return prevProps.fileName === nextProps.fileName;
+  //   }
+  // );
+  const MdDisplayerComponentMemo = MdDisplayerComponent;
+  // const num = useSelector((state) => state.recorder.num);
+  // const screenFlag = useSelector((state) => state.recorder.screenFlag);
   const [selectedOption, setSelectedOption] = useState(null);
   const [codingNonEnptyLines, setCodingNonEnptyLines] = useState(0);
   const dispatch = useDispatch();
@@ -47,23 +74,23 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
       questionContent.screenOption &&
       event.target.value === questionContent.screenOption
     ) {
-      console.log("screen flag0: ", screenFlag);
+      // console.log("screen flag0: ", screenFlag);
       dispatch(toggleScreenTrue());
     } else if (questionContent.screenOption) {
-      console.log("screen flag1: ", screenFlag);
+      // console.log("screen flag1: ", screenFlag);
       dispatch(toggleScreenFalse());
     }
 
-    console.log(
-      "id: ",
-      myKey,
-      ": ",
-      event.target.value,
-      ": ",
-      selectedOption,
-      " : ",
-      num
-    );
+    // console.log(
+    //   "id: ",
+    //   myKey,
+    //   ": ",
+    //   event.target.value,
+    //   ": ",
+    //   selectedOption,
+    //   " : ",
+    //   num
+    // );
     console.log(
       "id: ",
       myKey,
@@ -126,6 +153,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
         clarification={questionContent.clarification}
         preCode={questionContent.preCode}
         postCode={questionContent.postCode}
+        testCases={questionContent.testCases}
       />
     );
   }
@@ -148,7 +176,9 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
       ? { width: "calc(42.5vw - 5px)", paddingRight: "10px" }
       : {};
 
+  // const fileName = "coding1-easy-remove-duplicates-from-sorted-list.md";
   const fileName = useMemo(() => {
+    console.log("filename rerender");
     let fileNameTemp = questionContent.questionTextSrc[0];
     if (questionContent.questionTextSrc.length > 1) {
       const randomNumber = Math.floor(
@@ -231,9 +261,9 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
                 }
               >
                 {questionContent.recordLogic === "record" && (
-                  <MdDisplayerComponent fileName="coding1-general.md" />
+                  <MdDisplayerComponentMemo fileName="coding1-general.md" />
                 )}
-                <MdDisplayerComponent fileName={fileName} />
+                <MdDisplayerComponentMemo fileName={fileName} />
                 {questionContent.recordLogic === "display" && (
                   <>
                     <div className="collapse-container">
@@ -263,7 +293,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
                         <h4>Coding Task Description</h4>
                       </div>
                       {showTask && (
-                        <MdDisplayerComponent
+                        <MdDisplayerComponentMemo
                           fileName={sessionStorage.getItem("taskFile")}
                         />
                       )}
@@ -272,7 +302,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
                 )}
               </div>
             ) : (
-              <MdDisplayerComponent fileName={fileName} />
+              <MdDisplayerComponentMemo fileName={fileName} />
             )}
             {/* {(questionContent.recordLogic==="display") && <Markdown content={"```javascript\n"+sessionStorage.getItem("lcwRecordInfo")+"```"}/>} */}
             {/* <Markdown content={recordDisplay} /> */}

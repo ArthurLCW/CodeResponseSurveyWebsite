@@ -9,10 +9,16 @@ import executeBatch from "../util/api";
 
 // count line numbers, used to deduce in error message
 function countLines(str) {
+  if (!str) {
+    return -1;
+  }
   return str.split("\n").length;
 }
 // update line number so that they are the same as the line number at the code editor
 function updateLineNumbers(inputString, lineNum) {
+  if (!inputString) {
+    return "";
+  }
   // Regular expression to match "/box/script.js:" followed by a number
   const regex = /\/box\/script\.js:(\d+)/g;
 
@@ -37,6 +43,7 @@ const TestHeader = ({
   preCode,
   postCode,
   userCode,
+  testCases,
 }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
@@ -130,7 +137,9 @@ const TestHeader = ({
         message: `${testInput} is NOT a valid input! Please refer to the examples and introduction of the input format. `,
         isError: true,
       });
+      return;
     }
+    console.log("isStringArray", isStringAnArray(testInput), testInput);
 
     const submissions = [
       {
@@ -145,16 +154,33 @@ const TestHeader = ({
     setIsLoading(true);
     executeBatch("run", submissions, (results) => {
       setTestResult(transApiResult(results, true));
-      console.log("test!!!!!!!!!");
+      console.log("run!!!!!!!!!");
       setShowTab("Test Result");
       setIsLoading(false);
+      setTestFold(false);
     });
   };
 
   const handleSubmitButtonClick = () => {
-    console.log("isButtonClick", isButtonDisabled);
-    if (isButtonDisabled) return;
     setIsButtonDisabled(true);
+    console.log("isButtonClick & loading", isButtonDisabled, isLoading);
+    if (isButtonDisabled || isLoading) return;
+
+    const submissions = testCases;
+    for (const submission of submissions) {
+      submission.language_id = 63;
+      submission.source_code = preCode + userCode + postCode;
+    }
+    console.log(testCases, submissions);
+
+    setIsLoading(true);
+    executeBatch("submit", submissions, (results) => {
+      setTestResult(transApiResult(results, false));
+      console.log("submit!!!!!!!!!");
+      setShowTab("Test Result");
+      setIsLoading(false);
+      setTestFold(false);
+    });
   };
 
   const iconStyle = {
@@ -266,7 +292,7 @@ const TestHeader = ({
         >
           <span style={iconLabelStyle} onClick={handleRunButtonClick}>
             <SvgIcon component={PlayArrowIcon} style={iconStyle} />
-            Run
+            Run Your Testcase
           </span>
         </Tooltip>
         <Tooltip
@@ -275,7 +301,7 @@ const TestHeader = ({
         >
           <span style={iconLabelStyle} onClick={handleSubmitButtonClick}>
             <SvgIcon component={CloudUploadIcon} style={iconStyle} />
-            Submit
+            Run All Testcases
           </span>
         </Tooltip>
       </span>
@@ -441,6 +467,7 @@ const TestLayout = ({
   preCode,
   postCode,
   userCode,
+  testCases,
 }) => {
   const [showTab, setShowTab] = useState("Test Result");
   const [testInput, setTestInput] = useState(examples[0].input || "");
@@ -484,6 +511,7 @@ const TestLayout = ({
         preCode={preCode}
         postCode={postCode}
         userCode={userCode}
+        testCases={testCases}
       />
       {!testFold && (
         <TestContent

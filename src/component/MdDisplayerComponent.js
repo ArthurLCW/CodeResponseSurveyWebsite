@@ -3,15 +3,22 @@ import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import {
-  solarizedlight,
-  vs,
-  prism,
-} from "react-syntax-highlighter/dist/esm/styles/prism";
+import { prism } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "./MdDisplayerComponent.css";
 
-// Map images
+// 假设imageMap是一个从原始src映射到缓存src的对象
 const imageMap = {};
+
+const Image = React.memo(({ src, alt }) => {
+  const [imageSrc, setImageSrc] = useState("");
+
+  useEffect(() => {
+    const newSrc = imageMap[src] || src;
+    setImageSrc(newSrc);
+  }, [src]);
+
+  return <img src={imageSrc} alt={alt} style={{ maxWidth: "100%" }} />;
+});
 
 export const Markdown = ({ content }) => {
   return (
@@ -19,22 +26,7 @@ export const Markdown = ({ content }) => {
       components={{
         code({ node, inline, className, children, ...props }) {
           const match = /language-(\w+)/.exec(className || "");
-          // return !inline && match ? (
-          //   <SyntaxHighlighter
-          //     className={"syntax-highlighter"}
-          //     style={prism}
-          //     language={match[1]}
-          //     PreTag="div"
-          //     children={String(children).replace(/\n$/, "")}
-          //     {...props}
-          //   />
-          // ) : (
-          //   <code className={className} {...props}>
-          //     {children}
-          //   </code>
-          // );
           if (!inline && match) {
-            // 块级代码
             return (
               <SyntaxHighlighter
                 className={"syntax-highlighter"}
@@ -46,7 +38,6 @@ export const Markdown = ({ content }) => {
               />
             );
           } else {
-            // 行内代码
             return (
               <code className={`inline-code ${className}`} {...props}>
                 {children}
@@ -54,17 +45,7 @@ export const Markdown = ({ content }) => {
             );
           }
         },
-        img({ node, ...props }) {
-          const newSrc = imageMap[props.src] || props.src;
-          return (
-            <img
-              {...props}
-              src={newSrc}
-              style={{ maxWidth: "100%" }}
-              alt={newSrc}
-            />
-          );
-        },
+        img: Image,
       }}
       remarkPlugins={[remarkGfm]}
       rehypePlugins={[rehypeRaw]}
@@ -75,8 +56,9 @@ export const Markdown = ({ content }) => {
 };
 
 export const MdDisplayerComponent = ({ fileName }) => {
-  // console.log("mdDisplayer", fileName);
+  console.log("mdDisplayer rerender", fileName);
   const [content, setContent] = useState("");
+
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/question-text/${fileName}`)
       .then((response) => response.text())

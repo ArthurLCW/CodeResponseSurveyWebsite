@@ -24,7 +24,7 @@ const checkResults = async (buttonName, tokens, callback) => {
       fields: "token,status,stdout,stderr,time,memory,expected_output",
     },
     headers: {
-      "X-RapidAPI-Key": "bb786781e0msh2e4db7b948b9ea5p129e38jsn59326084eee0",
+      "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
       "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
     },
   });
@@ -40,7 +40,7 @@ const checkResults = async (buttonName, tokens, callback) => {
   } else {
     callback(resultsResponse.data.submissions);
     pushObjectToSessionArray(
-      buttonName + "Records",
+      buttonName + "Records" + sessionStorage.getItem("currentPage"),
       resultsResponse.data.submissions
     );
   }
@@ -62,7 +62,7 @@ const executeBatch = async (buttonName, submissions, callback) => {
       params: { base64_encoded: "false", fields: "*" },
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "bb786781e0msh2e4db7b948b9ea5p129e38jsn59326084eee0",
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
         "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
       },
       data: {
