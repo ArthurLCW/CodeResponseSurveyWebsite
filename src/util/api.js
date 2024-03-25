@@ -15,33 +15,58 @@ function pushObjectToSessionArray(key, newObj) {
 }
 
 const checkResults = async (buttonName, tokens, callback) => {
-  const resultsResponse = await axios({
-    method: "GET",
-    url: `https://judge0-ce.p.rapidapi.com/submissions/batch`,
-    params: {
-      tokens: tokens,
-      base64_encoded: "false",
-      fields: "token,status,stdout,stderr,time,memory,expected_output",
-    },
-    headers: {
-      "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
-      "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
-    },
-  });
+  try {
+    const resultsResponse = await axios({
+      method: "GET",
+      url: `https://judge0-ce.p.rapidapi.com/submissions/batch`,
+      params: {
+        tokens: tokens,
+        base64_encoded: "false",
+        fields: "token,status,stdout,stderr,time,memory,expected_output",
+      },
+      headers: {
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
+        "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
+      },
+    });
 
-  const allDone = resultsResponse.data.submissions.every(
-    (sub) => sub.status.id !== 1 && sub.status.id !== 2
-  );
+    const allDone = resultsResponse.data.submissions.every(
+      (sub) => sub.status.id !== 1 && sub.status.id !== 2
+    );
 
-  console.log(allDone, resultsResponse);
-  if (!allDone) {
-    // If any submission is still in queue or processing, wait for some time and then check again.
-    setTimeout(() => checkResults(buttonName, tokens, callback), 3000); // Check again after 3 seconds
-  } else {
-    callback(resultsResponse.data.submissions);
+    console.log(allDone, resultsResponse);
+    if (!allDone) {
+      setTimeout(() => checkResults(buttonName, tokens, callback), 3000);
+    } else {
+      callback(resultsResponse.data.submissions);
+      pushObjectToSessionArray(
+        buttonName + "Records" + sessionStorage.getItem("currentPage"),
+        resultsResponse.data.submissions
+      );
+    }
+  } catch (error) {
+    console.log(error);
+    console.error("Error fetching results:", error);
+    const errorDataArray = [];
+    const errorDataObj = {
+      expected_output: undefined,
+      memory: undefined,
+      status: {
+        id: -1,
+        description: "Unknown Error",
+      },
+      stderr:
+        error.response.data.error ||
+        "Unknown error occured, possibly internet failure or non-English identifiers in code. Please try again",
+      stdout: undefined,
+      time: undefined,
+      token: tokens,
+    };
+    errorDataArray.push(errorDataObj);
+    callback(errorDataArray);
     pushObjectToSessionArray(
       buttonName + "Records" + sessionStorage.getItem("currentPage"),
-      resultsResponse.data.submissions
+      errorDataArray
     );
   }
 };

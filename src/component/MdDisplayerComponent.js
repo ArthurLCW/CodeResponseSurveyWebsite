@@ -6,7 +6,6 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { prism } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "./MdDisplayerComponent.css";
 
-// 假设imageMap是一个从原始src映射到缓存src的对象
 const imageMap = {};
 
 const Image = React.memo(({ src, alt }) => {

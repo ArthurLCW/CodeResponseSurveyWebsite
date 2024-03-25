@@ -137,6 +137,9 @@ const TestHeader = ({
         message: `${testInput} is NOT a valid input! Please refer to the examples and introduction of the input format. `,
         isError: true,
       });
+      setShowTab("Test Result");
+      setIsLoading(false);
+      setTestFold(false);
       return;
     }
     console.log("isStringArray", isStringAnArray(testInput), testInput);
@@ -153,7 +156,16 @@ const TestHeader = ({
 
     setIsLoading(true);
     executeBatch("run", submissions, (results) => {
-      setTestResult(transApiResult(results, true));
+      if (results) setTestResult(transApiResult(results, true));
+      else
+        setTestResult({
+          type: "Unknown Error",
+          message:
+            "There is an unknown error, possibly internet failure or non-English identifiers in code. Please try again",
+          isError: true,
+          time: undefined,
+          memory: undefined,
+        });
       console.log("run!!!!!!!!!");
       setShowTab("Test Result");
       setIsLoading(false);
@@ -175,7 +187,16 @@ const TestHeader = ({
 
     setIsLoading(true);
     executeBatch("submit", submissions, (results) => {
-      setTestResult(transApiResult(results, false));
+      if (results) setTestResult(transApiResult(results, false));
+      else
+        setTestResult({
+          type: "Unknown Error",
+          message:
+            "There is an unknown error, possibly internet failure or non-English identifiers in code. Please try again",
+          isError: true,
+          time: undefined,
+          memory: undefined,
+        });
       console.log("submit!!!!!!!!!");
       setShowTab("Test Result");
       setIsLoading(false);
@@ -476,7 +497,7 @@ const TestLayout = ({
   );
   const [testResult, setTestResult] = useState({
     type: "",
-    message: "There will be running results once you run/submit your code.",
+    message: "There will be running results once you run your code.",
     isError: false,
     time: undefined,
     memory: undefined,
