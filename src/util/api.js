@@ -101,7 +101,29 @@ const executeBatch = async (buttonName, submissions, callback) => {
     // Initially check the results
     checkResults(buttonName, tokens, callback);
   } catch (error) {
-    console.error(error);
+    console.log(error);
+    console.error("Error fetching results:", error);
+    const errorDataArray = [];
+    const errorDataObj = {
+      expected_output: undefined,
+      memory: undefined,
+      status: {
+        id: -1,
+        description: "Unknown Error",
+      },
+      stderr:
+        error.response.data.error ||
+        "Unknown error occured, possibly internet failure or non-English identifiers in code. Please try again",
+      stdout: undefined,
+      time: undefined,
+      token: "have not get a token yet",
+    };
+    errorDataArray.push(errorDataObj);
+    callback(errorDataArray);
+    pushObjectToSessionArray(
+      buttonName + "Records" + sessionStorage.getItem("currentPage"),
+      errorDataArray
+    );
   } finally {
   }
 };
