@@ -142,6 +142,17 @@ const TestHeader = ({
       setTestFold(false);
       return;
     }
+    if (!isStringAnArray(expectedOutput)) {
+      setTestResult({
+        type: "Invalid Testcase",
+        message: `${expectedOutput} is NOT a valid output! Please refer to the examples and introduction of the input/output format. `,
+        isError: true,
+      });
+      setShowTab("Test Result");
+      setIsLoading(false);
+      setTestFold(false);
+      return;
+    }
     console.log("isStringArray", isStringAnArray(testInput), testInput);
 
     const submissions = [
