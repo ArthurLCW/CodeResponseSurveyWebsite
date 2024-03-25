@@ -17,7 +17,7 @@ const MonacoEditorComponent = ({
   postCode,
   testCases,
 }) => {
-  const [testFold, setTestFold] = useState(true);
+  const [testFold, setTestFold] = useState(false);
   const [code, setCode] = useState("// type your code...");
   const [nonEmptyLineCount, setNonEmptyLineCount] = useState(1);
   const num = useSelector((state) => state.recorder.num);
