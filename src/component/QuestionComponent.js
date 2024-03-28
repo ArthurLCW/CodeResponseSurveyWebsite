@@ -178,7 +178,12 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
 
   // const fileName = "coding1-easy-remove-duplicates-from-sorted-list.md";
   const fileName = useMemo(() => {
-    console.log("filename rerender");
+    if (
+      questionContent.questionType === "coding" &&
+      sessionStorage.getItem("lcwSurveyRandomMd") &&
+      questionContent.recordLogic === "display"
+    )
+      return sessionStorage.getItem("lcwSurveyRandomMd");
     let fileNameTemp = questionContent.questionTextSrc[0];
     if (questionContent.questionTextSrc.length > 1) {
       const randomNumber = Math.floor(

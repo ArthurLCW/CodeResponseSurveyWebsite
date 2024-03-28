@@ -999,15 +999,15 @@ var deleteDuplicates = function(head) {
   };
 
   const pageSection = {
-    medium: [
-      "consent",
-      "screener",
-      "demographics",
-      "codingMedium",
-      "gratitude",
-    ],
-    easy: ["consent", "screener", "demographics", "codingEasy", "gratitude"],
-    // easy: ["consent", "codingEasy", "gratitude"],
+    // medium: [
+    //   "consent",
+    //   "screener",
+    //   "demographics",
+    //   "codingMedium",
+    //   "gratitude",
+    // ],
+    // easy: ["consent", "screener", "demographics", "codingEasy", "gratitude"],
+    // // easy: ["consent", "codingEasy", "gratitude"],
     easy_remove_duplicates: [
       "consent",
       "screener",

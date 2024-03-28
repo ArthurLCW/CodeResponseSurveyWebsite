@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import PageComponent from "./PageComponent";
 
 const generateRandomString = (length = 10) => {
@@ -19,6 +19,14 @@ const SurveyComponent = ({
   rememberState,
   setEnableModal,
 }) => {
+  const questionSet = useMemo(() => {
+    const output =
+      Object.keys(pageSection)[
+        Math.floor(Math.random() * Object.keys(pageSection).length)
+      ];
+    console.log("111111111111111111111", output, pageSection);
+    return output;
+  }, []);
   const queryParams = new URLSearchParams(window.location.search);
   sessionStorage.setItem(
     "prolificId",
@@ -34,8 +42,18 @@ const SurveyComponent = ({
   );
   sessionStorage.setItem(
     "questionSet",
-    queryParams.get("QUESTION_SET") || "easy_remove_duplicates"
+    queryParams.get("QUESTION_SET") || questionSet
   );
+  if (queryParams.get("AI_CODE")) {
+    sessionStorage.setItem(
+      "lcwSurveyRandomMd",
+      "coding2-" +
+        sessionStorage.getItem("questionSet") +
+        "-" +
+        queryParams.get("AI_CODE") +
+        ".md"
+    );
+  }
   sessionStorage.setItem(
     "project",
     queryParams.get("PROJECT") || "default_project"
