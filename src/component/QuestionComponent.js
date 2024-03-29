@@ -30,9 +30,6 @@ const WarningMsgCoding = () => (
 );
 
 const QuestionComponent = ({ myKey, questionContent, finished }) => {
-  useEffect(() => {
-    console.log("rerender!!!!!!!!!!!!");
-  }, [myKey, questionContent, finished]);
   // const MdDisplayerComponentMemo = React.memo(
   //   MdDisplayerComponent,
   //   (prevProps, nextProps) => {
@@ -154,6 +151,8 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
         preCode={questionContent.preCode}
         postCode={questionContent.postCode}
         testCases={questionContent.testCases}
+        verifyInputFormat={questionContent.verifyInputFormat}
+        verifyOutputFormat={questionContent.verifyOutputFormat}
       />
     );
   }
@@ -178,10 +177,11 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
 
   // const fileName = "coding1-easy-remove-duplicates-from-sorted-list.md";
   const fileName = useMemo(() => {
+    const queryParams = new URLSearchParams(window.location.search);
     if (
       questionContent.questionType === "coding" &&
-      sessionStorage.getItem("lcwSurveyRandomMd") &&
-      questionContent.recordLogic === "display"
+      questionContent.recordLogic === "display" &&
+      queryParams.get("AI_CODE")
     )
       return sessionStorage.getItem("lcwSurveyRandomMd");
     let fileNameTemp = questionContent.questionTextSrc[0];

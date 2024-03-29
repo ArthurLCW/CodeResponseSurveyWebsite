@@ -11,7 +11,9 @@ export class Question {
     postCode = "",
     recordLogic = null,
     defaultCode = null,
-    testCases = []
+    testCases = [],
+    verifyInputFormat = undefined,
+    verifyOutputFormat = undefined
   ) {
     this.questionType = questionType;
     this.questionTextSrc = questionTextSrc; // array
@@ -25,6 +27,8 @@ export class Question {
     this.recordLogic = recordLogic; // "record" or "display"
     this.defaultCode = defaultCode;
     this.testCases = testCases;
+    this.verifyInputFormat = verifyInputFormat;
+    this.verifyOutputFormat = verifyOutputFormat;
   }
 }
 

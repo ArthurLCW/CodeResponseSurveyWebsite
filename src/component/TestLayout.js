@@ -44,32 +44,10 @@ const TestHeader = ({
   postCode,
   userCode,
   testCases,
+  verifyInputFormat,
+  verifyOutputFormat,
 }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
-  function isStringAnArray(str) {
-    const trimmedStr = str.trim();
-    if (!(trimmedStr.startsWith("[") && trimmedStr.endsWith("]"))) {
-      return false;
-    }
-
-    try {
-      const parsed = JSON.parse(trimmedStr);
-      if (!Array.isArray(parsed)) {
-        return false;
-      }
-      if (
-        trimmedStr.slice(1, -1).includes("[") ||
-        trimmedStr.slice(1, -1).includes("]")
-      ) {
-        return false;
-      }
-      return true;
-    } catch (e) {
-      // If JSON.parse() fails, the string is not a valid JSON array
-      return false;
-    }
-  }
 
   function transApiResult(submissions, isRun) {
     console.log("rawResults", submissions);
@@ -131,7 +109,8 @@ const TestHeader = ({
     console.log("isButtonClick & loading", isButtonDisabled, isLoading);
     console.log("testInput", testInput);
     if (isButtonDisabled || isLoading) return;
-    if (!isStringAnArray(testInput)) {
+    console.log(verifyInputFormat);
+    if (!verifyInputFormat(testInput)) {
       setTestResult({
         type: "Invalid Testcase",
         message: `${testInput} is NOT a valid input! Please refer to the examples and introduction of the input format. `,
@@ -142,7 +121,7 @@ const TestHeader = ({
       setTestFold(false);
       return;
     }
-    if (!isStringAnArray(expectedOutput)) {
+    if (!verifyOutputFormat(expectedOutput)) {
       setTestResult({
         type: "Invalid Testcase",
         message: `${expectedOutput} is NOT a valid output! Please refer to the examples and introduction of the input/output format. `,
@@ -153,7 +132,6 @@ const TestHeader = ({
       setTestFold(false);
       return;
     }
-    console.log("isStringArray", isStringAnArray(testInput), testInput);
 
     const submissions = [
       {
@@ -500,6 +478,8 @@ const TestLayout = ({
   postCode,
   userCode,
   testCases,
+  verifyInputFormat,
+  verifyOutputFormat,
 }) => {
   const [showTab, setShowTab] = useState("Test Result");
   const [testInput, setTestInput] = useState(examples[0].input || "");
@@ -544,6 +524,8 @@ const TestLayout = ({
         postCode={postCode}
         userCode={userCode}
         testCases={testCases}
+        verifyInputFormat={verifyInputFormat}
+        verifyOutputFormat={verifyOutputFormat}
       />
       {!testFold && (
         <TestContent
