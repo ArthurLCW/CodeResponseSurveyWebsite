@@ -56,7 +56,7 @@ console.log(res(input));
 * @return {boolean}
 */
 var canConstruct = function(ransomNote, magazine) {
-
+  
 };`
       : null,
     [

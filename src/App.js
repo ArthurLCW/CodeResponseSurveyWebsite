@@ -5,6 +5,9 @@ import FullScreenModalComponent from "./component/FullScreenModalComponent";
 import { Question, Page } from "./util/utilClass";
 import CodingEasyRemoveDuplicates from "./question/CodingEasyRemoveDuplicates";
 import CodingEasyRansomNotes from "./question/CodingEasyRansomNotes";
+import CodingHardLongestValidParenthesis from "./question/CodingHardLongestValidParenthesis";
+import CodingMediumFindWinner from "./question/CodingMediumFindWinner";
+import CodingMediumValidateBST from "./question/CodingMediumValidateBST";
 
 function App() {
   useEffect(() => {
@@ -396,6 +399,161 @@ function App() {
         ...programFactorsQuestions,
       ]),
     ],
+
+    // coding (the medium one: 1823. Find the Winner of the Circular Game)
+    codingMediumFindWinner: [
+      // coding question (self-coding)
+      new Page(
+        [CodingMediumFindWinner("record")],
+        600, // timer
+        60
+      ),
+
+      // coding question (assisted coding)
+      new Page(
+        [CodingMediumFindWinner("display")],
+        600, // timer
+        60
+      ),
+
+      // post-hoc (domain knowledge familarity & perceived difficulty)
+      new Page([
+        new Question(
+          "likert-scale",
+          ["domain-knowledge-queue.md"],
+          [
+            "Not familiar at all",
+            "Slightly familiar",
+            "Moderately familiar",
+            "Very familiar",
+            "Extremely familiar",
+          ]
+        ),
+        new Question(
+          "likert-scale",
+          ["perceived-difficulty.md"],
+          [
+            "Extremely easy",
+            "Somewhat Easy",
+            "Neither easy nor difficult",
+            "Somewhat difficult",
+            "Extremely difficult",
+          ]
+        ),
+        ...programFactorsQuestions,
+      ]),
+    ],
+
+    // coding (the medium one: 98. Validate Binary Search Tree)
+    codingMediumValidateBST: [
+      // coding question (self-coding)
+      new Page(
+        [CodingMediumValidateBST("record")],
+        600, // timer
+        60
+      ),
+
+      // coding question (assisted coding)
+      new Page(
+        [CodingMediumValidateBST("display")],
+        600, // timer
+        60
+      ),
+
+      // post-hoc (domain knowledge familarity & perceived difficulty)
+      new Page([
+        new Question(
+          "likert-scale",
+          ["domain-knowledge-tree.md"],
+          [
+            "Not familiar at all",
+            "Slightly familiar",
+            "Moderately familiar",
+            "Very familiar",
+            "Extremely familiar",
+          ]
+        ),
+        new Question(
+          "likert-scale",
+          ["domain-knowledge-recursion.md"],
+          [
+            "Not familiar at all",
+            "Slightly familiar",
+            "Moderately familiar",
+            "Very familiar",
+            "Extremely familiar",
+          ]
+        ),
+        new Question(
+          "likert-scale",
+          ["perceived-difficulty.md"],
+          [
+            "Extremely easy",
+            "Somewhat Easy",
+            "Neither easy nor difficult",
+            "Somewhat difficult",
+            "Extremely difficult",
+          ]
+        ),
+        ...programFactorsQuestions,
+      ]),
+    ],
+
+    // coding (the hard one: longest valid parenthesis)
+    codingHardLongestValidParenthesis: [
+      // coding question (self-coding)
+      new Page(
+        [CodingHardLongestValidParenthesis("record")],
+        600, // timer
+        60
+      ),
+
+      // coding question (assisted coding)
+      new Page(
+        [CodingHardLongestValidParenthesis("display")],
+        600, // timer
+        60
+      ),
+
+      // post-hoc (domain knowledge familarity & perceived difficulty)
+      new Page([
+        new Question(
+          "likert-scale",
+          ["domain-knowledge-stack.md"],
+          [
+            "Not familiar at all",
+            "Slightly familiar",
+            "Moderately familiar",
+            "Very familiar",
+            "Extremely familiar",
+          ]
+        ),
+        new Question(
+          "likert-scale",
+          ["domain-knowledge-dynamic-programming.md"],
+          [
+            "Not familiar at all",
+            "Slightly familiar",
+            "Moderately familiar",
+            "Very familiar",
+            "Extremely familiar",
+          ]
+        ),
+        new Question(
+          "likert-scale",
+          ["perceived-difficulty.md"],
+          [
+            "Extremely easy",
+            "Somewhat Easy",
+            "Neither easy nor difficult",
+            "Somewhat difficult",
+            "Extremely difficult",
+          ]
+        ),
+        ...programFactorsQuestions,
+      ]),
+    ],
+
     // coding (the medium one: remove-duplicates-from-sorted-list)
     codingMediumRemoveDuplicates: [
       // coding question (self-coding)
@@ -650,6 +808,19 @@ var deleteDuplicates = function(head) {
   };
 
   const pageSection = {
+    // medium_remove_duplicates: [
+    //   "consent",
+    //   "screener",
+    //   "demographics",
+    //   "codingMediumRemoveDuplicates",
+    //   "gratitude",
+    // ],
+    // medium_remove_duplicates: [
+    //   "consent",
+    //   "codingMediumRemoveDuplicates",
+    //   "gratitude",
+    // ],
+
     // easy_ransom_notes: [
     //   "consent",
     //   "screener",
@@ -670,18 +841,34 @@ var deleteDuplicates = function(head) {
       "codingEasyRemoveDuplicates",
       "gratitude",
     ],
-    // medium_remove_duplicates: [
+    // hard_longest_valid_parenthesis: [
     //   "consent",
     //   "screener",
     //   "demographics",
-    //   "codingMediumRemoveDuplicates",
+    //   "codingHardLongestValidParenthesis",
     //   "gratitude",
     // ],
-    // medium_remove_duplicates: [
+    hard_longest_valid_parenthesis: [
+      "consent",
+      "codingHardLongestValidParenthesis",
+      "gratitude",
+    ],
+    // medium_find_winner: [
     //   "consent",
-    //   "codingMediumRemoveDuplicates",
+    //   "screener",
+    //   "demographics",
+    //   "codingMediumFindWinner",
     //   "gratitude",
     // ],
+    medium_find_winner: ["consent", "codingMediumFindWinner", "gratitude"],
+    // medium_validate_BST: [
+    //   "consent",
+    //   "screener",
+    //   "demographics",
+    //   "codingMediumValidateBST",
+    //   "gratitude",
+    // ],
+    medium_validate_BST: ["consent", "codingMediumValidateBST", "gratitude"],
   };
 
   return (
