@@ -251,12 +251,14 @@ const TestHeader = ({
       <SvgIcon
         style={{
           position: "absolute",
-          top: 10,
+          top: -16,
           left: "50%",
           transform: "translateY(-50%) translateX(-50%)",
-          borderRadius: "50%",
-          background: "lightgray",
-          margin: "5px",
+          // borderRadius: "50%",
+          // background: "lightgray",
+          color: "lightgray",
+          fontSize: "32px",
+          // margin: "5px",
         }}
         component={testFold ? ArrowDropUpIcon : ArrowDropDownIcon}
         onClick={() => {
@@ -339,6 +341,10 @@ const TestCases = ({
 
   return (
     <div style={{ padding: "10px" }}>
+      <div>
+        You may specify a test case here, ensuring to accurately define both the
+        input and the expected output.
+      </div>
       <div>
         <span style={labelStype}>Testcase Input:</span>
         <input

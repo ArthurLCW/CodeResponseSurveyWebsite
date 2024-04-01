@@ -1,1 +1,0 @@
-How many years of experience do you have in programming? 

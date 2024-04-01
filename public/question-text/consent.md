@@ -10,4 +10,18 @@ Please read the following statements regarding the research consent form:
 8.	I have been informed that the confidentiality of the information I provide will be safeguarded subject to any legal requirements; my personal information will not be accessible to the researchers; my response to the survey will be password-protected and accessible only by the named researchers.
 9.	I understand that by choosing the option “Yes, I agree to participate in this study” in the online survey, I agree with all the statements above.
 
+
+
+**Responsible Researcher:** Mr. Changwen Li
+
+Tel: +61 4 73026835 Email: changwenl@student.unimelb.edu.au
+
+**Additional Researchers:** 
+
+Dr. Christoph Treude, Supervisor, Email: christoph.treude@unimelb.edu.au
+
+Prof. Ofir Turel, Co-Supervisor, Email: oturel@unimelb.edu.au
+
+
+
 I have read the above information. I understand the study/activity and agree to participate. 

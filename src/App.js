@@ -166,17 +166,36 @@ function App() {
         ),
       ]),
     ],
-    // screener (programming experience)
+    // screener (programming experience, language proficiency)
     screener: [
       new Page([
         new Question(
           "multiple-choice",
-          ["screener1.md"],
+          ["screener-prolific.md"],
           ["Yes", "No", "I don't know"]
         ),
         new Question(
+          "multiple-choice",
+          ["screener-current-job.md"],
+          [
+            "Student specializing in IT-related fields.",
+            "Professional specializing in IT (such as developer, testing engineer, operations engineer, etc).",
+            "Others.",
+          ]
+        ),
+        new Question(
+          "multiple-choice",
+          ["screener-programming-experience-obj.md"],
+          ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
+        ),
+        new Question(
+          "multiple-choice",
+          ["screener-language-proficiency-obj.md"],
+          ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
+        ),
+        new Question(
           "likert-scale",
-          ["screener2.md"],
+          ["screener-programming-experience-sub.md"],
           [
             "Not experienced at all",
             "Slightly experienced",
@@ -187,7 +206,7 @@ function App() {
         ),
         new Question(
           "likert-scale",
-          ["screener3.md"],
+          ["screener-language-proficiency-obj.md"],
           [
             "Not involved at all",
             "Slightly involved",
@@ -196,23 +215,9 @@ function App() {
             "Extremely involved",
           ]
         ),
-        new Question(
-          "multiple-choice",
-          ["screener4.md"],
-          [
-            "Student specializing in IT-related fields.",
-            "Professional specializing in IT (such as developer, testing engineer, operations engineer, etc).",
-            "Others.",
-          ]
-        ),
-        new Question(
-          "multiple-choice",
-          ["screener5.md"],
-          ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
-        ),
       ]),
     ],
-    // demographics (attitudes towards ai, language proficiency)
+    // demographics (attitudes towards ai)
     demographics: [
       new Page([
         new Question(
@@ -298,17 +303,6 @@ function App() {
             "8",
             "9",
             "10 (Strongly agree)",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["language-proficiency.md"],
-          [
-            "Not familiar at all",
-            "Slightly familiar",
-            "Moderately familiar",
-            "Very familiar",
-            "Extremely familiar",
           ]
         ),
       ]),
