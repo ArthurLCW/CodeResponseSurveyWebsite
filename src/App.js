@@ -615,12 +615,12 @@ function App() {
           />
         </div>
       </div>
-      {/* <FullScreenModalComponent
+      <FullScreenModalComponent
         isOpen={modalIsOpen}
         closeModal={closeModal}
         enterFullScreen={enterFullScreen}
         firstTimeEnter={firstTimeEnter}
-      /> */}
+      />
     </div>
   );
 }
