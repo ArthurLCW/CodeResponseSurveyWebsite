@@ -159,10 +159,10 @@ function App() {
           ["consent.md"],
           [
             "Yes, I agree to participate in this study.",
-            "No, I disagree to participate in this study.",
+            "No, I decline to participate in this study.",
           ],
-          "No, I disagree to participate in this study.",
-          "Thanks for your time. We respect your decision of not participating in this study. Now you may leave this website."
+          "No, I decline to participate in this study.",
+          "Thanks for your time. We respect your decision not to participate in this study. Now, you may leave this website."
         ),
       ]),
     ],
@@ -179,7 +179,7 @@ function App() {
           ["screener-current-job.md"],
           [
             "Student specializing in IT-related fields.",
-            "Professional specializing in IT (such as developer, testing engineer, operations engineer, etc).",
+            "Professional specializing in IT (developer, testing engineer, operations engineer, etc).",
             "Others.",
           ]
         ),
@@ -615,12 +615,12 @@ function App() {
           />
         </div>
       </div>
-      <FullScreenModalComponent
+      {/* <FullScreenModalComponent
         isOpen={modalIsOpen}
         closeModal={closeModal}
         enterFullScreen={enterFullScreen}
         firstTimeEnter={firstTimeEnter}
-      />
+      /> */}
     </div>
   );
 }

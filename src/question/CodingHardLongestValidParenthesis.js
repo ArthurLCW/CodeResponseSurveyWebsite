@@ -32,7 +32,7 @@ const question = (recordLogic) =>
       { input: ")()())", output: "4" },
       { input: "", output: "0" },
     ],
-    `The input can be null. For any input that is not null, it only contains '(' and/or ')'. 
+    `The input can be null. For any input that is not null, it will contain only '(' and/or ')'. \n
     The output should be an integer. `,
     ``,
     `

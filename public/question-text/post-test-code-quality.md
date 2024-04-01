@@ -1,2 +1,2 @@
- Please evaluate the **quality** of the AI-generated codes provided in the last page. 
+ Please evaluate the **quality** of the AI-generated code provided on the last page. 
 

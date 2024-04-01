@@ -1,2 +1,2 @@
-To what extent can you **understand** the AI-generated codes provided in the last page?
+To what extent can you **understand** the AI-generated code provided in the last page?
 

@@ -1,1 +1,1 @@
-Between your final submitted code and AI-generated code, which has better ***time*** **complexity**?
+Between your final submitted code and the AI-generated code, which one has better ***time*** **complexity**?  

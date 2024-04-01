@@ -31,8 +31,8 @@ const question = (recordLogic) =>
       { input: "5 2", output: "3" },
       { input: "6 5", output: "1" },
     ],
-    `The input should have two positive integers, which are n and k, seperated by a spcace.\n
-    The output should be a positive integer`,
+    `The input should consist of two positive integers, n and k, separated by a space. 
+    The output should be a positive integer.`,
     ``,
     `
   var res = function (str) {

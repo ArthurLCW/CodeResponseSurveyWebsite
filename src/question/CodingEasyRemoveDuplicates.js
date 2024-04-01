@@ -40,8 +40,8 @@ const question = (recordLogic) =>
       { input: "[1,1,2]", output: "[1,2]" },
       { input: "[1,1,2,3,3]", output: "[1,2,3]" },
     ],
-    `The input contains the values of all nodes presenting as an array. For example, [1,1,2] represents node(1)=>node(1)=>node(2). 
-    Please notice that both the input and output is the head of a linked-list, NOT an Array. We use array to present input and output just for simplicity. `,
+    `The input consists of the values of all nodes presented as an array. For example, [1,1,2] represents node(1) => node(1) => node(2).\n 
+    Please note that both the input and the output refer to the head of a linked list, NOT an array. We use an array to represent the input and output merely for simplicity.`,
     `
 function ListNode(val, next) {
 this.val = val === undefined ? 0 : val;

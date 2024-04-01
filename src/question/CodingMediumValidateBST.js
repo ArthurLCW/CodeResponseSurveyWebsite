@@ -38,10 +38,11 @@ const question = (recordLogic) =>
       { input: "[2,1,3]", output: "true" },
       { input: "[5,1,4,null,null,3,6]", output: "false" },
     ],
-    `The input for checking if a binary tree is a valid Binary Search Tree (BST) is given as an array representing the tree in level order:
-    The first element is the root's value.
-    Subsequent elements represent the tree's nodes level by level, from left to right.
-    The null values indicate the absence of nodes, maintaining the structure. The output should be either true or false. `,
+    `The input for checking whether a binary tree is a valid Binary Search Tree (BST) is provided as an array representing the tree in level order.
+
+    The first element represents the root's value.
+    Subsequent elements represent the tree's nodes, level by level, from left to right.
+    Null values indicate the absence of nodes, thereby preserving the structure. The output should be either true or false.`,
     `function TreeNode(val, left, right) {
       this.val = val === undefined ? 0 : val;
       this.left = left === undefined ? null : left;

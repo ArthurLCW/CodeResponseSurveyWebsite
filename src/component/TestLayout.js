@@ -63,10 +63,9 @@ const TestHeader = ({
         type = submissions[i].status.description;
         isError = true;
         message = isRun
-          ? "This is the test result of the testcases SPECIFIED BY YOURSELF:\n"
+          ? "This is the test result of the testcase you specified.:\n"
           : "This is the test result of our predefined testcases:\n";
-        if (isRun)
-          message += `Passed ${i}/${submissions.length} test cases. \n`;
+        if (isRun) message += `Passed ${i}/${submissions.length} testcases. \n`;
         if (submissions[i].status.id === 4) {
           // wrong answer
           message += `Expected output is ${submissions[i].expected_output}\n`;
@@ -83,8 +82,8 @@ const TestHeader = ({
     if (!isError) {
       type = "Accepted";
       message = isRun
-        ? "You have pass the testcase specified by yourself. \nHowever, please notice that passing self-defined testcase does NOT guarantee passing all predefined testcases. "
-        : "Congratulations! You have passed all the test cases. ";
+        ? "You have passed the testcase you specified. However, please note that passing a self-defined testcase does NOT guarantee to pass all predefined testcases. "
+        : "Congratulations! You have passed all the testcases. ";
       time = String(
         parseFloat(submissions[submissions.length - 1].time) * 1000
       );
@@ -124,7 +123,7 @@ const TestHeader = ({
     if (!verifyOutputFormat(expectedOutput)) {
       setTestResult({
         type: "Invalid Testcase",
-        message: `${expectedOutput} is NOT a valid output! Please refer to the examples and introduction of the input/output format. `,
+        message: `${expectedOutput} is NOT a valid output! Please refer to the examples and introduction of the output format. `,
         isError: true,
       });
       setShowTab("Test Result");
@@ -150,7 +149,7 @@ const TestHeader = ({
         setTestResult({
           type: "Unknown Error",
           message:
-            "There is an unknown error, possibly internet failure or non-English identifiers in code. Please try again",
+            "There is an unknown error, possibly internet failure or non-English identifiers in the code. Please try again",
           isError: true,
           time: undefined,
           memory: undefined,
@@ -181,7 +180,7 @@ const TestHeader = ({
         setTestResult({
           type: "Unknown Error",
           message:
-            "There is an unknown error, possibly internet failure or non-English identifiers in code. Please try again",
+            "There is an unknown error, possibly internet failure or non-English identifiers in the code. Please try again",
           isError: true,
           time: undefined,
           memory: undefined,
@@ -299,7 +298,7 @@ const TestHeader = ({
 
       <span>
         <Tooltip
-          title="Run your code with inputs specified by yourself in 'Test Cases'."
+          title="Run your code with inputs you specified in 'Test Cases'."
           componentsProps={{ tooltip: { sx: { fontSize: "1em" } } }}
         >
           <span style={iconLabelStyle} onClick={handleRunButtonClick}>
@@ -342,7 +341,7 @@ const TestCases = ({
   return (
     <div style={{ padding: "10px" }}>
       <div>
-        You may specify a test case here, ensuring to accurately define both the
+        You may specify a test case here. Please accurately define both the
         input and the expected output.
       </div>
       <div>
@@ -390,7 +389,8 @@ const TestCases = ({
           </button>
         );
       })}
-      <p>{clarification}</p>
+      <h4 style={{ marginBottom: "0px" }}>Testcase Input and Output Format:</h4>
+      <div>{clarification}</div>
     </div>
   );
 };
