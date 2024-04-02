@@ -206,13 +206,13 @@ function App() {
         ),
         new Question(
           "likert-scale",
-          ["screener-language-proficiency-obj.md"],
+          ["screener-language-proficiency-sub.md"],
           [
-            "Not involved at all",
-            "Slightly involved",
-            "Moderately involved",
-            "Very involved",
-            "Extremely involved",
+            "Not familiar at all",
+            "Slightly familiar",
+            "Moderately familiar",
+            "Very familiar",
+            "Extremely familiar",
           ]
         ),
       ]),
@@ -327,13 +327,23 @@ function App() {
       new Page([
         new Question(
           "likert-scale",
-          ["domain-knowledge-HashMap.md"],
+          ["domain-knowledge-HashMap-sub.md"],
           [
             "Not familiar at all",
             "Slightly familiar",
             "Moderately familiar",
             "Very familiar",
             "Extremely familiar",
+          ]
+        ),
+        new Question(
+          "multiple-choice",
+          ["domain-knowledge-HashMap-obj.md"],
+          [
+            "I have never heard of hash maps before this survey. ",
+            "I have heard of hash maps, but I have never used them.",
+            "I have occasionally used hash maps, but not on a regular basis.",
+            "I regularly use hash maps in my projects or work. ",
           ]
         ),
         new Question(
@@ -370,13 +380,23 @@ function App() {
       new Page([
         new Question(
           "likert-scale",
-          ["domain-knowledge-LinkedList.md"],
+          ["domain-knowledge-LinkedList-sub.md"],
           [
             "Not familiar at all",
             "Slightly familiar",
             "Moderately familiar",
             "Very familiar",
             "Extremely familiar",
+          ]
+        ),
+        new Question(
+          "multiple-choice",
+          ["domain-knowledge-LinkedList-obj.md"],
+          [
+            "I have never heard of linked lists before this survey. ",
+            "I have heard of linked lists, but I have never used them.",
+            "I have occasionally used linked lists, but not on a regular basis.",
+            "I regularly use linked lists in my projects or work. ",
           ]
         ),
         new Question(
@@ -414,13 +434,23 @@ function App() {
       new Page([
         new Question(
           "likert-scale",
-          ["domain-knowledge-queue.md"],
+          ["domain-knowledge-queue-sub.md"],
           [
             "Not familiar at all",
             "Slightly familiar",
             "Moderately familiar",
             "Very familiar",
             "Extremely familiar",
+          ]
+        ),
+        new Question(
+          "multiple-choice",
+          ["domain-knowledge-queue-obj.md"],
+          [
+            "I have never heard of queues before this survey. ",
+            "I have heard of queues, but I have never used them.",
+            "I have occasionally used queues, but not on a regular basis.",
+            "I regularly use queues in my projects or work. ",
           ]
         ),
         new Question(
@@ -458,7 +488,7 @@ function App() {
       new Page([
         new Question(
           "likert-scale",
-          ["domain-knowledge-tree.md"],
+          ["domain-knowledge-tree-sub.md"],
           [
             "Not familiar at all",
             "Slightly familiar",
@@ -468,14 +498,34 @@ function App() {
           ]
         ),
         new Question(
+          "multiple-choice",
+          ["domain-knowledge-tree-obj.md"],
+          [
+            "I have never heard of trees before this survey. ",
+            "I have heard of trees, but I have never used them.",
+            "I have occasionally used trees, but not on a regular basis.",
+            "I regularly use trees in my projects or work. ",
+          ]
+        ),
+        new Question(
           "likert-scale",
-          ["domain-knowledge-recursion.md"],
+          ["domain-knowledge-recursion-sub.md"],
           [
             "Not familiar at all",
             "Slightly familiar",
             "Moderately familiar",
             "Very familiar",
             "Extremely familiar",
+          ]
+        ),
+        new Question(
+          "multiple-choice",
+          ["domain-knowledge-recursion-obj.md"],
+          [
+            "I have never heard of recursion before this survey. ",
+            "I have heard of recursion, but I have never used it.",
+            "I have occasionally used recursion, but not on a regular basis.",
+            "I regularly use recursion in my projects or work. ",
           ]
         ),
         new Question(
@@ -499,21 +549,21 @@ function App() {
       new Page(
         [CodingHardLongestValidParenthesis("record")],
         600, // timer
-        60
+        1
       ),
 
       // coding question (assisted coding)
       new Page(
         [CodingHardLongestValidParenthesis("display")],
         600, // timer
-        60
+        1
       ),
 
       // post-hoc (domain knowledge familarity & perceived difficulty)
       new Page([
         new Question(
           "likert-scale",
-          ["domain-knowledge-stack.md"],
+          ["domain-knowledge-stack-sub.md"],
           [
             "Not familiar at all",
             "Slightly familiar",
@@ -523,14 +573,34 @@ function App() {
           ]
         ),
         new Question(
+          "multiple-choice",
+          ["domain-knowledge-stack-obj.md"],
+          [
+            "I have never heard of stacks before this survey. ",
+            "I have heard of stacks, but I have never used them.",
+            "I have occasionally used stacks, but not on a regular basis.",
+            "I regularly use stacks in my projects or work. ",
+          ]
+        ),
+        new Question(
           "likert-scale",
-          ["domain-knowledge-dynamic-programming.md"],
+          ["domain-knowledge-dynamic-programming-sub.md"],
           [
             "Not familiar at all",
             "Slightly familiar",
             "Moderately familiar",
             "Very familiar",
             "Extremely familiar",
+          ]
+        ),
+        new Question(
+          "multiple-choice",
+          ["domain-knowledge-dynamic-programming-obj.md"],
+          [
+            "I have never heard of dynamic programming before this survey. ",
+            "I have heard of dynamic programming, but I have never used it.",
+            "I have occasionally used dynamic programming, but not on a regular basis.",
+            "I regularly use dynamic programming in my projects or work. ",
           ]
         ),
         new Question(

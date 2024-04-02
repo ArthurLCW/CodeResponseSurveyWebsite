@@ -1,1 +1,0 @@
-To what extent are you familiar with Hash Map?

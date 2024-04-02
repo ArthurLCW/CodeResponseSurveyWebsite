@@ -192,20 +192,22 @@ const TestHeader = ({
     });
   };
 
-  const iconStyle = {
-    verticalAlign: "middle",
-    margin: "0px 3px",
-    fontSize: "20px",
-    color: "white",
-  };
+  const windowWidth = window.innerWidth; // Get the current window width
 
   const iconLabelStyle = {
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: "14px",
-    padding: "5px 10px",
-    marginRight: "5px",
+    fontSize:
+      windowWidth < 1100 ? "10px" : windowWidth < 1200 ? "12px" : "14px", // Even smaller font size if window width is less than 1000px
+    padding:
+      windowWidth < 1100
+        ? "2px 6px"
+        : windowWidth < 1200
+        ? "3px 8px"
+        : "5px 10px", // Even smaller padding
+    marginRight:
+      windowWidth < 1100 ? "2px" : windowWidth < 1200 ? "3px" : "5px", // Even smaller margin right
     borderRadius: "5px",
     background: isButtonDisabled || isLoading ? "#a0c4e5" : "#5a92c5",
     color: "white",
@@ -217,16 +219,32 @@ const TestHeader = ({
     transition: "background-color 0.3s",
   };
 
+  const iconStyle = {
+    verticalAlign: "middle",
+    margin:
+      windowWidth < 1100
+        ? "0px 1px"
+        : windowWidth < 1200
+        ? "0px 2px"
+        : "0px 3px", // Even smaller margin if window width is less than 1000px
+    fontSize: windowWidth < 100 ? "14px" : windowWidth < 1200 ? "16px" : "20px", // Even smaller font size
+    color: "white",
+  };
+
   const tabTitleStyle = {
-    padding: "5px 10px",
-    fontSize: "14px",
+    padding:
+      windowWidth < 1100
+        ? "2px 6px"
+        : windowWidth < 1200
+        ? "3px 8px"
+        : "5px 10px", // Even smaller padding
+    fontSize:
+      windowWidth < 1100 ? "10px" : windowWidth < 1200 ? "12px" : "14px", // Even smaller font size
     cursor: "pointer",
   };
 
   const tabTitleChosenStyle = {
-    padding: "5px 10px",
-    fontSize: "14px",
-    cursor: "pointer",
+    ...tabTitleStyle, // Inherit from tabTitleStyle
     backgroundColor: "#E6F4FF",
     color: "#094183",
     borderRadius: "5px",
@@ -234,6 +252,7 @@ const TestHeader = ({
     borderWidth: "2px",
     borderStyle: "solid",
   };
+
   return (
     <div
       style={{
@@ -277,12 +296,12 @@ const TestHeader = ({
           Test Result
         </span>
         <span
-          style={showTab === "Test Cases" ? tabTitleChosenStyle : tabTitleStyle}
+          style={showTab === "Testcase" ? tabTitleChosenStyle : tabTitleStyle}
           onClick={() => {
-            if (showTab !== "Test Cases") setShowTab("Test Cases");
+            if (showTab !== "Testcase") setShowTab("Testcase");
           }}
         >
-          Test Cases
+          Testcase
         </span>
         {/* <span
           style={
@@ -298,7 +317,7 @@ const TestHeader = ({
 
       <span>
         <Tooltip
-          title="Run your code with inputs you specified in 'Test Cases'."
+          title="Run your code with inputs you specified in 'Testcase'."
           componentsProps={{ tooltip: { sx: { fontSize: "1em" } } }}
         >
           <span style={iconLabelStyle} onClick={handleRunButtonClick}>
@@ -307,12 +326,12 @@ const TestHeader = ({
           </span>
         </Tooltip>
         <Tooltip
-          title="Submit and run your code with all pre-defined test cases. "
+          title="Submit and run your code with example testcases and other predefined testcases. "
           componentsProps={{ tooltip: { sx: { fontSize: "1em" } } }}
         >
           <span style={iconLabelStyle} onClick={handleSubmitButtonClick}>
             <SvgIcon component={CloudUploadIcon} style={iconStyle} />
-            Run All Testcases
+            Run Addidtional Testcases
           </span>
         </Tooltip>
       </span>
@@ -341,8 +360,8 @@ const TestCases = ({
   return (
     <div style={{ padding: "10px" }}>
       <div>
-        You may specify a test case here. Please accurately define both the
-        input and the expected output.
+        You may specify a testcase here. Please accurately define both the input
+        and the expected output.
       </div>
       <div>
         <span style={labelStype}>Testcase Input:</span>
@@ -458,7 +477,7 @@ const TestContent = ({
         overflowY: "scroll",
       }}
     >
-      {showTab === "Test Cases" && (
+      {showTab === "Testcase" && (
         <TestCases
           examples={examples}
           clarification={clarification}

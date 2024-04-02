@@ -1,0 +1,1 @@
+To what extent are you familiar with the data structure 'stack'?

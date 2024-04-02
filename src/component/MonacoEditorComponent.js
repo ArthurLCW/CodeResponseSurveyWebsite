@@ -26,18 +26,53 @@ const MonacoEditorComponent = ({
 
   let editorInstance = null;
 
+  // const getNonEmptyLines = (editorInstance) => {
+  //   if (editorInstance) {
+  //     const model = editorInstance.getModel();
+  //     const lineCount = model.getLineCount();
+  //     let nonEmptyLineCountLocal = 0;
+
+  //     for (let i = 1; i <= lineCount; i++) {
+  //       const lineContent = model.getLineContent(i);
+  //       if (lineContent.trim().length > 0) {
+  //         nonEmptyLineCountLocal++;
+  //       }
+  //     }
+  //     setNonEmptyLineCount(nonEmptyLineCountLocal);
+  //     setCodingNonEnptyLines(nonEmptyLineCountLocal);
+  //     console.log(
+  //       "number of nonEmpty lines: ",
+  //       nonEmptyLineCount,
+  //       nonEmptyLineCountLocal
+  //     );
+  //   }
+  // };
+
   const getNonEmptyLines = (editorInstance) => {
     if (editorInstance) {
       const model = editorInstance.getModel();
       const lineCount = model.getLineCount();
       let nonEmptyLineCountLocal = 0;
+      let inBlockComment = false;
 
       for (let i = 1; i <= lineCount; i++) {
-        const lineContent = model.getLineContent(i);
-        if (lineContent.trim().length > 0) {
-          nonEmptyLineCountLocal++;
+        const lineContent = model.getLineContent(i).trim();
+        const isSingleLineComment = lineContent.startsWith("//");
+        const startsBlockComment = lineContent.startsWith("/*");
+        const endsBlockComment =
+          lineContent.endsWith("*/") || lineContent.includes("*/");
+
+        if (inBlockComment) {
+          if (endsBlockComment) inBlockComment = false; // End of block comment
+          // No else here because we want to skip counting this line
+        } else if (startsBlockComment) {
+          inBlockComment = true; // Start of block comment
+          if (!endsBlockComment) continue; // If it doesn't also end on this line, skip counting
+        } else if (!isSingleLineComment && lineContent.length > 0) {
+          nonEmptyLineCountLocal++; // Count as non-empty if it's not a comment and not empty
         }
       }
+
       setNonEmptyLineCount(nonEmptyLineCountLocal);
       setCodingNonEnptyLines(nonEmptyLineCountLocal);
       console.log(
@@ -86,10 +121,10 @@ const MonacoEditorComponent = ({
   };
 
   useEffect(() => {
-    if (nonEmptyLineCount >= 10 && num === 0) {
+    if (nonEmptyLineCount >= 5 && num === 0) {
       dispatch(increment());
       console.log("MONACO editor increment: ", nonEmptyLineCount, num);
-    } else if (nonEmptyLineCount < 10 && num === 1) {
+    } else if (nonEmptyLineCount < 5 && num === 1) {
       dispatch(decrement());
       console.log("MONACO editor decrement: ", nonEmptyLineCount, num);
     } else {

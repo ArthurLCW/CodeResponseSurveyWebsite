@@ -23,8 +23,8 @@ const WarningMsg = () => (
 const WarningMsgCoding = () => (
   <div className="warning">
     <b>
-      Please finish this coding question! You need to write at least 10 lines of
-      non-empty codes.
+      Please finish this coding question! You need to write at least 5 lines of
+      non-empty codes (excluding comments).
     </b>
   </div>
 );
@@ -163,7 +163,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
       (selectedOption === null && finished) ||
       (questionContent.questionType === "coding" &&
         finished &&
-        codingNonEnptyLines < 10)
+        codingNonEnptyLines < 5)
         ? "#e6f1ff"
         : "white",
   };
@@ -251,7 +251,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
     <div className="question">
       {questionContent.questionType === "coding" &&
         finished &&
-        codingNonEnptyLines < 10 && <WarningMsgCoding />}
+        codingNonEnptyLines < 5 && <WarningMsgCoding />}
       {questionContent.questionType !== "coding" &&
         selectedOption === null &&
         finished && <WarningMsg />}

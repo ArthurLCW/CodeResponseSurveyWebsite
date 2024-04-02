@@ -65,6 +65,7 @@ const PageComponent = ({
   }
 
   const handleClick = () => {
+    // console.log(num, pageArray[pageNumber - 1].questions.length, finished);
     if (!finished) setFinished(true);
     if (Number.parseInt(num) === pageArray[pageNumber - 1].questions.length) {
       if (
