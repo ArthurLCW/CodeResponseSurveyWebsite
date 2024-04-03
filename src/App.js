@@ -28,6 +28,25 @@ function App() {
   const [firstTimeEnter, setFirstTimeEnter] = useState(true);
 
   useEffect(() => {
+    // Define the function that will be called whenever a fullscreen change event occurs.
+    const onFullScreenChange = () => {
+      // Logic to set focus at the top of the application.
+      const topOfAppElement = document.getElementById("top-of-app");
+      if (topOfAppElement) {
+        topOfAppElement.focus();
+      }
+    };
+
+    // Listen for fullscreen changes.
+    document.addEventListener("fullscreenchange", onFullScreenChange);
+
+    // Cleanup function to remove the event listener when the component unmounts or the effect needs to re-run.
+    return () => {
+      document.removeEventListener("fullscreenchange", onFullScreenChange);
+    };
+  }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount.
+
+  useEffect(() => {
     function onFullScreenChange() {
       if (!document.fullscreenElement && enableModal) {
         setModalIsOpen(true);
@@ -75,10 +94,20 @@ function App() {
     if (firstTimeEnter) setFirstTimeEnter(false);
   };
 
-  const closeModal = () => {
+  const closeModal = (e) => {
     setModalIsOpen(false);
     console.log("reject full screen mode.");
     sessionStorage.setItem("rejectFullScreen", true);
+
+    e.preventDefault();
+    document.addEventListener("focusin", (event) => {
+      console.log("Focused on:", event.target);
+    });
+    const topOfAppElement = document.getElementById("top-of-app");
+    if (topOfAppElement) {
+      console.log("focus element exist");
+      topOfAppElement.focus();
+    }
   };
 
   const programFactorsQuestions = [
@@ -675,6 +704,11 @@ function App() {
   return (
     <div>
       <div className="app">
+        <div
+          tabIndex="-1"
+          id="top-of-app"
+          style={{ height: "1px", outline: "none" }}
+        ></div>
         <div className="survey">
           <SurveyComponent
             // pageArray={pageArray}
@@ -687,7 +721,7 @@ function App() {
       </div>
       <FullScreenModalComponent
         isOpen={modalIsOpen}
-        closeModal={closeModal}
+        closeModal={(e) => closeModal(e)}
         enterFullScreen={enterFullScreen}
         firstTimeEnter={firstTimeEnter}
       />
