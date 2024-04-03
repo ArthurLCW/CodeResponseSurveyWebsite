@@ -28,26 +28,13 @@ function App() {
   const [firstTimeEnter, setFirstTimeEnter] = useState(true);
 
   useEffect(() => {
-    // Define the function that will be called whenever a fullscreen change event occurs.
-    const onFullScreenChange = () => {
+    function onFullScreenChange() {
       // Logic to set focus at the top of the application.
       const topOfAppElement = document.getElementById("top-of-app");
       if (topOfAppElement) {
+        console.log("focus exist");
         topOfAppElement.focus();
       }
-    };
-
-    // Listen for fullscreen changes.
-    document.addEventListener("fullscreenchange", onFullScreenChange);
-
-    // Cleanup function to remove the event listener when the component unmounts or the effect needs to re-run.
-    return () => {
-      document.removeEventListener("fullscreenchange", onFullScreenChange);
-    };
-  }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount.
-
-  useEffect(() => {
-    function onFullScreenChange() {
       if (!document.fullscreenElement && enableModal) {
         setModalIsOpen(true);
         // get records object
@@ -184,7 +171,8 @@ function App() {
     consent: [
       new Page([
         new Question(
-          "multiple-choice",
+          // "multiple-choice",
+          "likert-scale",
           ["consent.md"],
           [
             "Yes, I agree to participate in this study.",
@@ -199,12 +187,14 @@ function App() {
     screener: [
       new Page([
         new Question(
-          "multiple-choice",
+          // "multiple-choice",
+          "likert-scale",
           ["screener-prolific.md"],
           ["Yes", "No", "I don't know"]
         ),
         new Question(
-          "multiple-choice",
+          // "multiple-choice",
+          "likert-scale",
           ["screener-current-job.md"],
           [
             "Student specializing in IT-related fields.",
@@ -213,12 +203,14 @@ function App() {
           ]
         ),
         new Question(
-          "multiple-choice",
+          // "multiple-choice",
+          "likert-scale",
           ["screener-programming-experience-obj.md"],
           ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
         ),
         new Question(
-          "multiple-choice",
+          // "multiple-choice",
+          "likert-scale",
           ["screener-language-proficiency-obj.md"],
           ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
         ),
@@ -366,7 +358,8 @@ function App() {
           ]
         ),
         new Question(
-          "multiple-choice",
+          // "multiple-choice",
+          "likert-scale",
           ["domain-knowledge-HashMap-obj.md"],
           [
             "I have never heard of hash maps before this survey. ",
@@ -419,7 +412,8 @@ function App() {
           ]
         ),
         new Question(
-          "multiple-choice",
+          // "multiple-choice",
+          "likert-scale",
           ["domain-knowledge-LinkedList-obj.md"],
           [
             "I have never heard of linked lists before this survey. ",
@@ -473,7 +467,8 @@ function App() {
           ]
         ),
         new Question(
-          "multiple-choice",
+          // "multiple-choice",
+          "likert-scale",
           ["domain-knowledge-queue-obj.md"],
           [
             "I have never heard of queues before this survey. ",
@@ -527,7 +522,8 @@ function App() {
           ]
         ),
         new Question(
-          "multiple-choice",
+          // "multiple-choice",
+          "likert-scale",
           ["domain-knowledge-tree-obj.md"],
           [
             "I have never heard of trees before this survey. ",
@@ -548,7 +544,8 @@ function App() {
           ]
         ),
         new Question(
-          "multiple-choice",
+          // "multiple-choice",
+          "likert-scale",
           ["domain-knowledge-recursion-obj.md"],
           [
             "I have never heard of recursion before this survey. ",
@@ -602,7 +599,8 @@ function App() {
           ]
         ),
         new Question(
-          "multiple-choice",
+          // "multiple-choice",
+          "likert-scale",
           ["domain-knowledge-stack-obj.md"],
           [
             "I have never heard of stacks before this survey. ",
@@ -623,7 +621,8 @@ function App() {
           ]
         ),
         new Question(
-          "multiple-choice",
+          // "multiple-choice",
+          "likert-scale",
           ["domain-knowledge-dynamic-programming-obj.md"],
           [
             "I have never heard of dynamic programming before this survey. ",
