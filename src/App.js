@@ -236,98 +236,20 @@ function App() {
             "Extremely familiar",
           ]
         ),
+        new Question("likert-scale-grid", ["attitudes-general.md"], {
+          statements: [
+            "I trust AI code generation system",
+            "AI code generation system will benefit programmers",
+            "I fear AI code generation system",
+            "AI will destroy humankind",
+            "AI code generation system will cause many job losses",
+          ],
+          scale: Array.from({ length: 11 }, (_, i) => i),
+        }),
       ]),
     ],
     // demographics (attitudes towards ai)
     demographics: [
-      // new Page([
-      //   new Question(
-      //     "likert-scale",
-      //     ["attitudes1.md"],
-      //     [
-      //       "0 (Strongly disagree)",
-      //       "1",
-      //       "2",
-      //       "3",
-      //       "4",
-      //       "5",
-      //       "6",
-      //       "7",
-      //       "8",
-      //       "9",
-      //       "10 (Strongly agree)",
-      //     ]
-      //   ),
-      //   new Question(
-      //     "likert-scale",
-      //     ["attitudes2.md"],
-      //     [
-      //       "0 (Strongly disagree)",
-      //       "1",
-      //       "2",
-      //       "3",
-      //       "4",
-      //       "5",
-      //       "6",
-      //       "7",
-      //       "8",
-      //       "9",
-      //       "10 (Strongly agree)",
-      //     ]
-      //   ),
-      //   new Question(
-      //     "likert-scale",
-      //     ["attitudes3.md"],
-      //     [
-      //       "0 (Strongly disagree)",
-      //       "1",
-      //       "2",
-      //       "3",
-      //       "4",
-      //       "5",
-      //       "6",
-      //       "7",
-      //       "8",
-      //       "9",
-      //       "10 (Strongly agree)",
-      //     ]
-      //   ),
-      //   new Question(
-      //     "likert-scale",
-      //     ["attitudes4.md"],
-      //     [
-      //       "0 (Strongly disagree)",
-      //       "1",
-      //       "2",
-      //       "3",
-      //       "4",
-      //       "5",
-      //       "6",
-      //       "7",
-      //       "8",
-      //       "9",
-      //       "10 (Strongly agree)",
-      //     ]
-      //   ),
-      //   new Question(
-      //     "likert-scale",
-      //     ["attitudes5.md"],
-      //     [
-      //       "0 (Strongly disagree)",
-      //       "1",
-      //       "2",
-      //       "3",
-      //       "4",
-      //       "5",
-      //       "6",
-      //       "7",
-      //       "8",
-      //       "9",
-      //       "10 (Strongly agree)",
-      //     ]
-      //   ),
-      // ]),
-
       new Page([
         new Question("likert-scale-grid", ["attitudes-general.md"], {
           statements: [
@@ -666,7 +588,7 @@ function App() {
     easy_ransom_notes: [
       "consent",
       "screener",
-      "demographics",
+      // "demographics",
       "codingEasyRansomNotes",
       "gratitude",
     ],
@@ -674,7 +596,7 @@ function App() {
     easy_remove_duplicates: [
       "consent",
       "screener",
-      "demographics",
+      // "demographics",
       "codingEasyRemoveDuplicates",
       "gratitude",
     ],
@@ -686,7 +608,7 @@ function App() {
     hard_longest_valid_parenthesis: [
       "consent",
       "screener",
-      "demographics",
+      // "demographics",
       "codingHardLongestValidParenthesis",
       "gratitude",
     ],
@@ -698,7 +620,7 @@ function App() {
     medium_find_winner: [
       "consent",
       "screener",
-      "demographics",
+      // "demographics",
       "codingMediumFindWinner",
       "gratitude",
     ],
@@ -706,7 +628,7 @@ function App() {
     medium_validate_BST: [
       "consent",
       "screener",
-      "demographics",
+      // "demographics",
       "codingMediumValidateBST",
       "gratitude",
     ],
