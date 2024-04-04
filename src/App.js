@@ -673,7 +673,7 @@ function App() {
     // easy_ransom_notes: ["consent", "codingEasyRansomNotes", "gratitude"],
     easy_remove_duplicates: [
       "consent",
-      // "screener",
+      "screener",
       "demographics",
       "codingEasyRemoveDuplicates",
       "gratitude",

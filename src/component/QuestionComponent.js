@@ -37,128 +37,6 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
   const [showTask, setShowTask] = useState(false);
   const [showSelfCodes, setShowSelfCodes] = useState(false);
 
-  const handleOptionChange = (event) => {
-    if (selectedOption === null) dispatch(increment());
-    setSelectedOption(event.target.value);
-    sessionStorage.setItem(myKey, event.target.value);
-
-    if (
-      questionContent.screenOption &&
-      event.target.value === questionContent.screenOption
-    ) {
-      // console.log("screen flag0: ", screenFlag);
-      dispatch(toggleScreenTrue());
-    } else if (questionContent.screenOption) {
-      // console.log("screen flag1: ", screenFlag);
-      dispatch(toggleScreenFalse());
-    }
-
-    // console.log(
-    //   "id: ",
-    //   myKey,
-    //   ": ",
-    //   event.target.value,
-    //   ": ",
-    //   selectedOption,
-    //   " : ",
-    //   num
-    // );
-    console.log(
-      "id: ",
-      myKey,
-      ", sessionStorage: ",
-      sessionStorage.getItem(myKey)
-    );
-  };
-
-  let options;
-
-  if (questionContent.questionType === "null") {
-    // Handle null case
-  } else if (questionContent.questionType === "multiple-choice") {
-    const labelStyle = {
-      display: "block", // This makes each label a block-level element
-      margin: "5px 0", // Optional: Adds some spacing between options
-    };
-    options = (
-      <div>
-        {questionContent.questionOptions.map((option, index) => (
-          <label key={index} style={labelStyle}>
-            <input
-              type="radio"
-              value={option}
-              checked={selectedOption === option}
-              onChange={handleOptionChange}
-            />
-            {option}
-          </label>
-        ))}
-      </div>
-    );
-  } else if (questionContent.questionType === "likert-scale") {
-    options = (
-      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-        {questionContent.questionOptions.map((option, index) => (
-          <div key={index} className="likert-scale-container">
-            <div className="likert-label">{option}</div>
-            <input
-              type="radio"
-              value={option}
-              checked={selectedOption === option}
-              onChange={handleOptionChange}
-            />
-          </div>
-        ))}
-      </div>
-    );
-  } else if (questionContent.questionType === "likert-scale-grid") {
-    options = (
-      <LikertScaleGridComponent
-        statements={questionContent.questionOptions.statements}
-        scale={questionContent.questionOptions.scale}
-        setSelectedOption={setSelectedOption}
-        myKey={myKey}
-      />
-    );
-  } else if (questionContent.questionType === "coding") {
-    console.log(questionContent);
-    options = (
-      <MonacoEditorComponent
-        dispatch={dispatch}
-        setSelectedOption={setSelectedOption}
-        myKey={myKey}
-        recordLogic={questionContent.recordLogic}
-        setCodingNonEnptyLines={setCodingNonEnptyLines}
-        defaultCode={questionContent.defaultCode}
-        examples={questionContent.examples}
-        clarification={questionContent.clarification}
-        preCode={questionContent.preCode}
-        postCode={questionContent.postCode}
-        testCases={questionContent.testCases}
-        verifyInputFormat={questionContent.verifyInputFormat}
-        verifyOutputFormat={questionContent.verifyOutputFormat}
-      />
-    );
-  }
-
-  // console.log(finished, codingNonEnptyLines, selectedOption === null);
-  const unfinishedStyle = {
-    backgroundColor:
-      (selectedOption === null && finished) ||
-      (questionContent.questionType === "coding" &&
-        finished &&
-        codingNonEnptyLines < 5)
-        ? "#e6f1ff"
-        : "white",
-  };
-
-  const codingParentStyle =
-    questionContent.questionType === "coding" ? { display: "flex" } : {};
-  const codingChildStyle =
-    questionContent.questionType === "coding"
-      ? { width: "calc(42.5vw - 5px)", paddingRight: "10px" }
-      : {};
-
   // const fileName = "coding1-easy-remove-duplicates-from-sorted-list.md";
   const fileName = useMemo(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -222,6 +100,128 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
     return fileNameTemp;
   }, [myKey]);
 
+  const handleOptionChange = (event) => {
+    if (selectedOption === null) dispatch(increment());
+    setSelectedOption(event.target.value);
+    sessionStorage.setItem(myKey + ": " + fileName, event.target.value); ///////
+
+    if (
+      questionContent.screenOption &&
+      event.target.value === questionContent.screenOption
+    ) {
+      // console.log("screen flag0: ", screenFlag);
+      dispatch(toggleScreenTrue());
+    } else if (questionContent.screenOption) {
+      // console.log("screen flag1: ", screenFlag);
+      dispatch(toggleScreenFalse());
+    }
+
+    // console.log(
+    //   "id: ",
+    //   myKey,
+    //   ": ",
+    //   event.target.value,
+    //   ": ",
+    //   selectedOption,
+    //   " : ",
+    //   num
+    // );
+    console.log(
+      "id: ",
+      myKey,
+      ", sessionStorage: ",
+      sessionStorage.getItem(myKey + ": " + fileName) /////
+    );
+  };
+
+  let options;
+
+  if (questionContent.questionType === "null") {
+    // Handle null case
+  } else if (questionContent.questionType === "multiple-choice") {
+    const labelStyle = {
+      display: "block", // This makes each label a block-level element
+      margin: "5px 0", // Optional: Adds some spacing between options
+    };
+    options = (
+      <div>
+        {questionContent.questionOptions.map((option, index) => (
+          <label key={index} style={labelStyle}>
+            <input
+              type="radio"
+              value={option}
+              checked={selectedOption === option}
+              onChange={handleOptionChange}
+            />
+            {option}
+          </label>
+        ))}
+      </div>
+    );
+  } else if (questionContent.questionType === "likert-scale") {
+    options = (
+      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+        {questionContent.questionOptions.map((option, index) => (
+          <div key={index} className="likert-scale-container">
+            <div className="likert-label">{option}</div>
+            <input
+              type="radio"
+              value={option}
+              checked={selectedOption === option}
+              onChange={handleOptionChange}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  } else if (questionContent.questionType === "likert-scale-grid") {
+    options = (
+      <LikertScaleGridComponent
+        statements={questionContent.questionOptions.statements}
+        scale={questionContent.questionOptions.scale}
+        setSelectedOption={setSelectedOption}
+        myKey={myKey + ": " + fileName} ///////
+      />
+    );
+  } else if (questionContent.questionType === "coding") {
+    console.log(questionContent);
+    options = (
+      <MonacoEditorComponent
+        dispatch={dispatch}
+        setSelectedOption={setSelectedOption}
+        myKey={myKey + ": " + fileName} //////
+        recordLogic={questionContent.recordLogic}
+        setCodingNonEnptyLines={setCodingNonEnptyLines}
+        defaultCode={questionContent.defaultCode}
+        examples={questionContent.examples}
+        clarification={questionContent.clarification}
+        preCode={questionContent.preCode}
+        postCode={questionContent.postCode}
+        testCases={questionContent.testCases}
+        verifyInputFormat={questionContent.verifyInputFormat}
+        verifyOutputFormat={questionContent.verifyOutputFormat}
+      />
+    );
+  }
+
+  // console.log(finished, codingNonEnptyLines, selectedOption === null);
+  const unfinishedStyle = {
+    backgroundColor:
+      (selectedOption === null && finished) ||
+      (questionContent.questionType === "coding" &&
+        finished &&
+        codingNonEnptyLines < 5)
+        ? "#e6f1ff"
+        : "white",
+  };
+
+  const codingParentStyle =
+    questionContent.questionType === "coding" ? { display: "flex" } : {};
+  const codingChildStyle =
+    questionContent.questionType === "coding"
+      ? { width: "calc(42.5vw - 5px)", paddingRight: "10px" }
+      : {};
+
   let recordDisplay = "";
   if (questionContent.recordLogic === "display") {
     if ((questionContent.questionType = "coding"))
@@ -231,7 +231,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
     sessionStorage.setItem("taskFile", fileName);
   }
 
-  console.log("selected option", selectedOption, finished);
+  // console.log("selected option", selectedOption, finished);
   return (
     <div className="question">
       {questionContent.questionType === "coding" &&
