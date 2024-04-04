@@ -1,44 +1,60 @@
 import React, { useState } from "react";
 import "./LikertScaleGridComponent.css";
+import { useSelector, useDispatch } from "react-redux";
+import { increment } from "../redux/recorderSlice";
 
-const LikertScaleGridComponent = ({ questionContent }) => {
-  const questions = questionContent.gridQuestions;
-  const options = questionContent.questionOptions;
+const LikertScaleGrid = ({ statements, scale, setSelectedOption, myKey }) => {
+  // State to hold the selected options for each statement
+  const [responses, setResponses] = useState({});
 
-  // Initialize state to track responses for each question
-  const [responses, setResponses] = useState(questions.map(() => ""));
+  const [finished, setFinished] = useState(false);
+  const dispatch = useDispatch();
 
-  // Handle option selection
-  const handleSelect = (questionIndex, option) => {
-    setResponses(
-      responses.map((response, index) =>
-        index === questionIndex ? option : response
-      )
-    );
+  // Function to handle option change
+  const handleOptionChange = (statement, value) => {
+    const newResponse = { ...responses, [statement]: value };
+    console.log(newResponse);
+    setResponses(newResponse);
+    if (Object.keys(newResponse).length === statements.length) {
+      setSelectedOption(newResponse);
+      sessionStorage.setItem(myKey, JSON.stringify(newResponse));
+
+      if (!finished) {
+        setFinished(true);
+        dispatch(increment());
+      }
+    }
   };
 
   return (
-    <div className="likert-grid">
-      <div className="grid-header">
-        <div className="header-spacer"></div>
-        {options.map((option, index) => (
-          <div className="option-title">{option}</div>
+    <div className="likert-scale-grid">
+      {/* Header labels */}
+      <div className="header">
+        <div></div> {/* Empty Cell for statement alignment */}
+        {scale.map((scalePoint, index) => (
+          <div key={index} className="scale-point">
+            {scalePoint}
+            {scalePoint === 0 && " (Strongly disagree)"}
+            {scalePoint === 10 && " (Strongly agree)"}
+          </div>
         ))}
       </div>
-      {questions.map((question, questionIndex) => (
-        <div className="question-row">
-          <div className="question-text">{question}</div>
-          {options.map((option, optionIndex) => (
-            <label className="option-label">
+      {/* Statements and scale options */}
+      {statements.map((statement, index) => (
+        <div key={index} className="statement">
+          <div className="statement-text">{statement}</div>
+          {scale.map((scalePoint) => (
+            <div key={scalePoint} className="scale-option">
               <input
                 type="radio"
-                name={`question-${questionIndex}`}
-                value={option}
-                checked={responses[questionIndex] === option}
-                onChange={() => handleSelect(questionIndex, option)}
+                id={`${statement}-${scalePoint}`}
+                name={statement}
+                value={scalePoint}
+                checked={responses[statement] === `${scalePoint}`}
+                onChange={(e) => handleOptionChange(statement, e.target.value)}
               />
-              <span className="custom-radio"></span>
-            </label>
+              <label htmlFor={`${statement}-${scalePoint}`}></label>
+            </div>
           ))}
         </div>
       ))}
@@ -46,4 +62,4 @@ const LikertScaleGridComponent = ({ questionContent }) => {
   );
 };
 
-export default LikertScaleGridComponent;
+export default LikertScaleGrid;

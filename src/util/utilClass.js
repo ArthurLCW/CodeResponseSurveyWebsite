@@ -2,7 +2,7 @@ export class Question {
   constructor(
     questionType,
     questionTextSrc,
-    questionOptions,
+    questionOptions, // for grid-likert-scale, it is {statements:[], scale: []}
     screenOption = null,
     screenMsg = null,
     examples = [],

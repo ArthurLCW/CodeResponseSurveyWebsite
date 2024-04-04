@@ -240,92 +240,105 @@ function App() {
     ],
     // demographics (attitudes towards ai)
     demographics: [
+      // new Page([
+      //   new Question(
+      //     "likert-scale",
+      //     ["attitudes1.md"],
+      //     [
+      //       "0 (Strongly disagree)",
+      //       "1",
+      //       "2",
+      //       "3",
+      //       "4",
+      //       "5",
+      //       "6",
+      //       "7",
+      //       "8",
+      //       "9",
+      //       "10 (Strongly agree)",
+      //     ]
+      //   ),
+      //   new Question(
+      //     "likert-scale",
+      //     ["attitudes2.md"],
+      //     [
+      //       "0 (Strongly disagree)",
+      //       "1",
+      //       "2",
+      //       "3",
+      //       "4",
+      //       "5",
+      //       "6",
+      //       "7",
+      //       "8",
+      //       "9",
+      //       "10 (Strongly agree)",
+      //     ]
+      //   ),
+      //   new Question(
+      //     "likert-scale",
+      //     ["attitudes3.md"],
+      //     [
+      //       "0 (Strongly disagree)",
+      //       "1",
+      //       "2",
+      //       "3",
+      //       "4",
+      //       "5",
+      //       "6",
+      //       "7",
+      //       "8",
+      //       "9",
+      //       "10 (Strongly agree)",
+      //     ]
+      //   ),
+      //   new Question(
+      //     "likert-scale",
+      //     ["attitudes4.md"],
+      //     [
+      //       "0 (Strongly disagree)",
+      //       "1",
+      //       "2",
+      //       "3",
+      //       "4",
+      //       "5",
+      //       "6",
+      //       "7",
+      //       "8",
+      //       "9",
+      //       "10 (Strongly agree)",
+      //     ]
+      //   ),
+      //   new Question(
+      //     "likert-scale",
+      //     ["attitudes5.md"],
+      //     [
+      //       "0 (Strongly disagree)",
+      //       "1",
+      //       "2",
+      //       "3",
+      //       "4",
+      //       "5",
+      //       "6",
+      //       "7",
+      //       "8",
+      //       "9",
+      //       "10 (Strongly agree)",
+      //     ]
+      //   ),
+      // ]),
+
       new Page([
-        new Question(
-          "likert-scale",
-          ["attitudes1.md"],
-          [
-            "0 (Strongly disagree)",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10 (Strongly agree)",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["attitudes2.md"],
-          [
-            "0 (Strongly disagree)",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10 (Strongly agree)",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["attitudes3.md"],
-          [
-            "0 (Strongly disagree)",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10 (Strongly agree)",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["attitudes4.md"],
-          [
-            "0 (Strongly disagree)",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10 (Strongly agree)",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["attitudes5.md"],
-          [
-            "0 (Strongly disagree)",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10 (Strongly agree)",
-          ]
-        ),
+        new Question("likert-scale-grid", ["attitudes-general.md"], {
+          statements: [
+            "I trust AI code generation system",
+            "AI code generation system will benefit programmers",
+            "I fear AI code generation system",
+            "AI will destroy humankind",
+            "AI code generation system will cause many job losses",
+          ],
+          scale: Array.from({ length: 11 }, (_, i) => i),
+        }),
       ]),
     ],
     // coding (the easy one: ransom note)
@@ -575,14 +588,14 @@ function App() {
       new Page(
         [CodingHardLongestValidParenthesis("record")],
         600, // timer
-        1
+        60
       ),
 
       // coding question (assisted coding)
       new Page(
         [CodingHardLongestValidParenthesis("display")],
         600, // timer
-        1
+        60
       ),
 
       // post-hoc (domain knowledge familarity & perceived difficulty)
@@ -660,7 +673,7 @@ function App() {
     // easy_ransom_notes: ["consent", "codingEasyRansomNotes", "gratitude"],
     easy_remove_duplicates: [
       "consent",
-      "screener",
+      // "screener",
       "demographics",
       "codingEasyRemoveDuplicates",
       "gratitude",

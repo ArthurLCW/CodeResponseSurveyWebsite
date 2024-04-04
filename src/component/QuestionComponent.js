@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { MdDisplayerComponent, Markdown } from "./MdDisplayerComponent";
 import MonacoEditorComponent from "./MonacoEditorComponent";
-// import LikertScaleGridComponent from './LikertScaleGridComponent';
+import LikertScaleGridComponent from "./LikertScaleGridComponent";
 import "./QuestionComponent.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -30,32 +30,7 @@ const WarningMsgCoding = () => (
 );
 
 const QuestionComponent = ({ myKey, questionContent, finished }) => {
-  // const MdDisplayerComponentMemo = React.memo(
-  //   MdDisplayerComponent,
-  //   (prevProps, nextProps) => {
-  //     console.log(
-  //       "rerender in memo",
-  //       prevProps.fileName === nextProps.fileName
-  //     );
-  //     return prevProps.fileName === nextProps.fileName;
-  //   }
-  // );
-  // const MdDisplayerComponentMemo = React.memo(
-  //   ({ fileName }) => {
-  //     console.log("rerender in self test");
-  //     return <h1>{fileName}</h1>;
-  //   },
-  //   (prevProps, nextProps) => {
-  //     console.log(
-  //       "rerender in memo",
-  //       prevProps.fileName === nextProps.fileName
-  //     );
-  //     return prevProps.fileName === nextProps.fileName;
-  //   }
-  // );
   const MdDisplayerComponentMemo = MdDisplayerComponent;
-  // const num = useSelector((state) => state.recorder.num);
-  // const screenFlag = useSelector((state) => state.recorder.screenFlag);
   const [selectedOption, setSelectedOption] = useState(null);
   const [codingNonEnptyLines, setCodingNonEnptyLines] = useState(0);
   const dispatch = useDispatch();
@@ -135,6 +110,15 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
           </div>
         ))}
       </div>
+    );
+  } else if (questionContent.questionType === "likert-scale-grid") {
+    options = (
+      <LikertScaleGridComponent
+        statements={questionContent.questionOptions.statements}
+        scale={questionContent.questionOptions.scale}
+        setSelectedOption={setSelectedOption}
+        myKey={myKey}
+      />
     );
   } else if (questionContent.questionType === "coding") {
     console.log(questionContent);
@@ -247,6 +231,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
     sessionStorage.setItem("taskFile", fileName);
   }
 
+  console.log("selected option", selectedOption, finished);
   return (
     <div className="question">
       {questionContent.questionType === "coding" &&
