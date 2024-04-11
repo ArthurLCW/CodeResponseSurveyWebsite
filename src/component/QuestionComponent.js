@@ -29,6 +29,14 @@ const WarningMsgCoding = () => (
   </div>
 );
 
+function removeMdExtension(filename) {
+  if (filename.endsWith(".md")) {
+    // Remove the last 3 characters (".md") from the string
+    return filename.slice(0, -3);
+  }
+  return filename;
+}
+
 const QuestionComponent = ({ myKey, questionContent, finished }) => {
   const MdDisplayerComponentMemo = MdDisplayerComponent;
   const [selectedOption, setSelectedOption] = useState(null);
@@ -103,7 +111,10 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
   const handleOptionChange = (event) => {
     if (selectedOption === null) dispatch(increment());
     setSelectedOption(event.target.value);
-    sessionStorage.setItem(myKey + ": " + fileName, event.target.value); ///////
+    sessionStorage.setItem(
+      removeMdExtension(myKey + ": " + fileName),
+      event.target.value
+    ); ///////
 
     if (
       questionContent.screenOption &&
@@ -130,7 +141,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
       "id: ",
       myKey,
       ", sessionStorage: ",
-      sessionStorage.getItem(myKey + ": " + fileName) /////
+      sessionStorage.getItem(removeMdExtension(myKey + ": " + fileName)) /////
     );
   };
 
@@ -180,7 +191,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
         statements={questionContent.questionOptions.statements}
         scale={questionContent.questionOptions.scale}
         setSelectedOption={setSelectedOption}
-        myKey={myKey + ": " + fileName} ///////
+        myKey={removeMdExtension(myKey + ": " + fileName)} ///////
       />
     );
   } else if (questionContent.questionType === "coding") {
@@ -189,7 +200,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
       <MonacoEditorComponent
         dispatch={dispatch}
         setSelectedOption={setSelectedOption}
-        myKey={myKey + ": " + fileName} //////
+        myKey={removeMdExtension(myKey + ": " + fileName)} //////
         recordLogic={questionContent.recordLogic}
         setCodingNonEnptyLines={setCodingNonEnptyLines}
         defaultCode={questionContent.defaultCode}
