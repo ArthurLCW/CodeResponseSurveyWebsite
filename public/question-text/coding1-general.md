@@ -6,7 +6,7 @@ Please **DO NOT** use the internet or AI code generators to find the answer. If 
 
 
 
-<span style="color: red;">**Please notice that your payment depends on the quality of your final submitted codes.**</span> You will receive ***3.5 GBP*** for ***high-quality codes*** and only ***2.5 GBP*** for ***low-quality codes***. The additional 1 pound reward for high-quality code will be paid as a bonus to your Prolific account.  
+<span style="color: red;">**Please notice that your payment depends on the quality of your final submitted codes.**</span> You will receive ***4.2 GBP*** for ***high-quality codes*** and only ***3.2 GBP*** for ***low-quality codes***. The additional 1 pound reward for high-quality code will be paid as a bonus to your Prolific account.  
 
 ---
 
