@@ -13,6 +13,8 @@ const TimerComponent = ({
   const [seconds, setSeconds] = useState(timeMax);
   const secondsRef = useRef(seconds);
 
+  const num = useSelector((state) => state.recorder.num);
+
   // for performance enhancement, avoid updating state in Page component every second
   const [localTimingFlag, setLocalTimingFlag] = useState(false);
   const dispatch = useDispatch();
@@ -34,6 +36,7 @@ const TimerComponent = ({
             `Page ${pageNumber} finishing time`,
             timeMax - newSeconds
           );
+          console.log("num", num);
           return 0;
         } else if (timeMax - newSeconds >= timeMin && !localTimingFlag) {
           setTimingFullfilledFlag(true);
@@ -47,6 +50,7 @@ const TimerComponent = ({
     // Clear the interval on component unmount
     return () => {
       clearInterval(interval);
+      dispatch(reset());
       sessionStorage.setItem(
         `Page ${pageNumber} finishing time`,
         timeMax - secondsRef.current
