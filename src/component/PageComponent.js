@@ -16,6 +16,7 @@ const PageComponent = ({
   goToLastPage,
   isLastPage,
   finishCode,
+  failedAttentionCheckCode,
 }) => {
   // console.log(pageArray.length, pageNumber);
   const [finished, setFinished] = useState(false);
@@ -27,6 +28,9 @@ const PageComponent = ({
   const screenFlag = useSelector((state) => state.recorder.screenFlag);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
+  const failedAttentionCheck = useSelector(
+    (state) => state.recorder.failedAttentionCheck
+  );
 
   function getCurrentTimeInAEDT() {
     const now = new Date();
@@ -111,6 +115,14 @@ const PageComponent = ({
     }
   }, [pageArray, pageNumber]);
 
+  useEffect(() => {
+    console.log("useEffect failed attention check");
+    if (failedAttentionCheck) {
+      console.log("useEffect failed attention check, yes");
+      goToLastPage();
+    }
+  }, [failedAttentionCheck]);
+
   return (
     <div>
       <Modal
@@ -147,19 +159,46 @@ const PageComponent = ({
           Page {pageNumber} / {pageArray.length}
         </div>
 
-        {finishCode && pageNumber === pageArray.length && !screenFlag && (
-          <div>
-            <p>
-              <b>
-                <i>
-                  Please paste the following completion code in your Prolific
-                  Link:{" "}
-                </i>
-              </b>
-            </p>
-            <h3 style={{ color: "red" }}>{finishCode}</h3>
-          </div>
-        )}
+        {!failedAttentionCheck &&
+          finishCode &&
+          pageNumber === pageArray.length &&
+          !screenFlag && (
+            <div>
+              <p>
+                <b>
+                  <i>
+                    Please paste the following completion code in your Prolific
+                    Link:{" "}
+                  </i>
+                </b>
+              </p>
+              <h3 style={{ color: "red" }}>{finishCode}</h3>
+            </div>
+          )}
+
+        {failedAttentionCheck &&
+          failedAttentionCheckCode &&
+          pageNumber === pageArray.length &&
+          !screenFlag && (
+            <div>
+              <h1>Sorry, you have failed the attention check. </h1>
+              <p>
+                The issue occurred because you exited full-screen mode too
+                frequently or stayed out of full-screen mode for an extended
+                period.
+              </p>
+              <p>Please return your submission. </p>
+              <p>
+                <b>
+                  <i>
+                    Please paste the following completion code in your Prolific
+                    Link:{" "}
+                  </i>
+                </b>
+              </p>
+              <h3 style={{ color: "red" }}>{failedAttentionCheckCode}</h3>
+            </div>
+          )}
 
         {pageArray[pageNumber - 1].timeMax > 0 && (
           <TimerComponent

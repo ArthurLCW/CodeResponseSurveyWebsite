@@ -69,7 +69,9 @@ const TestHeader = ({
         if (submissions[i].status.id === 4) {
           // wrong answer
           message += `Expected output is ${submissions[i].expected_output}\n`;
-          message += `However, the actual out is ${submissions[i].stdout}\n`;
+          message += `However, the actual out is ${submissions[i].stdout}\n\n`;
+          message += `Please notice that do NOT use console.log() in your code when you execute your code.\n`;
+          message += `Output from console.log() in your code will also be compared with the expected output.\n`;
         } else {
           message += updateLineNumbers(
             submissions[i].stderr,

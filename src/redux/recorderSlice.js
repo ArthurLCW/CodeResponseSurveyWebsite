@@ -5,6 +5,7 @@ export const recorderSlice = createSlice({
   initialState: {
     num: 0,
     screenFlag: false,
+    failedAttentionCheck: false,
   },
   reducers: {
     increment: (state) => {
@@ -30,6 +31,12 @@ export const recorderSlice = createSlice({
     toggleScreenFalse: (state) => {
       state.screenFlag = false;
     },
+    toggleFailedAttentionCheckTrue: (state) => {
+      state.failedAttentionCheck = true;
+    },
+    toggleFailedAttentionCheckFalse: (state) => {
+      state.failedAttentionCheck = false;
+    },
   },
 });
 
@@ -41,6 +48,8 @@ export const {
   incrementByAmount,
   toggleScreenTrue,
   toggleScreenFalse,
+  toggleFailedAttentionCheckTrue,
+  toggleFailedAttentionCheckFalse,
 } = recorderSlice.actions;
 
 export default recorderSlice.reducer;

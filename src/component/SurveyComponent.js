@@ -127,6 +127,7 @@ const SurveyComponent = ({
         goToLastPage={goToLastPage}
         isLastPage={currentPage === totalPages}
         finishCode={"C8MRP57T"}
+        failedAttentionCheckCode={"IFailedAttentionCheck"}
       />
     </div>
   );

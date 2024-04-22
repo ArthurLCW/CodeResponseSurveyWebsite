@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleFailedAttentionCheckTrue } from "../redux/recorderSlice";
+
 Modal.setAppElement("#root");
 
 function FullScreenModalComponent({
@@ -8,6 +11,11 @@ function FullScreenModalComponent({
   enterFullScreen,
   firstTimeEnter,
 }) {
+  const dispatch = useDispatch();
+  const failedAttentionCheck = useSelector(
+    (state) => state.recorder.failedAttentionCheck
+  );
+
   useEffect(() => {
     let id;
     let seconds = 0;
@@ -31,6 +39,28 @@ function FullScreenModalComponent({
               JSON.stringify(records)
             );
           }
+        }
+
+        // check if failed attention check
+        if (
+          !failedAttentionCheck &&
+          sessionStorage.getItem("leaveFullScreenTimes")
+        ) {
+          let totalTimes = 0;
+          let totalDuration = 0;
+          Object.values(records).forEach((record) => {
+            totalTimes += record[0];
+            totalDuration += record[1];
+          });
+          if (totalTimes >= 3 || totalDuration >= 3) {
+            dispatch(toggleFailedAttentionCheckTrue());
+          }
+          console.log(
+            "cheating check: ",
+            failedAttentionCheck,
+            totalTimes,
+            totalDuration
+          );
         }
         clearInterval(id);
       }
@@ -80,15 +110,16 @@ function FullScreenModalComponent({
         <b>record your action of leaving full-screen mode</b>.
       </p>
       <p>
-        <b style={{ color: "red" }}>
-          Leaving full-screen mode may lead to reduction in payment!
+        <b style={{ color: "red", fontSize: "20px" }}>
+          Leaving full-screen mode may lead to failed attention check, and your
+          submission may be rejected!
         </b>
       </p>
       <div
         style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}
       >
         <button onClick={enterFullScreen} className="attractive-btn">
-          OK
+          OK, I understand I should NOT leave full-screen mode.
         </button>
       </div>
     </Modal>
