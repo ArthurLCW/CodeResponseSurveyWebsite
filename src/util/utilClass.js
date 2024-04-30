@@ -13,7 +13,9 @@ export class Question {
     defaultCode = null,
     testCases = [],
     verifyInputFormat = undefined,
-    verifyOutputFormat = undefined
+    verifyOutputFormat = undefined,
+    attentionCheck = false,
+    attentionAns = []
   ) {
     this.questionType = questionType;
     this.questionTextSrc = questionTextSrc; // array
@@ -29,6 +31,8 @@ export class Question {
     this.testCases = testCases;
     this.verifyInputFormat = verifyInputFormat;
     this.verifyOutputFormat = verifyOutputFormat;
+    this.attentionCheck = attentionCheck;
+    this.attentionAns = attentionAns;
   }
 }
 

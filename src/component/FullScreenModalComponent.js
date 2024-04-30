@@ -52,9 +52,9 @@ function FullScreenModalComponent({
             totalTimes += record[0];
             totalDuration += record[1];
           });
-          if (totalTimes >= 3 || totalDuration >= 3) {
-            dispatch(toggleFailedAttentionCheckTrue());
-          }
+          // if (totalTimes >= 3 || totalDuration >= 3) {
+          //   dispatch(toggleFailedAttentionCheckTrue());
+          // }
           console.log(
             "cheating check: ",
             failedAttentionCheck,
@@ -111,8 +111,7 @@ function FullScreenModalComponent({
       </p>
       <p>
         <b style={{ color: "red", fontSize: "20px" }}>
-          Leaving full-screen mode may lead to failed attention check, and your
-          submission may be rejected!
+          We may reject to pay you if you leave full-screen mode!
         </b>
       </p>
       <div

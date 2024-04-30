@@ -7,6 +7,7 @@ import { writeParticipantData } from "../util/firebase";
 import TimerComponent from "./TimerComponent";
 import "./PageComponent.css";
 import Modal from "react-modal";
+import WarningModalComponent from "./WarningModalComponent";
 
 Modal.setAppElement("#root");
 const PageComponent = ({
@@ -125,6 +126,7 @@ const PageComponent = ({
 
   return (
     <div>
+      <WarningModalComponent pageArray={pageArray} pageNumber={pageNumber} />
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
