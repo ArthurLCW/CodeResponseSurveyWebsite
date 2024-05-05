@@ -203,18 +203,6 @@ function App() {
           ]
         ),
         new Question(
-          // "multiple-choice",
-          "likert-scale",
-          ["screener-programming-experience-obj.md"],
-          ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
-        ),
-        new Question(
-          // "multiple-choice",
-          "likert-scale",
-          ["screener-language-proficiency-obj.md"],
-          ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
-        ),
-        new Question(
           "likert-scale",
           ["screener-programming-experience-sub.md"],
           [
@@ -226,6 +214,12 @@ function App() {
           ]
         ),
         new Question(
+          // "multiple-choice",
+          "likert-scale",
+          ["screener-programming-experience-obj.md"],
+          ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
+        ),
+        new Question(
           "likert-scale",
           ["screener-language-proficiency-sub.md"],
           [
@@ -235,6 +229,12 @@ function App() {
             "Very familiar",
             "Extremely familiar",
           ]
+        ),
+        new Question(
+          // "multiple-choice",
+          "likert-scale",
+          ["screener-language-proficiency-obj.md"],
+          ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
         ),
         new Question("likert-scale-grid", ["attitudes-general.md"], {
           statements: [
@@ -542,28 +542,6 @@ function App() {
             "I have heard of stacks, but I have never used them.",
             "I have occasionally used stacks, but not on a regular basis.",
             "I regularly use stacks in my projects or work. ",
-          ]
-        ),
-        new Question(
-          "likert-scale",
-          ["domain-knowledge-dynamic-programming-sub.md"],
-          [
-            "Not familiar at all",
-            "Slightly familiar",
-            "Moderately familiar",
-            "Very familiar",
-            "Extremely familiar",
-          ]
-        ),
-        new Question(
-          // "multiple-choice",
-          "likert-scale",
-          ["domain-knowledge-dynamic-programming-obj.md"],
-          [
-            "I have never heard of dynamic programming before this survey. ",
-            "I have heard of dynamic programming, but I have never used it.",
-            "I have occasionally used dynamic programming, but not on a regular basis.",
-            "I regularly use dynamic programming in my projects or work. ",
           ]
         ),
         new Question(
