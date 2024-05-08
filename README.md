@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Survey Web Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+This is the source code for the survey web utilized in the research "Investigating factors influencing programmers' adoption of AI-generated codes". This survey app allows participants to answer multiple-choice questions and code in a fully functional web code editor. 
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This project uses React as frontend, Google Firebase Realtime Database as the backend, and Judge0 CE API for codes execution. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Demo
 
-### `npm test`
+See this website: www.hci-survey.com
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+##  Prerequisites 
 
-### `npm run build`
+1. NPM, preferred version: 8.5.0
+2. JavaScript, preferred version: v16.14.2
+3. git
+4. A firebase account with access to the Realtime Database. 
+5. A Rapid API account with access to Judge0 CE API.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Setup
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. clone the project, use command: `git clone git@github.com:ArthurLCW/CodeResponseSurveyWebsite.git`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Create a `.env` file under the root, add port number add Rapid API key to it: 
 
-### `npm run eject`
+   ```bash
+   PORT=3001
+   REACT_APP_API_KEY=`$(Your Rapid API key)`
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. Create a `firebaseConfig.js` file under the directory `src/util`, the file looks like: 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```javascript
+   const firebaseConfig = {
+     apiKey: "your-api-key",
+     authDomain: "your-project-authdomain.firebaseapp.com",
+     databaseURL: "https://your-database-url.firebaseio.com",
+     projectId: "your-project-id",
+     storageBucket: "your-storage-bucket.appspot.com",
+     messagingSenderId: "your-messaging-sender-id",
+     appId: "your-app-id",
+     measurementId: "your-measurement-id",
+   };
+   
+   export default firebaseConfig;
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. Install all the dependencies: `npm install`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+5. Execute project in development mode: `npm start`; Execute project in production mode: `npm run build`, `serve -s build`
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

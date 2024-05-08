@@ -120,12 +120,15 @@ function App() {
     ),
     new Question(
       "likert-scale",
-      ["post-test-comprehend.md"],
+      ["post-test-comment.md"],
       [
-        "Fully understand",
-        "Somewhat understand",
-        "Do not understand",
-        "I don't remember if I can understand. ",
+        "Very good",
+        "Somewhat good",
+        "Neither good nor bad",
+        "Somewhat bad",
+        "Very bad",
+        "I don't remember the comment quality of the AI-generated codes",
+        "There is no comment in the AI-generated codes",
       ]
     ),
     new Question(
@@ -140,29 +143,14 @@ function App() {
         "I don't remember the quality of the AI-generated codes",
       ]
     ),
-    // new Question(
-    //   "likert-scale",
-    //   ["post-test-variable.md"],
-    //   [
-    //     "Very good",
-    //     "Somewhat good",
-    //     "Neither good nor bad",
-    //     "Somewhat bad",
-    //     "Very bad",
-    //     "I don't remember the variable naming style of the AI-generated codes",
-    //   ]
-    // ),
     new Question(
       "likert-scale",
-      ["post-test-comment.md"],
+      ["post-test-comprehend.md"],
       [
-        "Very good",
-        "Somewhat good",
-        "Neither good nor bad",
-        "Somewhat bad",
-        "Very bad",
-        "I don't remember the comment quality of the AI-generated codes",
-        "There is no comment in the AI-generated codes",
+        "Fully understand",
+        "Somewhat understand",
+        "Do not understand",
+        "I don't remember if I can understand. ",
       ]
     ),
   ];
