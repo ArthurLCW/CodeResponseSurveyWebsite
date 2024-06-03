@@ -201,12 +201,15 @@ function App() {
             "Extremely experienced",
           ]
         ),
-        new Question(
-          // "multiple-choice",
-          "likert-scale",
-          ["screener-programming-experience-obj.md"],
-          ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
-        ),
+        // new Question(
+        //   // "multiple-choice",
+        //   "likert-scale",
+        //   ["screener-programming-experience-obj.md"],
+        //   ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
+        // ),
+        new Question("fill-in-the-blank-int", [
+          "screener-programming-experience-obj.md",
+        ]),
         new Question(
           "likert-scale",
           ["screener-language-proficiency-sub.md"],
@@ -218,12 +221,15 @@ function App() {
             "Extremely familiar",
           ]
         ),
-        new Question(
-          // "multiple-choice",
-          "likert-scale",
-          ["screener-language-proficiency-obj.md"],
-          ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
-        ),
+        // new Question(
+        //   // "multiple-choice",
+        //   "likert-scale",
+        //   ["screener-language-proficiency-obj.md"],
+        //   ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10+"]
+        // ),
+        new Question("fill-in-the-blank-int", [
+          "screener-language-proficiency-obj.md",
+        ]),
         new Question("likert-scale-grid", ["attitudes-general.md"], {
           statements: [
             "I trust AI code generation system",

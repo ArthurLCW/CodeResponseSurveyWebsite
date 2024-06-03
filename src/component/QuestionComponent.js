@@ -185,6 +185,24 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
         ))}
       </div>
     );
+  } else if (questionContent.questionType === "fill-in-the-blank-int") {
+    options = (
+      <div className="fill-in-the-blank-int">
+        <b>Please input an integer:&nbsp;&nbsp;</b>
+        <input
+          type="number"
+          value={selectedOption}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (!value || value.match(/^\d+$/)) {
+              handleOptionChange(e);
+            }
+          }}
+          step="1"
+          // placeholder="Enter an integer"
+        />
+      </div>
+    );
   } else if (questionContent.questionType === "likert-scale-grid") {
     options = (
       <LikertScaleGridComponent
