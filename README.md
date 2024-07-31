@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This is the source code for the survey web utilized in the research "Investigating factors influencing programmers' adoption of AI-generated codes". This survey app allows participants to answer multiple-choice questions and code in a fully functional web code editor. 
+This is the source code for the survey web utilized in the research " Do Comments and Expertise Still Matter? A Controlled Experiment on Programmers’ Adoption of AI-Generated Code ". This survey app allows participants to answer multiple-choice questions and code in a fully functional web code editor. 
 
 
 
-This project uses React as frontend, Google Firebase Realtime Database as the backend, and Judge0 CE API for codes execution. 
+This project uses React as the front end, Google Firebase Realtime Database as the backend, and Judge0 CE API for code execution. 
 
 ## Demo
 
@@ -17,7 +17,7 @@ See this website: www.hci-survey.com
 1. NPM, preferred version: 8.5.0
 2. JavaScript, preferred version: v16.14.2
 3. git
-4. A firebase account with access to the Realtime Database. 
+4. A Firebase account with access to the Realtime Database. 
 5. A Rapid API account with access to Judge0 CE API.
 
 ## Setup
