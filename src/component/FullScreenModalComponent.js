@@ -22,13 +22,13 @@ function FullScreenModalComponent({
     if (isOpen) {
       id = setInterval(() => {
         seconds += 1;
-        console.log("Timer tick");
+        // console.log("Timer tick");
       }, 1000);
     }
 
     return () => {
       if (id) {
-        console.log("seconds in total", seconds);
+        // console.log("seconds in total", seconds);
         let records;
         if (sessionStorage.getItem("leaveFullScreenTimes")) {
           records = JSON.parse(sessionStorage.getItem("leaveFullScreenTimes"));
@@ -55,12 +55,12 @@ function FullScreenModalComponent({
           // if (totalTimes >= 3 || totalDuration >= 3) {
           //   dispatch(toggleFailedAttentionCheckTrue());
           // }
-          console.log(
-            "cheating check: ",
-            failedAttentionCheck,
-            totalTimes,
-            totalDuration
-          );
+          // console.log(
+          //   "cheating check: ",
+          //   failedAttentionCheck,
+          //   totalTimes,
+          //   totalDuration
+          // );
         }
         clearInterval(id);
       }

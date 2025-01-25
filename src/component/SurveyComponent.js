@@ -24,7 +24,7 @@ const SurveyComponent = ({
       Object.keys(pageSection)[
         Math.floor(Math.random() * Object.keys(pageSection).length)
       ];
-    console.log("111111111111111111111", output, pageSection);
+    // console.log("111111111111111111111", output, pageSection);
     return output;
   }, []);
   const queryParams = new URLSearchParams(window.location.search);
@@ -113,7 +113,7 @@ const SurveyComponent = ({
             )
           );
       } else {
-        console.log("Currently not in full-screen mode. ");
+        // console.log("Currently not in full-screen mode. ");
       }
     }
   }, [currentPage, pageArray.length, setEnableModal]);

@@ -32,7 +32,7 @@ function App() {
       // Logic to set focus at the top of the application.
       const topOfAppElement = document.getElementById("top-of-app");
       if (topOfAppElement) {
-        console.log("focus exist");
+        // console.log("focus exist");
         topOfAppElement.focus();
       }
       if (!document.fullscreenElement && enableModal) {
@@ -83,16 +83,16 @@ function App() {
 
   const closeModal = (e) => {
     setModalIsOpen(false);
-    console.log("reject full screen mode.");
+    // console.log("reject full screen mode.");
     sessionStorage.setItem("rejectFullScreen", true);
 
     e.preventDefault();
     document.addEventListener("focusin", (event) => {
-      console.log("Focused on:", event.target);
+      // console.log("Focused on:", event.target);
     });
     const topOfAppElement = document.getElementById("top-of-app");
     if (topOfAppElement) {
-      console.log("focus element exist");
+      // console.log("focus element exist");
       topOfAppElement.focus();
     }
   };

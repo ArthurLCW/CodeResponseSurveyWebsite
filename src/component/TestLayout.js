@@ -50,7 +50,7 @@ const TestHeader = ({
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   function transApiResult(submissions, isRun) {
-    console.log("rawResults", submissions);
+    // console.log("rawResults", submissions);
     let type = "";
     let message =
       "There will be running results once you run/submit your code.";
@@ -107,10 +107,10 @@ const TestHeader = ({
 
   const handleRunButtonClick = () => {
     setIsButtonDisabled(true);
-    console.log("isButtonClick & loading", isButtonDisabled, isLoading);
-    console.log("testInput", testInput);
+    // console.log("isButtonClick & loading", isButtonDisabled, isLoading);
+    // console.log("testInput", testInput);
     if (isButtonDisabled || isLoading) return;
-    console.log(verifyInputFormat);
+    // console.log(verifyInputFormat);
     if (!verifyInputFormat(testInput)) {
       setTestResult({
         type: "Invalid Testcase",
@@ -142,7 +142,7 @@ const TestHeader = ({
         expected_output: expectedOutput,
       },
     ];
-    console.log(userCode);
+    // console.log(userCode);
 
     setIsLoading(true);
     executeBatch("run", submissions, (results) => {
@@ -156,7 +156,7 @@ const TestHeader = ({
           time: undefined,
           memory: undefined,
         });
-      console.log("run!!!!!!!!!");
+      // console.log("run!!!!!!!!!");
       setShowTab("Test Result");
       setIsLoading(false);
       setTestFold(false);
@@ -165,7 +165,7 @@ const TestHeader = ({
 
   const handleSubmitButtonClick = () => {
     setIsButtonDisabled(true);
-    console.log("isButtonClick & loading", isButtonDisabled, isLoading);
+    // console.log("isButtonClick & loading", isButtonDisabled, isLoading);
     if (isButtonDisabled || isLoading) return;
 
     const submissions = testCases;
@@ -173,7 +173,7 @@ const TestHeader = ({
       submission.language_id = 63;
       submission.source_code = preCode + userCode + postCode;
     }
-    console.log(testCases, submissions);
+    // console.log(testCases, submissions);
 
     setIsLoading(true);
     executeBatch("submit", submissions, (results) => {
@@ -187,7 +187,7 @@ const TestHeader = ({
           time: undefined,
           memory: undefined,
         });
-      console.log("submit!!!!!!!!!");
+      // console.log("submit!!!!!!!!!");
       setShowTab("Test Result");
       setIsLoading(false);
       setTestFold(false);

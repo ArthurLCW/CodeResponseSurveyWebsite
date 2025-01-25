@@ -34,7 +34,7 @@ const checkResults = async (buttonName, tokens, callback) => {
       (sub) => sub.status.id !== 1 && sub.status.id !== 2
     );
 
-    console.log(allDone, resultsResponse);
+    // console.log(allDone, resultsResponse);
     if (!allDone) {
       setTimeout(() => checkResults(buttonName, tokens, callback), 3000);
     } else {
@@ -45,7 +45,7 @@ const checkResults = async (buttonName, tokens, callback) => {
       );
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     console.error("Error fetching results:", error);
     const errorDataArray = [];
     const errorDataObj = {
@@ -72,7 +72,7 @@ const checkResults = async (buttonName, tokens, callback) => {
 };
 
 const executeBatch = async (buttonName, submissions, callback) => {
-  console.log("executeBatch submissions: ", submissions);
+  // console.log("executeBatch submissions: ", submissions);
   const submissionData = submissions.map((submission) => ({
     language_id: submission.language_id,
     source_code: submission.source_code,
@@ -96,12 +96,12 @@ const executeBatch = async (buttonName, submissions, callback) => {
     });
 
     const tokens = submitResponse.data.map((sub) => sub.token).join(",");
-    console.log(submitResponse, tokens);
+    // console.log(submitResponse, tokens);
 
     // Initially check the results
     checkResults(buttonName, tokens, callback);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     console.error("Error fetching results:", error);
     const errorDataArray = [];
     const errorDataObj = {

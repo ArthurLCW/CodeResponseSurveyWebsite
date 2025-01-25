@@ -60,8 +60,8 @@ const PageComponent = ({
       if (!key.includes("."))
         sessionStorageObject[key] = sessionStorage.getItem(key);
     }
-    console.log(sessionStorage);
-    console.log(sessionStorageObject, sessionStorageObject["prolificId"]);
+    // console.log(sessionStorage);
+    // console.log(sessionStorageObject, sessionStorageObject["prolificId"]);
     writeParticipantData(
       sessionStorageObject["prolificId"],
       sessionStorageObject
@@ -100,7 +100,7 @@ const PageComponent = ({
       }
     }
     if (screenFlag) {
-      console.log("screen flag true in page component click, msg: ", screenMsg);
+      // console.log("screen flag true in page component click, msg: ", screenMsg);
       // alert(screenMsg);
       setModalContent(screenMsg);
       setModalIsOpen(true);
@@ -117,9 +117,9 @@ const PageComponent = ({
   }, [pageArray, pageNumber]);
 
   useEffect(() => {
-    console.log("useEffect failed attention check");
+    // console.log("useEffect failed attention check");
     if (failedAttentionCheck) {
-      console.log("useEffect failed attention check, yes");
+      // console.log("useEffect failed attention check, yes");
       goToLastPage();
     }
   }, [failedAttentionCheck]);

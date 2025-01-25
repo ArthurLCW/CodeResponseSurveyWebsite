@@ -75,11 +75,11 @@ const MonacoEditorComponent = ({
 
       setNonEmptyLineCount(nonEmptyLineCountLocal);
       setCodingNonEnptyLines(nonEmptyLineCountLocal);
-      console.log(
-        "number of nonEmpty lines: ",
-        nonEmptyLineCount,
-        nonEmptyLineCountLocal
-      );
+      // console.log(
+      //   "number of nonEmpty lines: ",
+      //   nonEmptyLineCount,
+      //   nonEmptyLineCountLocal
+      // );
     }
   };
 
@@ -123,12 +123,12 @@ const MonacoEditorComponent = ({
   useEffect(() => {
     if (nonEmptyLineCount >= 5 && num === 0) {
       dispatch(increment());
-      console.log("MONACO editor increment: ", nonEmptyLineCount, num);
+      // console.log("MONACO editor increment: ", nonEmptyLineCount, num);
     } else if (nonEmptyLineCount < 5 && num === 1) {
       dispatch(decrement());
-      console.log("MONACO editor decrement: ", nonEmptyLineCount, num);
+      // console.log("MONACO editor decrement: ", nonEmptyLineCount, num);
     } else {
-      console.log("MONACO editor nothing: ", nonEmptyLineCount, num);
+      // console.log("MONACO editor nothing: ", nonEmptyLineCount, num);
     }
   }, [dispatch, nonEmptyLineCount, num]);
 

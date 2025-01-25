@@ -20,10 +20,10 @@ function WarningModalComponent({ pageArray, pageNumber }) {
         (question) => question.questionType === "coding"
       )
     ) {
-      console.log("in warning modal open: ", pageNumber, pageArray);
+      // console.log("in warning modal open: ", pageNumber, pageArray);
       openModal();
     }
-    console.log("in warning modal: ", pageNumber, pageArray);
+    // console.log("in warning modal: ", pageNumber, pageArray);
   }, [pageNumber]);
 
   return (

@@ -36,7 +36,7 @@ const TimerComponent = ({
             `Page ${pageNumber} finishing time`,
             timeMax - newSeconds
           );
-          console.log("num", num);
+          // console.log("num", num);
           return 0;
         } else if (timeMax - newSeconds >= timeMin && !localTimingFlag) {
           setTimingFullfilledFlag(true);
@@ -55,16 +55,16 @@ const TimerComponent = ({
         `Page ${pageNumber} finishing time`,
         timeMax - secondsRef.current
       );
-      console.log(
-        "Cleanup - current time",
-        timeMax - secondsRef.current,
-        "Max Time:",
-        timeMax,
-        "Last Seconds:",
-        secondsRef.current,
-        "Page Number:",
-        pageNumber
-      );
+      // console.log(
+      //   "Cleanup - current time",
+      //   timeMax - secondsRef.current,
+      //   "Max Time:",
+      //   timeMax,
+      //   "Last Seconds:",
+      //   secondsRef.current,
+      //   "Page Number:",
+      //   pageNumber
+      // );
     };
   }, [
     pageNumber,

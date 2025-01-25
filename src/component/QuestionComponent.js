@@ -60,7 +60,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
         Math.random() * questionContent.questionTextSrc.length
       );
       fileNameTemp = questionContent.questionTextSrc[randomNumber];
-      console.log("randomNumber", randomNumber, fileNameTemp);
+      // console.log("randomNumber", randomNumber, fileNameTemp);
       // list does not exist, initialize it
       if (!sessionStorage.getItem("lcwSurveyRandomIndexList")) {
         sessionStorage.setItem("lcwSurveyRandomIndexList", myKey);
@@ -98,12 +98,12 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
           }
         }
       }
-      console.log(
-        "filename:",
-        fileNameTemp,
-        sessionStorage.getItem("lcwSurveyRandomIndexList"),
-        sessionStorage.getItem("lcwSurveyRandomMd")
-      );
+      // console.log(
+      //   "filename:",
+      //   fileNameTemp,
+      //   sessionStorage.getItem("lcwSurveyRandomIndexList"),
+      //   sessionStorage.getItem("lcwSurveyRandomMd")
+      // );
     }
     return fileNameTemp;
   }, [myKey]);
@@ -137,12 +137,12 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
     //   " : ",
     //   num
     // );
-    console.log(
-      "id: ",
-      myKey,
-      ", sessionStorage: ",
-      sessionStorage.getItem(removeMdExtension(myKey + ": " + fileName)) /////
-    );
+    // console.log(
+    //   "id: ",
+    //   myKey,
+    //   ", sessionStorage: ",
+    //   sessionStorage.getItem(removeMdExtension(myKey + ": " + fileName)) /////
+    // );
   };
 
   let options;
@@ -213,7 +213,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
       />
     );
   } else if (questionContent.questionType === "coding") {
-    console.log(questionContent);
+    // console.log(questionContent);
     options = (
       <MonacoEditorComponent
         dispatch={dispatch}

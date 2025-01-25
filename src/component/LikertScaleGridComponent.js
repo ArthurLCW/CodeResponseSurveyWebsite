@@ -13,7 +13,7 @@ const LikertScaleGrid = ({ statements, scale, setSelectedOption, myKey }) => {
   // Function to handle option change
   const handleOptionChange = (statement, value) => {
     const newResponse = { ...responses, [statement]: value };
-    console.log(newResponse);
+    // console.log(newResponse);
     setResponses(newResponse);
     if (Object.keys(newResponse).length === statements.length) {
       setSelectedOption(newResponse);

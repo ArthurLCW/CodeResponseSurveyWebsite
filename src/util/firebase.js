@@ -20,13 +20,13 @@ const writeParticipantData = (
   const batch = myData["batch"] || "unknown";
   const project = myData["project"] || "unknown";
 
-  console.log("userId:", userId, "myData:", myData);
+  // console.log("userId:", userId, "myData:", myData);
 
   const database = getDatabase(app);
   const dataRef = ref(database, `${project}/${batch}/${userId}`);
   set(dataRef, myData)
     .then(() => {
-      console.log("Data saved successfully!");
+      // console.log("Data saved successfully!");
     })
     .catch((error) => {
       console.error("Failed to write data", error);
