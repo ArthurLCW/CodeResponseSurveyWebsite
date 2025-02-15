@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
-import QuestionComponent from "./QuestionComponent";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { increment, reset } from "../redux/recorderSlice";
 import { Page } from "../util/utilClass";
 import { writeParticipantData } from "../util/firebase";
-import TimerComponent from "./TimerComponent";
 import "./PageComponent.css";
 import Modal from "react-modal";
-import WarningModalComponent from "./WarningModalComponent";
+
+const QuestionComponent = lazy(() => import("./QuestionComponent"));
+const WarningModalComponent = lazy(() => import("./WarningModalComponent"));
+const TimerComponent = lazy(() => import("./TimerComponent"));
 
 Modal.setAppElement("#root");
 const PageComponent = ({
@@ -126,7 +127,9 @@ const PageComponent = ({
 
   return (
     <div>
-      <WarningModalComponent pageArray={pageArray} pageNumber={pageNumber} />
+      <Suspense fallback={<div>Loading components...</div>}>
+        <WarningModalComponent pageArray={pageArray} pageNumber={pageNumber} />
+      </Suspense>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
@@ -203,25 +206,29 @@ const PageComponent = ({
           )}
 
         {pageArray[pageNumber - 1].timeMax > 0 && (
-          <TimerComponent
-            key={pageNumber}
-            pageNumber={pageNumber}
-            timeMax={pageArray[pageNumber - 1].timeMax}
-            timeMin={pageArray[pageNumber - 1].timeMin}
-            goToNextPage={goToNextPage}
-            setTimingFullfilledFlag={setTimingFullfilledFlag}
-          />
+          <Suspense fallback={<div>Loading components...</div>}>
+            <TimerComponent
+              key={pageNumber}
+              pageNumber={pageNumber}
+              timeMax={pageArray[pageNumber - 1].timeMax}
+              timeMin={pageArray[pageNumber - 1].timeMin}
+              goToNextPage={goToNextPage}
+              setTimingFullfilledFlag={setTimingFullfilledFlag}
+            />
+          </Suspense>
         )}
 
         {pageArray[pageNumber - 1].questions.map((questionContent, index) => {
           // console.log(questionContent);
           return (
-            <QuestionComponent
-              key={"lcwSurvey-" + pageNumber + "-" + index}
-              myKey={"lcwSurvey-" + pageNumber + "-" + index}
-              questionContent={questionContent}
-              finished={finished}
-            />
+            <Suspense fallback={<div>Loading components...</div>}>
+              <QuestionComponent
+                key={"lcwSurvey-" + pageNumber + "-" + index}
+                myKey={"lcwSurvey-" + pageNumber + "-" + index}
+                questionContent={questionContent}
+                finished={finished}
+              />
+            </Suspense>
           );
         })}
       </div>

@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import "./App.css";
-import SurveyComponent from "./component/SurveyComponent";
-import FullScreenModalComponent from "./component/FullScreenModalComponent";
 import { Question, Page } from "./util/utilClass";
 import CodingEasyRemoveDuplicates from "./question/CodingEasyRemoveDuplicates";
 import CodingEasyRansomNotes from "./question/CodingEasyRansomNotes";
 import CodingHardLongestValidParenthesis from "./question/CodingHardLongestValidParenthesis";
 import CodingMediumFindWinner from "./question/CodingMediumFindWinner";
 import CodingMediumValidateBST from "./question/CodingMediumValidateBST";
+
+const SurveyComponent = lazy(() => import("./component/SurveyComponent"));
+const FullScreenModalComponent = lazy(() =>
+  import("./component/FullScreenModalComponent")
+);
 
 function App() {
   useEffect(() => {
@@ -616,21 +619,25 @@ function App() {
           style={{ height: "1px", outline: "none" }}
         ></div>
         <div className="survey">
-          <SurveyComponent
-            // pageArray={pageArray}
-            pageObj={pageObj}
-            pageSection={pageSection}
-            rememberState={false}
-            setEnableModal={setEnableModal}
-          />
+          <Suspense fallback={<div>Loading components...</div>}>
+            <SurveyComponent
+              // pageArray={pageArray}
+              pageObj={pageObj}
+              pageSection={pageSection}
+              rememberState={false}
+              setEnableModal={setEnableModal}
+            />
+          </Suspense>
         </div>
       </div>
-      <FullScreenModalComponent
-        isOpen={modalIsOpen}
-        closeModal={(e) => closeModal(e)}
-        enterFullScreen={enterFullScreen}
-        firstTimeEnter={firstTimeEnter}
-      />
+      <Suspense fallback={<div>Loading components...</div>}>
+        <FullScreenModalComponent
+          isOpen={modalIsOpen}
+          closeModal={(e) => closeModal(e)}
+          enterFullScreen={enterFullScreen}
+          firstTimeEnter={firstTimeEnter}
+        />
+      </Suspense>
     </div>
   );
 }

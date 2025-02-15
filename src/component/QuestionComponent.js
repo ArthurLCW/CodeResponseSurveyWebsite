@@ -1,7 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
-import { MdDisplayerComponent, Markdown } from "./MdDisplayerComponent";
-import MonacoEditorComponent from "./MonacoEditorComponent";
-import LikertScaleGridComponent from "./LikertScaleGridComponent";
+import React, { useState, useMemo, useEffect, lazy, Suspense } from "react";
 import "./QuestionComponent.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -9,10 +6,15 @@ import {
   toggleScreenTrue,
   toggleScreenFalse,
 } from "../redux/recorderSlice";
-
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import SvgIcon from "@mui/material/SvgIcon";
+import { Markdown } from "./MdDisplayerComponent";
+const MonacoEditorComponent = lazy(() => import("./MonacoEditorComponent"));
+const LikertScaleGridComponent = lazy(() =>
+  import("./LikertScaleGridComponent")
+);
+const MdDisplayerComponent = lazy(() => import("./MdDisplayerComponent"));
 
 const WarningMsg = () => (
   <div className="warning">
@@ -38,7 +40,6 @@ function removeMdExtension(filename) {
 }
 
 const QuestionComponent = ({ myKey, questionContent, finished }) => {
-  const MdDisplayerComponentMemo = MdDisplayerComponent;
   const [selectedOption, setSelectedOption] = useState(null);
   const [codingNonEnptyLines, setCodingNonEnptyLines] = useState(0);
   const dispatch = useDispatch();
@@ -205,31 +206,35 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
     );
   } else if (questionContent.questionType === "likert-scale-grid") {
     options = (
-      <LikertScaleGridComponent
-        statements={questionContent.questionOptions.statements}
-        scale={questionContent.questionOptions.scale}
-        setSelectedOption={setSelectedOption}
-        myKey={removeMdExtension(myKey + ": " + fileName)} ///////
-      />
+      <Suspense fallback={<div>Loading components...</div>}>
+        <LikertScaleGridComponent
+          statements={questionContent.questionOptions.statements}
+          scale={questionContent.questionOptions.scale}
+          setSelectedOption={setSelectedOption}
+          myKey={removeMdExtension(myKey + ": " + fileName)} ///////
+        />
+      </Suspense>
     );
   } else if (questionContent.questionType === "coding") {
     // console.log(questionContent);
     options = (
-      <MonacoEditorComponent
-        dispatch={dispatch}
-        setSelectedOption={setSelectedOption}
-        myKey={removeMdExtension(myKey + ": " + fileName)} //////
-        recordLogic={questionContent.recordLogic}
-        setCodingNonEnptyLines={setCodingNonEnptyLines}
-        defaultCode={questionContent.defaultCode}
-        examples={questionContent.examples}
-        clarification={questionContent.clarification}
-        preCode={questionContent.preCode}
-        postCode={questionContent.postCode}
-        testCases={questionContent.testCases}
-        verifyInputFormat={questionContent.verifyInputFormat}
-        verifyOutputFormat={questionContent.verifyOutputFormat}
-      />
+      <Suspense fallback={<div>Loading components...</div>}>
+        <MonacoEditorComponent
+          dispatch={dispatch}
+          setSelectedOption={setSelectedOption}
+          myKey={removeMdExtension(myKey + ": " + fileName)} //////
+          recordLogic={questionContent.recordLogic}
+          setCodingNonEnptyLines={setCodingNonEnptyLines}
+          defaultCode={questionContent.defaultCode}
+          examples={questionContent.examples}
+          clarification={questionContent.clarification}
+          preCode={questionContent.preCode}
+          postCode={questionContent.postCode}
+          testCases={questionContent.testCases}
+          verifyInputFormat={questionContent.verifyInputFormat}
+          verifyOutputFormat={questionContent.verifyOutputFormat}
+        />
+      </Suspense>
     );
   }
 
@@ -280,9 +285,13 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
                 }
               >
                 {questionContent.recordLogic === "record" && (
-                  <MdDisplayerComponentMemo fileName="coding1-general.md" />
+                  <Suspense fallback={<div>Loading components...</div>}>
+                    <MdDisplayerComponent fileName="coding1-general.md" />
+                  </Suspense>
                 )}
-                <MdDisplayerComponentMemo fileName={fileName} />
+                <Suspense fallback={<div>Loading components...</div>}>
+                  <MdDisplayerComponent fileName={fileName} />
+                </Suspense>
                 {questionContent.recordLogic === "display" && (
                   <>
                     <div className="collapse-container">
@@ -312,16 +321,20 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
                         <h4>Coding Task Description</h4>
                       </div>
                       {showTask && (
-                        <MdDisplayerComponentMemo
-                          fileName={sessionStorage.getItem("taskFile")}
-                        />
+                        <Suspense fallback={<div>Loading components...</div>}>
+                          <MdDisplayerComponent
+                            fileName={sessionStorage.getItem("taskFile")}
+                          />
+                        </Suspense>
                       )}
                     </div>
                   </>
                 )}
               </div>
             ) : (
-              <MdDisplayerComponentMemo fileName={fileName} />
+              <Suspense fallback={<div>Loading components...</div>}>
+                <MdDisplayerComponent fileName={fileName} />
+              </Suspense>
             )}
             {/* {(questionContent.recordLogic==="display") && <Markdown content={"```javascript\n"+sessionStorage.getItem("lcwRecordInfo")+"```"}/>} */}
             {/* <Markdown content={recordDisplay} /> */}

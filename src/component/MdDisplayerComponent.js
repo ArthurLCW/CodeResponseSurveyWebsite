@@ -54,7 +54,7 @@ export const Markdown = ({ content }) => {
   );
 };
 
-export const MdDisplayerComponent = ({ fileName }) => {
+const MdDisplayerComponent = ({ fileName }) => {
   // console.log("mdDisplayer rerender", fileName);
   const [content, setContent] = useState("");
 
@@ -67,3 +67,5 @@ export const MdDisplayerComponent = ({ fileName }) => {
 
   return <Markdown content={content} />;
 };
+
+export default MdDisplayerComponent;

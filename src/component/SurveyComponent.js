@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo } from "react";
-import PageComponent from "./PageComponent";
+import React, { useState, useEffect, useMemo, lazy, Suspense } from "react";
+const PageComponent = lazy(() => import("./PageComponent"));
 
 const generateRandomString = (length = 10) => {
   const characters =
@@ -120,15 +120,17 @@ const SurveyComponent = ({
 
   return (
     <div>
-      <PageComponent
-        pageArray={pageArray}
-        pageNumber={currentPage}
-        goToNextPage={goToNextPage}
-        goToLastPage={goToLastPage}
-        isLastPage={currentPage === totalPages}
-        finishCode={"C8MRP57T"}
-        failedAttentionCheckCode={"IFailedAttentionCheck"}
-      />
+      <Suspense fallback={<div>Loading components...</div>}>
+        <PageComponent
+          pageArray={pageArray}
+          pageNumber={currentPage}
+          goToNextPage={goToNextPage}
+          goToLastPage={goToLastPage}
+          isLastPage={currentPage === totalPages}
+          finishCode={"C8MRP57T"}
+          failedAttentionCheckCode={"IFailedAttentionCheck"}
+        />
+      </Suspense>
     </div>
   );
 };
