@@ -10,7 +10,8 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import SvgIcon from "@mui/material/SvgIcon";
 import { Markdown } from "./MdDisplayerComponent";
-const MonacoEditorComponent = lazy(() => import("./MonacoEditorComponent"));
+import MonacoEditorComponent from "./MonacoEditorComponent";
+// const MonacoEditorComponent = lazy(() => import("./MonacoEditorComponent"));
 const LikertScaleGridComponent = lazy(() =>
   import("./LikertScaleGridComponent")
 );
@@ -218,23 +219,21 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
   } else if (questionContent.questionType === "coding") {
     // console.log(questionContent);
     options = (
-      <Suspense fallback={<div>Loading components...</div>}>
-        <MonacoEditorComponent
-          dispatch={dispatch}
-          setSelectedOption={setSelectedOption}
-          myKey={removeMdExtension(myKey + ": " + fileName)} //////
-          recordLogic={questionContent.recordLogic}
-          setCodingNonEnptyLines={setCodingNonEnptyLines}
-          defaultCode={questionContent.defaultCode}
-          examples={questionContent.examples}
-          clarification={questionContent.clarification}
-          preCode={questionContent.preCode}
-          postCode={questionContent.postCode}
-          testCases={questionContent.testCases}
-          verifyInputFormat={questionContent.verifyInputFormat}
-          verifyOutputFormat={questionContent.verifyOutputFormat}
-        />
-      </Suspense>
+      <MonacoEditorComponent
+        dispatch={dispatch}
+        setSelectedOption={setSelectedOption}
+        myKey={removeMdExtension(myKey + ": " + fileName)} //////
+        recordLogic={questionContent.recordLogic}
+        setCodingNonEnptyLines={setCodingNonEnptyLines}
+        defaultCode={questionContent.defaultCode}
+        examples={questionContent.examples}
+        clarification={questionContent.clarification}
+        preCode={questionContent.preCode}
+        postCode={questionContent.postCode}
+        testCases={questionContent.testCases}
+        verifyInputFormat={questionContent.verifyInputFormat}
+        verifyOutputFormat={questionContent.verifyOutputFormat}
+      />
     );
   }
 
