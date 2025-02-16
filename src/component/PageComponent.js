@@ -35,6 +35,13 @@ const PageComponent = ({
     (state) => state.recorder.failedAttentionCheck
   );
 
+  const hasCoding = pageArray[pageNumber]?.questions?.some(
+    (q) => q.questionType === "coding"
+  );
+
+  console.log("lcw hasCoding", hasCoding);
+  const [monacoLoaded, setMonacoLoaded] = useState(() => !hasCoding);
+
   function getCurrentTimeInAEDT() {
     const now = new Date();
     const options = {
@@ -206,18 +213,19 @@ const PageComponent = ({
             </div>
           )}
 
-        {pageArray[pageNumber - 1].timeMax > 0 && (
-          <Suspense fallback={<LoadingComponent />}>
-            <TimerComponent
-              key={pageNumber}
-              pageNumber={pageNumber}
-              timeMax={pageArray[pageNumber - 1].timeMax}
-              timeMin={pageArray[pageNumber - 1].timeMin}
-              goToNextPage={goToNextPage}
-              setTimingFullfilledFlag={setTimingFullfilledFlag}
-            />
-          </Suspense>
-        )}
+        {pageArray[pageNumber - 1].timeMax > 0 &&
+          (!hasCoding || monacoLoaded) && (
+            <Suspense fallback={<LoadingComponent />}>
+              <TimerComponent
+                key={pageNumber}
+                pageNumber={pageNumber}
+                timeMax={pageArray[pageNumber - 1].timeMax}
+                timeMin={pageArray[pageNumber - 1].timeMin}
+                goToNextPage={goToNextPage}
+                setTimingFullfilledFlag={setTimingFullfilledFlag}
+              />
+            </Suspense>
+          )}
 
         {pageArray[pageNumber - 1].questions.map((questionContent, index) => {
           // console.log(questionContent);
@@ -228,6 +236,8 @@ const PageComponent = ({
                 myKey={"lcwSurvey-" + pageNumber + "-" + index}
                 questionContent={questionContent}
                 finished={finished}
+                monacoLoaded={monacoLoaded}
+                setMonacoLoaded={setMonacoLoaded}
               />
             </Suspense>
           );

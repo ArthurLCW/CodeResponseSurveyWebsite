@@ -41,10 +41,13 @@ function removeMdExtension(filename) {
   return filename;
 }
 
-const QuestionComponent = ({ myKey, questionContent, finished }) => {
-  const [monacoLoaded, setMonacoLoaded] = useState(
-    () => !(questionContent.questionType === "coding")
-  );
+const QuestionComponent = ({
+  myKey,
+  questionContent,
+  finished,
+  monacoLoaded = !(questionContent.questionType === "coding"),
+  setMonacoLoaded = () => {},
+}) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [codingNonEnptyLines, setCodingNonEnptyLines] = useState(0);
   const dispatch = useDispatch();
@@ -284,7 +287,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
         finished && <WarningMsg />}
       <div style={unfinishedStyle}>
         <div style={codingParentStyle}>
-          {monacoLoaded ? (
+          {monacoLoaded && (
             <div style={codingChildStyle}>
               {questionContent.questionType === "coding" ? (
                 <div
@@ -347,10 +350,6 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
               )}
               {/* {(questionContent.recordLogic==="display") && <Markdown content={"```javascript\n"+sessionStorage.getItem("lcwRecordInfo")+"```"}/>} */}
               {/* <Markdown content={recordDisplay} /> */}
-            </div>
-          ) : (
-            <div>
-              <LoadingComponent />
             </div>
           )}
           <div>{options}</div>
