@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, lazy, Suspense } from "react";
+import React, { useState, useMemo, lazy, Suspense } from "react";
 import "./QuestionComponent.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -10,8 +10,9 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import SvgIcon from "@mui/material/SvgIcon";
 import { Markdown } from "./MdDisplayerComponent";
-import MonacoEditorComponent from "./MonacoEditorComponent";
-// const MonacoEditorComponent = lazy(() => import("./MonacoEditorComponent"));
+import LoadingComponent from "./LoadingComponent";
+const MonacoEditorComponent = lazy(() => import("./MonacoEditorComponent"));
+
 const LikertScaleGridComponent = lazy(() =>
   import("./LikertScaleGridComponent")
 );
@@ -41,6 +42,9 @@ function removeMdExtension(filename) {
 }
 
 const QuestionComponent = ({ myKey, questionContent, finished }) => {
+  const [monacoLoaded, setMonacoLoaded] = useState(
+    () => !(questionContent.questionType === "coding")
+  );
   const [selectedOption, setSelectedOption] = useState(null);
   const [codingNonEnptyLines, setCodingNonEnptyLines] = useState(0);
   const dispatch = useDispatch();
@@ -207,7 +211,7 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
     );
   } else if (questionContent.questionType === "likert-scale-grid") {
     options = (
-      <Suspense fallback={<div>Loading components...</div>}>
+      <Suspense fallback={<LoadingComponent />}>
         <LikertScaleGridComponent
           statements={questionContent.questionOptions.statements}
           scale={questionContent.questionOptions.scale}
@@ -219,21 +223,26 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
   } else if (questionContent.questionType === "coding") {
     // console.log(questionContent);
     options = (
-      <MonacoEditorComponent
-        dispatch={dispatch}
-        setSelectedOption={setSelectedOption}
-        myKey={removeMdExtension(myKey + ": " + fileName)} //////
-        recordLogic={questionContent.recordLogic}
-        setCodingNonEnptyLines={setCodingNonEnptyLines}
-        defaultCode={questionContent.defaultCode}
-        examples={questionContent.examples}
-        clarification={questionContent.clarification}
-        preCode={questionContent.preCode}
-        postCode={questionContent.postCode}
-        testCases={questionContent.testCases}
-        verifyInputFormat={questionContent.verifyInputFormat}
-        verifyOutputFormat={questionContent.verifyOutputFormat}
-      />
+      <Suspense fallback={<LoadingComponent />}>
+        <MonacoEditorComponent
+          onLoad={() => {
+            setMonacoLoaded(true);
+          }}
+          dispatch={dispatch}
+          setSelectedOption={setSelectedOption}
+          myKey={removeMdExtension(myKey + ": " + fileName)} //////
+          recordLogic={questionContent.recordLogic}
+          setCodingNonEnptyLines={setCodingNonEnptyLines}
+          defaultCode={questionContent.defaultCode}
+          examples={questionContent.examples}
+          clarification={questionContent.clarification}
+          preCode={questionContent.preCode}
+          postCode={questionContent.postCode}
+          testCases={questionContent.testCases}
+          verifyInputFormat={questionContent.verifyInputFormat}
+          verifyOutputFormat={questionContent.verifyOutputFormat}
+        />
+      </Suspense>
     );
   }
 
@@ -275,69 +284,75 @@ const QuestionComponent = ({ myKey, questionContent, finished }) => {
         finished && <WarningMsg />}
       <div style={unfinishedStyle}>
         <div style={codingParentStyle}>
-          <div style={codingChildStyle}>
-            {questionContent.questionType === "coding" ? (
-              <div
-                className={
-                  questionContent.questionType === "coding" &&
-                  "left-coding-panel"
-                }
-              >
-                {questionContent.recordLogic === "record" && (
-                  <Suspense fallback={<div>Loading components...</div>}>
-                    <MdDisplayerComponent fileName="coding1-general.md" />
+          {monacoLoaded ? (
+            <div style={codingChildStyle}>
+              {questionContent.questionType === "coding" ? (
+                <div
+                  className={
+                    questionContent.questionType === "coding" &&
+                    "left-coding-panel"
+                  }
+                >
+                  {questionContent.recordLogic === "record" && (
+                    <Suspense fallback={<LoadingComponent />}>
+                      <MdDisplayerComponent fileName="coding1-general.md" />
+                    </Suspense>
+                  )}
+                  <Suspense fallback={<LoadingComponent />}>
+                    <MdDisplayerComponent fileName={fileName} />
                   </Suspense>
-                )}
-                <Suspense fallback={<div>Loading components...</div>}>
+                  {questionContent.recordLogic === "display" && (
+                    <>
+                      <div className="collapse-container">
+                        <div
+                          className="collapse-header"
+                          onClick={() => setShowSelfCodes(!showSelfCodes)}
+                        >
+                          <SvgIcon
+                            component={
+                              showSelfCodes ? ArrowDropDownIcon : ArrowRightIcon
+                            }
+                          />
+                          <h4>Codes Written by Yourself in Previous Page</h4>
+                        </div>
+                        {showSelfCodes && <Markdown content={recordDisplay} />}
+                      </div>
+                      <div className="collapse-container">
+                        <div
+                          className="collapse-header"
+                          onClick={() => setShowTask(!showTask)}
+                        >
+                          <SvgIcon
+                            component={
+                              showTask ? ArrowDropDownIcon : ArrowRightIcon
+                            }
+                          />
+                          <h4>Coding Task Description</h4>
+                        </div>
+                        {showTask && (
+                          <Suspense fallback={<LoadingComponent />}>
+                            <MdDisplayerComponent
+                              fileName={sessionStorage.getItem("taskFile")}
+                            />
+                          </Suspense>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </div>
+              ) : (
+                <Suspense fallback={<LoadingComponent />}>
                   <MdDisplayerComponent fileName={fileName} />
                 </Suspense>
-                {questionContent.recordLogic === "display" && (
-                  <>
-                    <div className="collapse-container">
-                      <div
-                        className="collapse-header"
-                        onClick={() => setShowSelfCodes(!showSelfCodes)}
-                      >
-                        <SvgIcon
-                          component={
-                            showSelfCodes ? ArrowDropDownIcon : ArrowRightIcon
-                          }
-                        />
-                        <h4>Codes Written by Yourself in Previous Page</h4>
-                      </div>
-                      {showSelfCodes && <Markdown content={recordDisplay} />}
-                    </div>
-                    <div className="collapse-container">
-                      <div
-                        className="collapse-header"
-                        onClick={() => setShowTask(!showTask)}
-                      >
-                        <SvgIcon
-                          component={
-                            showTask ? ArrowDropDownIcon : ArrowRightIcon
-                          }
-                        />
-                        <h4>Coding Task Description</h4>
-                      </div>
-                      {showTask && (
-                        <Suspense fallback={<div>Loading components...</div>}>
-                          <MdDisplayerComponent
-                            fileName={sessionStorage.getItem("taskFile")}
-                          />
-                        </Suspense>
-                      )}
-                    </div>
-                  </>
-                )}
-              </div>
-            ) : (
-              <Suspense fallback={<div>Loading components...</div>}>
-                <MdDisplayerComponent fileName={fileName} />
-              </Suspense>
-            )}
-            {/* {(questionContent.recordLogic==="display") && <Markdown content={"```javascript\n"+sessionStorage.getItem("lcwRecordInfo")+"```"}/>} */}
-            {/* <Markdown content={recordDisplay} /> */}
-          </div>
+              )}
+              {/* {(questionContent.recordLogic==="display") && <Markdown content={"```javascript\n"+sessionStorage.getItem("lcwRecordInfo")+"```"}/>} */}
+              {/* <Markdown content={recordDisplay} /> */}
+            </div>
+          ) : (
+            <div>
+              <LoadingComponent />
+            </div>
+          )}
           <div>{options}</div>
         </div>
       </div>

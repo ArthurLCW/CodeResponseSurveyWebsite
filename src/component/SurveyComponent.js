@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useMemo, lazy, Suspense } from "react";
+import LoadingComponent from "./LoadingComponent";
+
 const PageComponent = lazy(() => import("./PageComponent"));
 
 const generateRandomString = (length = 10) => {
@@ -120,7 +122,7 @@ const SurveyComponent = ({
 
   return (
     <div>
-      <Suspense fallback={<div>Loading components...</div>}>
+      <Suspense fallback={<LoadingComponent />}>
         <PageComponent
           pageArray={pageArray}
           pageNumber={currentPage}

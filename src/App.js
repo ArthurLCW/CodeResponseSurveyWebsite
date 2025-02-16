@@ -6,6 +6,7 @@ import CodingEasyRansomNotes from "./question/CodingEasyRansomNotes";
 import CodingHardLongestValidParenthesis from "./question/CodingHardLongestValidParenthesis";
 import CodingMediumFindWinner from "./question/CodingMediumFindWinner";
 import CodingMediumValidateBST from "./question/CodingMediumValidateBST";
+import LoadingComponent from "./component/LoadingComponent";
 
 const SurveyComponent = lazy(() => import("./component/SurveyComponent"));
 const FullScreenModalComponent = lazy(() =>
@@ -619,7 +620,7 @@ function App() {
           style={{ height: "1px", outline: "none" }}
         ></div>
         <div className="survey">
-          <Suspense fallback={<div>Loading components...</div>}>
+          <Suspense fallback={<LoadingComponent />}>
             <SurveyComponent
               // pageArray={pageArray}
               pageObj={pageObj}
@@ -630,7 +631,7 @@ function App() {
           </Suspense>
         </div>
       </div>
-      <Suspense fallback={<div>Loading components...</div>}>
+      <Suspense fallback={<LoadingComponent />}>
         <FullScreenModalComponent
           isOpen={modalIsOpen}
           closeModal={(e) => closeModal(e)}

@@ -5,6 +5,7 @@ import { Page } from "../util/utilClass";
 import { writeParticipantData } from "../util/firebase";
 import "./PageComponent.css";
 import Modal from "react-modal";
+import LoadingComponent from "./LoadingComponent";
 
 const QuestionComponent = lazy(() => import("./QuestionComponent"));
 const WarningModalComponent = lazy(() => import("./WarningModalComponent"));
@@ -127,7 +128,7 @@ const PageComponent = ({
 
   return (
     <div>
-      <Suspense fallback={<div>Loading components...</div>}>
+      <Suspense fallback={<LoadingComponent />}>
         <WarningModalComponent pageArray={pageArray} pageNumber={pageNumber} />
       </Suspense>
       <Modal
@@ -206,7 +207,7 @@ const PageComponent = ({
           )}
 
         {pageArray[pageNumber - 1].timeMax > 0 && (
-          <Suspense fallback={<div>Loading components...</div>}>
+          <Suspense fallback={<LoadingComponent />}>
             <TimerComponent
               key={pageNumber}
               pageNumber={pageNumber}
@@ -221,7 +222,7 @@ const PageComponent = ({
         {pageArray[pageNumber - 1].questions.map((questionContent, index) => {
           // console.log(questionContent);
           return (
-            <Suspense fallback={<div>Loading components...</div>}>
+            <Suspense fallback={<LoadingComponent />}>
               <QuestionComponent
                 key={"lcwSurvey-" + pageNumber + "-" + index}
                 myKey={"lcwSurvey-" + pageNumber + "-" + index}

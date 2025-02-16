@@ -18,6 +18,7 @@ const MonacoEditorComponent = ({
   testCases,
   verifyInputFormat,
   verifyOutputFormat,
+  onLoad = () => {},
 }) => {
   const [testFold, setTestFold] = useState(false);
   const [code, setCode] = useState("// type your code...");
@@ -131,6 +132,10 @@ const MonacoEditorComponent = ({
       // console.log("MONACO editor nothing: ", nonEmptyLineCount, num);
     }
   }, [dispatch, nonEmptyLineCount, num]);
+
+  useEffect(() => {
+    onLoad();
+  }, [onLoad]);
 
   const options = {
     selectOnLineNumbers: true,
