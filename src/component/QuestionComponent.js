@@ -229,6 +229,8 @@ const QuestionComponent = ({
       <Suspense fallback={<LoadingComponent />}>
         <MonacoEditorComponent
           onLoad={() => {
+            console.log("onload!!!");
+
             setMonacoLoaded(true);
           }}
           dispatch={dispatch}

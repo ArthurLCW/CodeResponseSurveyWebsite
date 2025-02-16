@@ -26,7 +26,6 @@ const SurveyComponent = ({
       Object.keys(pageSection)[
         Math.floor(Math.random() * Object.keys(pageSection).length)
       ];
-    // console.log("111111111111111111111", output, pageSection);
     return output;
   }, []);
   const queryParams = new URLSearchParams(window.location.search);
@@ -131,6 +130,7 @@ const SurveyComponent = ({
           isLastPage={currentPage === totalPages}
           finishCode={"C8MRP57T"}
           failedAttentionCheckCode={"IFailedAttentionCheck"}
+          key={currentPage}
         />
       </Suspense>
     </div>

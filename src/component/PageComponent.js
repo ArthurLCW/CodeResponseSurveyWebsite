@@ -35,12 +35,11 @@ const PageComponent = ({
     (state) => state.recorder.failedAttentionCheck
   );
 
-  const hasCoding = pageArray[pageNumber]?.questions?.some(
+  const hasCoding = pageArray[pageNumber - 1]?.questions?.some(
     (q) => q.questionType === "coding"
   );
 
-  console.log("lcw hasCoding", hasCoding);
-  const [monacoLoaded, setMonacoLoaded] = useState(() => !hasCoding);
+  const [monacoLoaded, setMonacoLoaded] = useState(!hasCoding);
 
   function getCurrentTimeInAEDT() {
     const now = new Date();
@@ -132,6 +131,8 @@ const PageComponent = ({
       goToLastPage();
     }
   }, [failedAttentionCheck]);
+
+  console.log("loaded", monacoLoaded, hasCoding, pageNumber);
 
   return (
     <div>
