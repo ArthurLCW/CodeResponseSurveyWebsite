@@ -132,8 +132,6 @@ const PageComponent = ({
     }
   }, [failedAttentionCheck]);
 
-  console.log("loaded", monacoLoaded, hasCoding, pageNumber);
-
   return (
     <div>
       <Suspense fallback={<LoadingComponent />}>

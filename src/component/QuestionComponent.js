@@ -5,6 +5,7 @@ import {
   increment,
   toggleScreenTrue,
   toggleScreenFalse,
+  decrement,
 } from "../redux/recorderSlice";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
@@ -135,23 +136,31 @@ const QuestionComponent = ({
       // console.log("screen flag1: ", screenFlag);
       dispatch(toggleScreenFalse());
     }
+  };
 
-    // console.log(
-    //   "id: ",
-    //   myKey,
-    //   ": ",
-    //   event.target.value,
-    //   ": ",
+  const handleInputChange = (event) => {
+    // console.log("event", {
+    //   val: event.target.value,
     //   selectedOption,
-    //   " : ",
-    //   num
-    // );
-    // console.log(
-    //   "id: ",
-    //   myKey,
-    //   ", sessionStorage: ",
-    //   sessionStorage.getItem(removeMdExtension(myKey + ": " + fileName)) /////
-    // );
+    //   questionContent,
+    // });
+
+    if (!selectedOption && event.target.value) {
+      // console.log("ready +");
+      dispatch(increment());
+    } else if (selectedOption && !event.target.value) {
+      // console.log("ready -");
+      setSelectedOption(null);
+      event.target.value = null;
+      dispatch(decrement());
+      return;
+    }
+    // console.log("ready =");
+    setSelectedOption(event.target.value);
+    sessionStorage.setItem(
+      removeMdExtension(myKey + ": " + fileName),
+      event.target.value
+    ); ///////
   };
 
   let options;
@@ -204,10 +213,11 @@ const QuestionComponent = ({
           onChange={(e) => {
             const value = e.target.value;
             if (!value || value.match(/^\d+$/)) {
-              handleOptionChange(e);
+              handleInputChange(e);
             }
           }}
           step="1"
+          min="0"
           // placeholder="Enter an integer"
         />
       </div>
