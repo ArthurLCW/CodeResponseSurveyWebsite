@@ -156,7 +156,7 @@ const QuestionComponent = ({
       return;
     }
     // console.log("ready =");
-    setSelectedOption(event.target.value);
+    setSelectedOption(event.target.value === "" ? null : event.target.value);
     sessionStorage.setItem(
       removeMdExtension(myKey + ": " + fileName),
       event.target.value
