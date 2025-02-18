@@ -8,7 +8,7 @@ This project uses React as the front end, Google Firebase Realtime Database as t
 
 ## Demo
 
-See this website: https://changwen-software-engineering.xyz/
+See this website: [https://survey.changwen-software-engineering.xyz/](https://survey.changwen-software-engineering.xyz/)
 
 ## Prerequisites
 
